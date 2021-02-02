@@ -1,4 +1,5 @@
-# recipehubb-client
+# RecipeHubb-Client
+Front end service for RecipeHubb
 
 ## Project setup
 ```
@@ -22,3 +23,4 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
