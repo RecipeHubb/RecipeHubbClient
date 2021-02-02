@@ -2,17 +2,15 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/recipehubb_main.png">
     <h1>Welcome to RecipeHubb!</h1>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
   }
 }
 </script>
