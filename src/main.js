@@ -15,8 +15,8 @@ const routes = [
   { path: '/', component: Home },
   { path: '/as', component: HelloWorld },
   { path: '/about', component: About },
-  { path: '/signin', component: SignIn },
-  { path: '/signup', component: SignUp }
+  { path: '/login', component: SignIn },
+  { path: '/register', component: SignUp }
 ]
 
 const router = new VueRouter({

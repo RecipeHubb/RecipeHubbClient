@@ -1,0 +1,46 @@
+Mongo DB Schema
+
+ - 1 db - recipehubb-db
+ - 4 collections (Auth, Users, Recipetds, Comments(maybe0)
+
+auth {
+    email: email
+    password: password
+}
+user {
+    _id: 2b04071f-9815-4929-8045-4d62bd79e844,
+    username: 'display username',
+    firstName: '',
+    lastName: '',
+    email: ''
+    profilePic: ''
+    numRecipes: int,
+}
+recipe {
+    _id: 8YC40THf-9815-4929-8045-4d62bd79e844,
+    ownerID: 2b04071f-9815-4929-8045-4d62bd79e844, (relates to User _id)
+    toolsNeeded?? (crock pot)
+    ingredients: [
+        {
+            quantity: '',
+            name: ''
+        }
+     ],
+    instructions: '',
+    recipeImage: '',
+    servingSize: '', range of people
+    type: int(1-5)(breakfast, lunch, dinner, dessert)
+    category: [ ] list of defined values (Pultry, pork, seafood, Beef, vegetarian, Other )
+    difficulty: int (1-5) (So easy meter (how many pans used, time to prepare, clean up time))
+    favorites: int (tally of # of times favorited)
+    dateCreated: timestamp
+    isPublic: bool (if user wants it available)
+}
+
+- - - - - Maybe - - - - - 
+comment {
+    _id: 2b04071f-9815-4929-8045-4d62bd79e844
+    ownerID: 949971f-9815-4929-8045-4d62bd79e844 (FK - relates to User UUID)
+    rating: int (1-5)
+    body: ''
+}

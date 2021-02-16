@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <PublicNav />
     <img alt="Vue logo" src="./assets/recipehubb_main.png">
     <h1>Welcome to RecipeHubb!</h1>
     <router-view></router-view>
@@ -7,10 +8,12 @@
 </template>
 
 <script>
+import PublicNav from './components/navigation/PublicNav.vue'
 
 export default {
   name: 'App',
   components: {
+    PublicNav
   }
 }
 </script>
