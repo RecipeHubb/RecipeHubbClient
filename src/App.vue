@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <PublicNav />
+    <PublicHeader />
     <img alt="Vue logo" src="./assets/recipehubb_main.png">
     <h1>Welcome to RecipeHubb!</h1>
     <router-view></router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
-import PublicNav from './components/navigation/PublicNav.vue'
+import PublicHeader from './components/navigation/PublicHeader.vue'
+import Footer from './components/navigation/Footer.vue'
 
 export default {
   name: 'App',
   components: {
-    PublicNav
+    PublicHeader,
+    Footer
   }
 }
 </script>

@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'PublicNav'
+    name: 'PublicHeader'
 }
 </script>
 <style lang="">
