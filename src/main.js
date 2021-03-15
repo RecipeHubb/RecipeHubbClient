@@ -6,10 +6,15 @@ import About from './components/public/About'
 import Home from './components/public/Home'
 import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
+import VueFeatherIcon from 'vue-feather-icon-corrected'
+
+Vue.use(VueFeatherIcon)
+
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
+
 
 const routes = [
   { path: '/', component: Home },
