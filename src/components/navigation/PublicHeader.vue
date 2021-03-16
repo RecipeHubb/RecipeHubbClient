@@ -19,16 +19,16 @@
             <nav class="cursor-pointer">
               <ul>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Home
+                  <router-link to="/">Home</router-link>
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  About
+                  <router-link to="/about">About</router-link>
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Sign in
+                  <router-link to="/login">Sign In</router-link>
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Sign up
+                  <router-link to="/register">Sign Up</router-link>
                 </li>
               </ul>
             </nav>
@@ -44,22 +44,22 @@
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Home
+            <router-link to="/">Home</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            About
+            <router-link to="/about">About</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Sign in
+            <router-link to="/login">Sign In</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Sign up
+            <router-link to="/register">Sign Up</router-link>
           </button>
         </div>
       </div>
