@@ -1,9 +1,9 @@
 <template lang="">
 <div class=" p-16 flex justify-center ">
   <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
-    <div class="font-mono flex justify-center">
+    <div class=" flex justify-center">
       <div class="relative w-1/2 hidden lg:block ">
-        <img class="object-fill h-full w-full inset-0 m-0 p-0" src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80" />
+        <img class="object-fill h-full w-full rounded-l-lg inset-0 m-0 p-0" src="https://images.unsplash.com/photo-1495521821757-a1efb6729352?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80" />
       </div>
       <div class="lg:w-1/2 text-center">
         <h1 class="text-right text-sm px-4 py-4 text-gray-700">Don't have an account? <span class="font-bold">Sign up </span></h1>
