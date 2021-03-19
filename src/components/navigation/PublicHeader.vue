@@ -19,9 +19,9 @@
             <nav class="cursor-pointer">
               <ul>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Home
+                 Home 
                 </li>
-                <li class="border-transparent border-b-2 hover:border-purple-600">
+                <li  class="border-transparent border-b-2 hover:border-purple-600">
                   About
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
@@ -44,22 +44,22 @@
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Home
+          <a href="/"> Home </a>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            About
+           <a href="/about"> About </a>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Sign in
+           <a href="/login"> Sign in </a>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Sign up
+           <a href="/register"> Sign up </a>
           </button>
         </div>
       </div>
@@ -77,7 +77,7 @@ export default {
     methods: {
     handleMenu () {
       this.isOpen = !this.isOpen
-    }
+    },
         }
 }
 </script>
