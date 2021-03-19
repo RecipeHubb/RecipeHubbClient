@@ -1,6 +1,5 @@
 <template>
 <!-- We can update font -->
-<div class=" h-full font-serif flex-1">
   <!-- Section -->
   <div class="flex justify-center pt-20 h-screen">
     <div class="m-6 lg:m-12 text-center lg:w-1/2">
@@ -9,7 +8,6 @@
     </div>
     <!-- <div class="w-1/2 relative"><img src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"</div> -->
   </div>
-</div>
 
 </template>
 <script>
