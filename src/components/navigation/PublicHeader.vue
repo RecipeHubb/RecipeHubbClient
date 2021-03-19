@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white h-full">
     <div class="bg-hue h-full font-serif flex-1">
       <!-- NAVBAR -->
       <div
@@ -77,7 +77,7 @@ export default {
     methods: {
     handleMenu () {
       this.isOpen = !this.isOpen
-    }
+    },
         }
 }
 </script>
