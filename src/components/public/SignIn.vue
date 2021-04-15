@@ -10,7 +10,7 @@
           <div class="my-16">
             <h1 class="text-2xl py-2"> Sign in </h1>
               <div>
-                <input type="text" placeholder="Username" v-model="username" class="border-2  rounded-md my-2 p-2 outline-none w-7/12" />
+                <input type="text" placeholder="Email" v-model="email" class="border-2  rounded-md my-2 p-2 outline-none w-7/12" />
               </div>
               <div>
                 <input type="password" v-model="password" placeholder="Password" class="border-2  rounded-md my-2 p-2 w-7/12  outline-none" />
@@ -24,18 +24,23 @@
 </template>
 
 <script>
+import AuthService from '../../service/AuthService'
 export default {
     name: 'SignIn',
-        data: function() {
+
+    data: function() {
       return {
-        username: '',
+        email: '',
         password: ''
       }
     },
     methods: {
       signInUser: function() {
-        console.log(this.username)
-        console.log(this.password)
+
+        AuthService.login({
+          email: this.email,
+          password: this.password
+        })
       }
     },
 }

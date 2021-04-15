@@ -14,7 +14,7 @@
               <div>
                 <input type="password" v-model="password" placeholder="Password" class="border-2 rounded-md my-2 p-2 lg:w-9/12 outline-none" />
               </div>
-              <div class="bg-white border-2 rounded-md cursor-pointer p-2 my-6 px-8 text-sm inline-block" v-on:click="signUpUser">Sign Up</div>
+              <div class="bg-white border-2 rounded-md cursor-pointer p-2 my-6 px-8 text-sm inline-block" v-on:click="registerUser">Sign Up</div>
             </div>
         </div>
       </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import AuthService from '../../service/AuthService'
 export default {
     name: 'SignUp',
     data: function() {
@@ -32,10 +33,14 @@ export default {
       }
     },
     methods: {
-      signUpUser: function() {
-        console.log(this.username)
-        console.log(this.password)
-        console.log(this. email)
+      registerUser: async function() {
+
+        const res = await AuthService.register({
+            username: this.username,
+            email: this.email,
+            password: this.password
+        })
+        console.log(res)
       },
       verifyPassword: function() {
         //verify password through regex
