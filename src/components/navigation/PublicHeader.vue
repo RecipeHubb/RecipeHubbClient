@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="sticky inset-x-0 top-0 h-16 bg-white h-full">
+  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white h-full">
     <div class="bg-hue h-full font-serif flex-1">
       <!-- NAVBAR -->
       <div
@@ -19,16 +19,16 @@
             <nav class="cursor-pointer">
               <ul>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                 Home 
-                </li>
-                <li  class="border-transparent border-b-2 hover:border-purple-600">
-                  About
+                  <router-link to="/">Home</router-link>
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Sign in
+                  <router-link to="/about">About</router-link>
                 </li>
                 <li class="border-transparent border-b-2 hover:border-purple-600">
-                  Sign up
+                  <router-link to="/login">Sign In</router-link>
+                </li>
+                <li class="border-transparent border-b-2 hover:border-purple-600">
+                  <router-link to="/register">Sign Up</router-link>
                 </li>
               </ul>
             </nav>
@@ -44,22 +44,22 @@
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-          <a href="/"> Home </a>
+            <router-link to="/">Home</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-           <a href="/about"> About </a>
+            <router-link to="/about">About</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-           <a href="/login"> Sign in </a>
+            <router-link to="/login">Sign In</router-link>
           </button>
           <button
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-           <a href="/register"> Sign up </a>
+            <router-link to="/register">Sign Up</router-link>
           </button>
         </div>
       </div>
