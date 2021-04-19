@@ -1,13 +1,13 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
-// const url = 'http://recipeapi-env.eba-mrkgc9ge.us-east-1.elasticbeanstalk.com/'
-const url2 = 'http://localhost:8000/'
+// const prod = 'http://recipeapi-env.eba-mrkgc9ge.us-east-1.elasticbeanstalk.com/'
+const dev = 'http://localhost:8000/'
 
 module.exports = {
 
     register: (data) => {
         try {
-            return axios.post(`${url2}user-auth/`, {
+            return axios.post(`${dev}user-auth/`, {
                 username: data.username,
                 email: data.email,
                 password: data.password
@@ -24,7 +24,7 @@ module.exports = {
         // fconsole.log(data)
         let res = {}
         try {
-            res = await axios.post(`${url2}user-auth/login`, {
+            res = await axios.post(`${dev}user-auth/login`, {
                 email: data.email,
                 password: data.password
             })
