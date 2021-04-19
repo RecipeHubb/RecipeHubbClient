@@ -6,9 +6,15 @@ import Home from './components/public/Home'
 import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
 import VueFeatherIcon from 'vue-feather-icon-corrected'
+import VueToastify from "vue-toastify";
+import VueModal from '@kouts/vue-modal';
+import '@kouts/vue-modal/dist/vue-modal.css';
 
 Vue.use(VueFeatherIcon)
+Vue.use(VueToastify);
 
+//registered components
+Vue.component('Modal', VueModal);
 
 Vue.config.productionTip = false
 
@@ -29,5 +35,5 @@ const router = new VueRouter({
 
 new Vue({
   router,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app')
