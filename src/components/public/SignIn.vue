@@ -35,12 +35,16 @@ export default {
       }
     },
     methods: {
-      signInUser: function() {
+      signInUser: async function() {
 
-        AuthService.login({
+     const res = await AuthService.login({
           email: this.email,
           password: this.password
         })
+        // if(res.data.status) {
+        //   // add toastr
+        //   // push new routes to authenticated user
+        // }
       }
     },
 }
