@@ -35,12 +35,17 @@ export default {
       }
     },
     methods: {
-      signInUser: function() {
+      signInUser: async function() {
 
-        AuthService.login({
+     const res = await AuthService.login({
           email: this.email,
           password: this.password
         })
+      console.log(res, 'For the sake of the error [variable not being used]')
+        // if(res.data.status) {
+        //   // add toastr
+        //   // push new routes to authenticated user
+        // }
       }
     },
 }
