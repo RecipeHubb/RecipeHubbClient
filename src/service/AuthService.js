@@ -27,11 +27,21 @@ module.exports = {
                 password: data.password
             })
 
-        // set created user in Local Storage
-        let expirationDate = new Date()
-        expirationDate.getHours() + 2
-        document.cookie = 'token=' + res.data.token + 'expires=' + expirationDate
+            let d = new Date();
+            d.setTime(d.getTime() + 1 * 24 * 60 * 60 * 1000);
+            let expires = "expires=" + d.toUTCString();
+            const token = 'token=' + res.data.token + ';' + 'expires=' +  expires + ';'
+            document.cookie = token
 
+            //could create a helper function
+
+            const user = await axios.get(`${url2}user/data`, {
+                headers: {
+                    token: res.data.token
+                }
+            })
+            localStorage.setItem('user', JSON.stringify(user.data))
+            
         return res
 
         }
