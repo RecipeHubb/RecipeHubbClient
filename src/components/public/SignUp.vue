@@ -62,10 +62,17 @@ export default {
         email: this.email,
         password: this.password,
       });
+      // validation for empty text inputs
+    if(!this.username && !this.email && !this.password) {
+        this.$vToastify.error("Please enter Username, Email and Password.");
+       return
+    }
 
+    //push after register to the login page
       if (res.data.success) {
         this.$vToastify.success("Thanks for registering!");
         // set up programitically pushing them to login route/ may have to use router.push
+        this.$router.push('/login')
       }
     },
     verifyPassword: function() {

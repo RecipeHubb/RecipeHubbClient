@@ -22,7 +22,7 @@ module.exports = {
 
     login: async (data) => {
         try {
-            const res = await axios.post(`${url2}user-auth/login`, {
+            const res = await axios.post(`${dev}user-auth/login`, {
                 email: data.email,
                 password: data.password
             })
@@ -35,7 +35,7 @@ module.exports = {
 
             //could create a helper function
 
-            const user = await axios.get(`${url2}user/data`, {
+            const user = await axios.get(`${dev}user/data`, {
                 headers: {
                     token: res.data.token
                 }

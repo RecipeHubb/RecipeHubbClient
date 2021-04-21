@@ -5,6 +5,7 @@ import About from './components/public/About'
 import Home from './components/public/Home'
 import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
+import Profile from './components/protected/ProfilePage'
 import VueFeatherIcon from 'vue-feather-icon-corrected'
 import VueToastify from "vue-toastify";
 import VueModal from '@kouts/vue-modal';
@@ -25,7 +26,8 @@ const routes = [
   { path: '/', component: Home },
   { path: '/about', component: About },
   { path: '/login', component: SignIn },
-  { path: '/register', component: SignUp }
+  { path: '/register', component: SignUp },
+  { path: '/profile', component: Profile }
 ]
 
 const router = new VueRouter({
