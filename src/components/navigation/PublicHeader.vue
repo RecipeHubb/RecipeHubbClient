@@ -18,25 +18,49 @@
           <div class="pt-3" v-show="isOpen">
             <nav class="cursor-pointer">
               <ul>
-                <li class="border-transparent border-b-2 hover:border-purple-600">
+                <li
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/">Home</router-link>
                 </li>
-                <li class="border-transparent border-b-2 hover:border-purple-600">
+                <li
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/about">About</router-link>
                 </li>
-                <li class="border-transparent border-b-2 hover:border-purple-600">
+                <li
+                  v-show="!loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
+                  <router-link to="/register">Sign Up</router-link>
+                </li>
+                <li
+                  v-show="{ loggedIn }"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
+                  <router-link to="/profile">Profile</router-link>
+                </li>
+                <li
+                  v-if="!loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/login">Sign In</router-link>
                 </li>
-                <li class="border-transparent border-b-2 hover:border-purple-600">
-                  <router-link to="/register">Sign Up</router-link>
+                <li
+                  v-else
+                  v-on:click="logOut"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
+                  Sign Out
                 </li>
               </ul>
             </nav>
           </div>
-          
         </div>
         <div class="inline lg:hidden mt-1 ml-2">
-          <label v-on:click="handleMenu"> <feather-activity></feather-activity> </label>
+          <label v-on:click="handleMenu">
+            <feather-activity></feather-activity>
+          </label>
         </div>
         <input type="checkbox" id="menu-toggle" class="mt-4 hidden" />
 
@@ -52,14 +76,29 @@
             <router-link to="/about">About</router-link>
           </button>
           <button
+            v-show="!loggedIn"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/register">Sign Up</router-link>
+          </button>
+          <button
+            v-show="{ loggedIn }"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/profile">Profile</router-link>
+          </button>
+          <button
+            v-if="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/login">Sign In</router-link>
           </button>
           <button
+            v-else
+            v-on:click="logOut"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/register">Sign Up</router-link>
+            Sign Out
           </button>
         </div>
       </div>
@@ -68,17 +107,47 @@
 </template>
 <script>
 export default {
-    name: 'PublicHeader',
-    data()  {
+  name: "PublicHeader",
+  data() {
     return {
-      isOpen: false
-        }
+      isOpen: false,
+      loggedIn: false,
+    };
+  },
+  mounted() {
+    //get token before everything is mounted
+    const token = this.getToken()
+
+//check token to verify if they are logged in
+    if (token && token !== null) {
+      this.loggedIn = true;
+    }
+  },
+  methods: {
+    handleMenu() {
+      this.isOpen = !this.isOpen;
     },
-    methods: {
-    handleMenu () {
-      this.isOpen = !this.isOpen
+    logOut() {
+      console.log('here')
+      localStorage.clear();
+      this.clearToken();
+      
+      // pushes to home page and refreshes the page for new nav
+      this.$router.push('/')
+      this.$router.go(0)
     },
-        }
-}
+    getToken() {
+      const token = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("token="))
+        .split("=")[1];
+
+        return token
+    },
+    clearToken() {
+      document.cookie ="token=;"
+    }
+  },
+};
 </script>
 <style lang=""></style>
