@@ -3,7 +3,7 @@
     <div class="bg-hue h-full font-serif flex-1">
       <!-- NAVBAR -->
       <div
-        class="lg:px-6 py-2 my-2 px-4 border-b-2 border-gray-600 flex justify-between"
+        class="lg:px-6 mt-2 px-4 border-b-2 border-gray-600 flex justify-between"
       >
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>
@@ -35,7 +35,7 @@
                   <router-link to="/register">Sign Up</router-link>
                 </li>
                 <li
-                  v-show="{ loggedIn }"
+                  v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/profile">Profile</router-link>
@@ -82,7 +82,7 @@
             <router-link to="/register">Sign Up</router-link>
           </button>
           <button
-            v-show="{ loggedIn }"
+            v-show="loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/profile">Profile</router-link>
@@ -115,6 +115,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.loggedIn)
     //get token before everything is mounted
     const token = this.getToken()
 

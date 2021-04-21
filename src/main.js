@@ -10,7 +10,14 @@ import VueFeatherIcon from 'vue-feather-icon-corrected'
 import VueToastify from "vue-toastify";
 import VueModal from '@kouts/vue-modal';
 import '@kouts/vue-modal/dist/vue-modal.css';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
+library.add(faCoffee)
+
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(VueFeatherIcon)
 Vue.use(VueToastify);
 
