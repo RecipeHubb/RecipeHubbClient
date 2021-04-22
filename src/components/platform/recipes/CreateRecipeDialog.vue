@@ -3,7 +3,7 @@
     <div>
       <v-card>
         <v-card-title>
-          <span class="headline">User Profile</span>
+          <span class="headline">New Recipe</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -13,10 +13,10 @@
                 sm="6"
                 md="4"
               >
-                <v-text-field
-                  label="Legal first name*"
-                  required
-                ></v-text-field>
+                  <v-text-field
+                    label="Name*"
+                    required
+                  ></v-text-field>
               </v-col>
               <v-col
                 cols="12"
@@ -24,8 +24,8 @@
                 md="4"
               >
                 <v-text-field
-                  label="Legal middle name"
-                  hint="example of helper text only on focus"
+                  label="Name*"
+                  hint="Name of this new recipe"
                 ></v-text-field>
               </v-col>
               <v-col
@@ -40,12 +40,7 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Email*"
-                  required
-                ></v-text-field>
-              </v-col>
+              
               <v-col cols="12">
                 <v-text-field
                   label="Password*"
@@ -59,7 +54,7 @@
               >
                 <v-select
                   :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Age*"
+                  label="Category"
                   required
                 ></v-select>
               </v-col>
@@ -69,7 +64,7 @@
               >
                 <v-autocomplete
                   :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                  label="Interests"
+                  label="Type"
                   multiple
                 ></v-autocomplete>
               </v-col>
@@ -82,19 +77,22 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="open = false"
+            class="bg-purple-400 pr-5"
+            @click="$emit('close-dialog')"
           >
             Close
           </v-btn>
           <v-btn
             color="blue darken-1"
             text
-            @click="open = false"
+            class="bg-purple-400"
+            @click="createRecipe"
           >
             Save
           </v-btn>
         </v-card-actions>
       </v-card>
+      <!-- </v-row> -->
     <!-- <div class=" p-16 flex justify-center "> -->
     <!-- <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
       <div class=" flex justify-center">
@@ -146,6 +144,13 @@
       image: '',
 
     };
+  },
+  methods: {
+    createRecipe() {
+      alert('create')
+      //close popup
+      this.$emit('close-dialog')
+    },
   },
   mounted() {
       // not sure what goes here yet
