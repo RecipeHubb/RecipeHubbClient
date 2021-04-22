@@ -44,6 +44,12 @@
                   v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
+                  <router-link to="/recipes">Recipes</router-link>
+                </li>
+                <li
+                  v-show="loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/profile">Profile</router-link>
                 </li>
                 <li
@@ -72,11 +78,13 @@
 
         <div class="lg:inline lg:float-right hidden">
           <button
+            v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/">Home</router-link>
           </button>
           <button
+            v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/about">About</router-link>
@@ -89,10 +97,16 @@
           </button>
           <button
             v-show="loggedIn"
-            @click="openCreate"
+            @click="open = true"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             Create
+          </button>
+          <button
+            v-show="loggedIn"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/recipes">Recipes</router-link>
           </button>
           <button
             v-show="loggedIn"
@@ -116,21 +130,119 @@
         </div>
       </div>
     </div>
-    <div>
+    <div data-app>
       <v-dialog
         v-model="open"
         fullscreen
-        hide-overlay
         transition="dialog-bottom-transition"
+        width="400px"
+        class="pt-20"
       >
-      hey
+      <v-row justify="center">
+      <v-card>
+        <v-card-title>
+          <span class="headline">New Recipe</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                  <v-text-field
+                    label="Name*"
+                    required
+                  ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-text-field
+                  label="Name*"
+                  hint="Name of this new recipe"
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-text-field
+                  label="Legal last name*"
+                  hint="example of persistent helper text"
+                  persistent-hint
+                  required
+                ></v-text-field>
+              </v-col>
+              
+              <v-col cols="12">
+                <v-text-field
+                  label="Password*"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-select
+                  :items="['0-17', '18-29', '30-54', '54+']"
+                  label="Category"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-autocomplete
+                  :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
+                  label="Type"
+                  multiple
+                ></v-autocomplete>
+              </v-col>
+            </v-row>
+          </v-container>
+          <small>*indicates required field</small>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            class="bg-purple-400 pr-5"
+            @click="open = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            class="bg-purple-400"
+            @click="createRecipe"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-row>
+        <!-- <CreateRecipeDialog :open="open"/> -->
       </v-dialog>
     </div>
   </div>
 </template>
 <script>
+// import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
 export default {
   name: "PublicHeader",
+  components: {
+    // CreateRecipeDialog
+  },
   data() {
     return {
       isOpen: false,
@@ -139,18 +251,17 @@ export default {
     };
   },
   mounted() {
-    console.log(this.loggedIn)
     //get token before everything is mounted
     const token = this.getToken()
-
-//check token to verify if they are logged in
+    //check token to verify if they are logged in
     if (token && token !== null) {
       this.loggedIn = true;
     }
   },
   methods: {
-    openCreate() {
-      this.open = true
+    createRecipe() {
+      alert('create')
+      this.open = false
     },
     handleMenu() {
       this.isOpen = !this.isOpen;

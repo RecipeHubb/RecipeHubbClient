@@ -4,7 +4,7 @@
       <div class="font-mono flex justify-center">
         <div class="text-center lg:m-16 m-8 lg:w-96">
           <h1 class="text-sm lg:px-4 py-4 text-gray-700">
-            Have an account? <span class="font-bold">Sign in </span>
+            Have an account? <span class="font-bold"><router-link to="/login">Sign in</router-link> </span>
           </h1>
           <h1 class="text-2xl py-2">Sign Up</h1>
           <div>
@@ -12,7 +12,7 @@
               type="text"
               v-model="username"
               placeholder="Username"
-              class="border-2 rounded-md my-2 p-2 outline-none lg:w-9/12"
+              class="border-2 bg-white rounded-md my-2 p-2 outline-none lg:w-9/12"
             />
           </div>
           <div>
@@ -20,7 +20,7 @@
               type="text"
               v-model="email"
               placeholder="Email"
-              class="border-2 rounded-md my-2 p-2 outline-none lg:w-9/12"
+              class="border-2 bg-white rounded-md my-2 p-2 outline-none lg:w-9/12"
             />
           </div>
           <div>
@@ -28,7 +28,7 @@
               type="password"
               v-model="password"
               placeholder="Password"
-              class="border-2 rounded-md my-2 p-2 lg:w-9/12 outline-none"
+              class="border-2 bg-white rounded-md my-2 p-2 lg:w-9/12 outline-none"
             />
           </div>
           <div

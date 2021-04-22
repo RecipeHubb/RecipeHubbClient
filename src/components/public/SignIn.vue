@@ -10,7 +10,7 @@
         </div>
         <div class="lg:w-1/2 text-center">
           <h1 class="text-right text-sm px-4 py-4 text-gray-700">
-            Don't have an account? <span class="font-bold">Sign up </span>
+            Don't have an account? <span class="font-bold"><router-link to="/register">Sign up</router-link></span>
           </h1>
           <div class="my-16">
             <h1 class="text-2xl py-2">Sign in</h1>
@@ -19,7 +19,7 @@
                 type="text"
                 placeholder="Email"
                 v-model="email"
-                class="border-2  rounded-md my-2 p-2 outline-none w-7/12"
+                class="border-2 bg-white rounded-md my-2 p-2 outline-none w-7/12"
               />
             </div>
             <div>
@@ -27,7 +27,7 @@
                 type="password"
                 v-model="password"
                 placeholder="Password"
-                class="border-2  rounded-md my-2 p-2 w-7/12  outline-none"
+                class="border-2 bg-white rounded-md my-2 p-2 w-7/12  outline-none"
               />
             </div>
             <div
