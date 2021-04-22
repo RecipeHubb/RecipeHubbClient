@@ -1,13 +1,13 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
-// const prod = 'http://recipeapi-env.eba-mrkgc9ge.us-east-1.elasticbeanstalk.com/'
-const dev = 'http://localhost:8000/'
+// const dev = 'http://localhost:8000/'
+const URL = process.env.API_KEY
 
 module.exports = {
 
     register: (data) => {
         try {
-            return axios.post(`${dev}user-auth/`, {
+            return axios.post(`${URL}user-auth/`, {
                 username: data.username,
                 email: data.email,
                 password: data.password
@@ -22,7 +22,7 @@ module.exports = {
 
     login: async (data) => {
         try {
-            const res = await axios.post(`${dev}user-auth/login`, {
+            const res = await axios.post(`${URL}user-auth/login`, {
                 email: data.email,
                 password: data.password
             })
@@ -35,7 +35,7 @@ module.exports = {
 
             //could create a helper function
 
-            const user = await axios.get(`${dev}user/data`, {
+            const user = await axios.get(`${URL}user/data`, {
                 headers: {
                     token: res.data.token
                 }
