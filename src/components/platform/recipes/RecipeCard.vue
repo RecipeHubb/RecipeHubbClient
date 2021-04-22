@@ -33,7 +33,9 @@
         color="orange"
         text
       >
+      <router-link :to="{name: 'singleRecipe', params: {id: this.recipe.id}}">
         View
+      </router-link>
       </v-btn>
 
       Stars here
@@ -43,6 +45,18 @@
 <script>
 export default {
    name: 'RecipeCard',
-   props: ['recipe'] 
+   props: ['recipe'],
+
+   data: function() {
+       return {
+
+       }
+   },
+   methods: {
+     routeToRecipe() {
+        this.$router.push({name: 'singleRecipe', params: { id: this.recipe.id }})
+     }
+   },
+
 }
 </script>
