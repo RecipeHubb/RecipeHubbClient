@@ -90,21 +90,45 @@
                   sm='6'
                   xs='10'
                 >
-                hey
+                  <v-slider
+                    v-model="soEasyMeter"
+                    class="align-center"
+                    max="5"
+                    min="0"
+                    hide-details
+                  >
+                  {{soEasyMeter}}
+                    <!-- <template v-slot:append>
+                      <v-text-field
+                        v-model="soEasyMeter"
+                        class="mt-0 pt-0"
+                        hide-details
+                        single-line
+                        type="number"
+                        style="width: 30px"
+                      ></v-text-field>
+                    </template> -->
+                  </v-slider>
                 </v-col>
                 <v-col
                   cols="12"
                   lg='4'
                   sm='6'
                   xs='10'
-                >hey
+                >
+
                 </v-col>
                 <v-col
                   cols="12"
                   lg='4'
                   sm='6'
                   xs='10'
-                >hey
+                >
+                  <v-switch
+                    v-model="isPublic"
+                    color="purple"
+                    :label="`Public ${isPublic}`"
+                  ></v-switch>
                 </v-col>
               </v-row>
             </v-row>

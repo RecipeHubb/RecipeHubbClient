@@ -1,6 +1,6 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
-// const dev = 'http://localhost:8000/'
+// const URL = 'http://localhost:8000/'
 const URL = process.env.API_KEY
 
 module.exports = {
