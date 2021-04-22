@@ -2,23 +2,24 @@
   <v-card
     class="mx-auto"
     max-width="400"
+    @click="routeToRecipe"
   >
     <v-img
       class="white--text align-end"
       height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      :src="recipe.img"
     >
-      <v-card-title>{{recipe.name}}</v-card-title>
+      <!-- <v-card-title><span class="text-white">{{recipe.name}}</span></v-card-title> -->
     </v-img>
 
     <v-card-subtitle class="pb-0">
-      Number 10
+      <span class="text-2xl text-purple-500">{{recipe.name}}</span>
     </v-card-subtitle>
 
     <v-card-text class="text--primary">
-      <div>Whitehaven Beach</div>
+      <div>Other Data we have</div>
 
-      <div>Whitsunday Island, Whitsunday Islands</div>
+      <div>More data</div>
     </v-card-text>
 
     <v-card-actions>
@@ -33,9 +34,9 @@
         color="orange"
         text
       >
-      <router-link :to="{name: 'singleRecipe', params: {id: this.recipe.id}}">
-        View
-      </router-link>
+        <router-link :to="{name: 'singleRecipe', params: {id: this.recipe.id}}">
+            View
+        </router-link>
       </v-btn>
 
       Stars here
