@@ -4,7 +4,7 @@ const url = 'http://recipeapi-env.eba-mrkgc9ge.us-east-1.elasticbeanstalk.com/'
 
 module.exports = {
 
-    register: (data) => {
+    createRecipe: (data) => {
         console.log(data)
         try {
             axios.post(url, {
@@ -19,7 +19,7 @@ module.exports = {
         
     },
 
-    login: (data) => {
+    getRecipe: (data) => {
         console.log(data)
         try {
             axios.post(url, {

@@ -15,7 +15,8 @@ export default {
     };
   },
   mounted() {
-    //get recipe data from API/DB
+    //get recipe data from API/DB from params
+    console.log(this.$router.params.id)
   },
 };
 </script>

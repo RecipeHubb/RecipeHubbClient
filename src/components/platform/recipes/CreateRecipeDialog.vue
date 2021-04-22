@@ -22,7 +22,10 @@
                 md="4"
               >
                   <v-text-field
+                    outlined
                     label="Name*"
+                    v-model="name"
+                    :value="name"
                     required
                   ></v-text-field>
               </v-col>
@@ -32,21 +35,23 @@
                 md="4"
               >
                 <v-text-field
-                  label="Name*"
-                  hint="Name of this new recipe"
+                outlined
+                  label="Ingredients"
+                  hint="add ingredients"
                 ></v-text-field>
               </v-col>
               <v-col
                 cols="12"
-                sm="6"
                 md="4"
               >
-                <v-text-field
-                  label="Legal last name*"
-                  hint="example of persistent helper text"
-                  persistent-hint
-                  required
-                ></v-text-field>
+                <v-textarea
+                  outlined
+                  name="input-7-4"
+                  label="Instructions"
+                  placeholder="Enter additonal cooking instructions here..."
+                  v-model="instructions"
+                  :value="instructions"
+                ></v-textarea>
               </v-col>
               
               <!-- <v-col cols="12">
@@ -64,6 +69,7 @@
                   :items="['1', '2', '3', '4', '5']"
                   label="Type"
                   required
+                  outlined
                 ></v-select>
               </v-col>
               <v-col
@@ -74,8 +80,33 @@
                   :items="['American', 'Mexican', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Meat', 'Vegetables', 'Fruit']"
                   label="Category"
                   multiple
+                  outlined
                 ></v-autocomplete>
               </v-col>
+              <v-row justify="center">
+                <v-col
+                  cols="12"
+                  lg='4'
+                  sm='6'
+                  xs='10'
+                >
+                hey
+                </v-col>
+                <v-col
+                  cols="12"
+                  lg='4'
+                  sm='6'
+                  xs='10'
+                >hey
+                </v-col>
+                <v-col
+                  cols="12"
+                  lg='4'
+                  sm='6'
+                  xs='10'
+                >hey
+                </v-col>
+              </v-row>
             </v-row>
           </v-container>
           <small>*indicates required field</small>
@@ -106,6 +137,7 @@
 </template>
 
 <script>
+  import RecipeService from '../../../service/RecipeService'
   export default {
   name: "CreateRecipeDialog",
   props: ['open'],
@@ -123,8 +155,13 @@
     };
   },
   methods: {
-    createRecipe() {
-      alert('create')
+    createRecipe: async function() {
+      console.log(this.name)
+      const res = await RecipeService.createRecipe({
+        name: this.name,
+        instructions: this.instructions,
+      })
+      console.log(res)
       //close popup
       this.$emit('close-dialog')
     },
