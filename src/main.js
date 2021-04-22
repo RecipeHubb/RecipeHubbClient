@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import vuetify from '@/plugins/vuetify' 
+// public
 import App from './App.vue'
 import About from './components/public/About'
 import Home from './components/public/Home'
 import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
+// platform
 import Profile from './components/protected/ProfilePage'
+import Recipes from './components/platform/recipes/Recipes'
+// dependancies
 import VueFeatherIcon from 'vue-feather-icon-corrected'
 import VueToastify from "vue-toastify";
 import VueModal from '@kouts/vue-modal';
@@ -34,7 +39,8 @@ const routes = [
   { path: '/about', component: About },
   { path: '/login', component: SignIn },
   { path: '/register', component: SignUp },
-  { path: '/profile', component: Profile }
+  { path: '/profile', component: Profile },
+  { path: '/recipes', component: Recipes }
 ]
 
 const router = new VueRouter({
@@ -44,5 +50,6 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')

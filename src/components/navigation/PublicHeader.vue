@@ -38,6 +38,12 @@
                   v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
+                  <router-link to="/createrecipe">Create</router-link>
+                </li>
+                <li
+                  v-show="loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/profile">Profile</router-link>
                 </li>
                 <li
@@ -83,6 +89,13 @@
           </button>
           <button
             v-show="loggedIn"
+            @click="openCreate"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            Create
+          </button>
+          <button
+            v-show="loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/profile">Profile</router-link>
@@ -103,6 +116,16 @@
         </div>
       </div>
     </div>
+    <div>
+      <v-dialog
+        v-model="open"
+        fullscreen
+        hide-overlay
+        transition="dialog-bottom-transition"
+      >
+      hey
+      </v-dialog>
+    </div>
   </div>
 </template>
 <script>
@@ -112,6 +135,7 @@ export default {
     return {
       isOpen: false,
       loggedIn: false,
+      open: false,
     };
   },
   mounted() {
@@ -125,6 +149,9 @@ export default {
     }
   },
   methods: {
+    openCreate() {
+      this.open = true
+    },
     handleMenu() {
       this.isOpen = !this.isOpen;
     },

@@ -1,5 +1,5 @@
 <template lang="">
-  <div class=" p-16 flex justify-center ">
+      <div class=" p-16 flex justify-center ">
     <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
       <div class=" flex justify-center">
         <div class="relative w-1/2 hidden lg:block ">
@@ -9,9 +9,7 @@
           />
         </div>
         <div class="lg:w-1/2 text-center">
-          <h1 class="text-right text-sm px-4 py-4 text-gray-700">
-            Don't have an account? <span class="font-bold">Sign up </span>
-          </h1>
+          <h1>Create Recipe</h1>
           <div class="my-16">
             <h1 class="text-2xl py-2">Sign in</h1>
             <div>
@@ -42,40 +40,20 @@
     </div>
   </div>
 </template>
-
 <script>
-import AuthService from "../../service/AuthService";
 export default {
-  name: "SignIn",
-
-  data: function() {
+    export default {
+  name: "ProfilePage",
+  data() {
     return {
-      email: "",
-      password: "",
+      name: '',
+      image: '',
+
     };
   },
-  methods: {
-    signInUser: async function() {
-      const res = await AuthService.login({
-        email: this.email,
-        password: this.password,
-      });
-
-      if (!this.email && !this.password) {
-        this.$vToastify.error("Please enter Email and Password.");
-        return;
-      }
-      if(res && res.data && res.data.success) {
-        // add toastr
-        this.$vToastify.success("Logging In...");
-        // pushes to home page and refreshes the page for new nav
-        this.$router.push('/recipes')
-        this.$router.go(0)
-        return
-        // push new routes to authenticated user
-      }
-      this.$vToastify.error("Please Try Password or Email Again.");
-    },
+  mounted() {
+      // not sure what goes here yet
   },
 };
+}
 </script>
