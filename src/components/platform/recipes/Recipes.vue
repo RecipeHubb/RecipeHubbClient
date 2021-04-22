@@ -16,7 +16,7 @@
             v-for="recipe in recipes" :key="recipe.id"
             class="text-black-100 pt-15"
           >
-            <h1 class="text-purple-900">{{ recipe.name }}</h1>
+            <RecipeCard :recipe="recipe" />
           </div>
         </v-col>
       </v-row> 
@@ -25,8 +25,13 @@
   </div>
 </template>
 <script>
+import RecipeCard from './RecipeCard'
 export default {
   name: "Recipes",
+  components: {
+    RecipeCard
+  },
+
   data() {
     return {
       recipes: [
