@@ -1,6 +1,13 @@
 
 <template lang="">
     <div>
+      <v-dialog
+        v-model="open"
+        fullscreen
+        transition="dialog-bottom-transition"
+        width="400px"
+        class="pt-20"
+      >
       <v-card>
         <v-card-title>
           <span class="headline">New Recipe</span>
@@ -92,6 +99,7 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+      </v-dialog>
       <!-- </v-row> -->
     <!-- <div class=" p-16 flex justify-center "> -->
     <!-- <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
@@ -142,7 +150,13 @@
     return {
       name: '',
       image: '',
-
+      instructions: '',
+      category: 0,
+      type: 0,
+      numPeopleServed: 0,
+      soEasyMeter: 0,
+      ingredients: [],
+      isPublic: false
     };
   },
   methods: {
@@ -153,7 +167,6 @@
     },
   },
   mounted() {
-      // not sure what goes here yet
   },
 };
 </script>

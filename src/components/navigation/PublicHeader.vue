@@ -131,15 +131,15 @@
       </div>
     </div>
     <div data-app>
-      <v-dialog
+      <!-- <v-dialog
         v-model="open"
         fullscreen
         transition="dialog-bottom-transition"
         width="400px"
         class="pt-20"
-      >
-        <CreateRecipeDialog @close-dialog="closeDialog" />
-      </v-dialog>
+      > -->
+        <CreateRecipeDialog @close-dialog="closeDialog" :open="open" />
+      <!-- </v-dialog> -->
     </div>
   </div>
 </template>
