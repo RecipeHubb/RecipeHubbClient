@@ -38,6 +38,18 @@
                   v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
+                  <router-link to="/createrecipe">Create</router-link>
+                </li>
+                <li
+                  v-show="loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
+                  <router-link to="/recipes">Recipes</router-link>
+                </li>
+                <li
+                  v-show="loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/profile">Profile</router-link>
                 </li>
                 <li
@@ -66,11 +78,13 @@
 
         <div class="lg:inline lg:float-right hidden">
           <button
+            v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/">Home</router-link>
           </button>
           <button
+            v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/about">About</router-link>
@@ -80,6 +94,19 @@
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/register">Sign Up</router-link>
+          </button>
+          <button
+            v-show="loggedIn"
+            @click="open = true"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            Create
+          </button>
+          <button
+            v-show="loggedIn"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/recipes">Recipes</router-link>
           </button>
           <button
             v-show="loggedIn"
@@ -103,23 +130,29 @@
         </div>
       </div>
     </div>
+    <div data-app>
+        <CreateRecipeDialog @close-dialog="closeDialog" :open="open" />
+    </div>
   </div>
 </template>
 <script>
+import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
 export default {
   name: "PublicHeader",
+  components: {
+    CreateRecipeDialog
+  },
   data() {
     return {
       isOpen: false,
       loggedIn: false,
+      open: false,
     };
   },
   mounted() {
-    console.log(this.loggedIn)
     //get token before everything is mounted
     const token = this.getToken()
-
-//check token to verify if they are logged in
+    //check token to verify if they are logged in
     if (token && token !== null) {
       this.loggedIn = true;
     }
@@ -147,8 +180,12 @@ export default {
     },
     clearToken() {
       document.cookie ="token=;"
-    }
+    },
+
+    // Create Recipe Dialog
+    closeDialog() {
+      this.open = false;
+    },
   },
 };
 </script>
-<style lang=""></style>
