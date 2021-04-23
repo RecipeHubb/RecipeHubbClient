@@ -17,9 +17,9 @@
     </v-card-subtitle>
 
     <v-card-text class="text--primary">
-      <div>Other Data we have</div>
+      <div>Date Added: 04/04/2021</div>
 
-      <div>More data</div>
+      <div>Category Tags</div>
     </v-card-text>
 
     <v-card-actions>
