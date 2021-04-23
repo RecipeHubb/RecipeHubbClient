@@ -10,15 +10,18 @@
         </div>
         <div class="lg:w-1/2 text-center">
           <h1 class="text-right text-sm px-4 py-4 text-gray-700">
-            Don't have an account? <span class="font-bold"><router-link to="/register">Sign up</router-link></span>
+            Don't have an account?
+            <span class="font-bold"
+              ><router-link to="/register">Sign up</router-link></span
+            >
           </h1>
           <div class="my-16">
             <h1 class="text-2xl py-2">Sign in</h1>
             <div>
               <input
                 type="text"
-                placeholder="Email"
-                v-model="email"
+                placeholder="Email or Username"
+                v-model="credential"
                 class="border-2 bg-white rounded-md my-2 p-2 outline-none w-7/12"
               />
             </div>
@@ -50,31 +53,50 @@ export default {
 
   data: function() {
     return {
-      email: "",
-      password: "",
+      credential: null,
+      email: null,
+      username: null,
+      password: null,
     };
   },
   methods: {
     signInUser: async function() {
+      // validate credentials
+      this.validateCredentials();
+
       const res = await AuthService.login({
         email: this.email,
+        username: this.username,
         password: this.password,
       });
 
-      if (!this.email && !this.password) {
-        this.$vToastify.error("Please enter Email and Password.");
-        return;
-      }
-      if(res && res.data && res.data.success) {
+      if (res && res.data && res.data.success) {
         // add toastr
         this.$vToastify.success("Logging In...");
         // pushes to home page and refreshes the page for new nav
-        this.$router.push('/recipes')
-        this.$router.go(0)
-        return
+        this.$router.push("/recipes");
+        this.$router.go(0);
+        return;
         // push new routes to authenticated user
       }
       this.$vToastify.error("Please Try Password or Email Again.");
+    },
+    validateCredentials() {
+      const match = this.credential.match(/[@]/g);
+
+      if (match) {
+        // credential is an email
+        this.email = this.credential.toLowerCase();
+      } else {
+        this.username = this.credential.toLowerCase();
+      }
+      // credential is a username
+
+      if (!this.credential && !this.password) {
+        this.$vToastify.error("Please enter Email or Username and Password.");
+        return false;
+      }
+      return true;
     },
   },
 };

@@ -162,7 +162,6 @@ export default {
       this.isOpen = !this.isOpen;
     },
     logOut() {
-      console.log('here')
       localStorage.clear();
       this.clearToken();
       

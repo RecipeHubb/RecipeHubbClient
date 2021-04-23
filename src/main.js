@@ -8,6 +8,7 @@ import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
 // platform
 import Profile from './components/platform/profileDetails/ProfilePage'
+import Setting from './components/platform/profileDetails/Setting'
 import Recipes from './components/platform/recipes/Recipes'
 import Recipe from './components/platform/recipes/Recipe'
 // dependancies
@@ -42,6 +43,7 @@ const routes = [
   { path: '/register', component: SignUp },
   { path: '/profile', component: Profile },
   { path: '/recipes', component: Recipes },
+  { path: '/setting', component: Setting },
   { path: '/recipes/:id', name: 'singleRecipe', component: Recipe }
 ]
 

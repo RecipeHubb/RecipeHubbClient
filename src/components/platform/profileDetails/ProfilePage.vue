@@ -55,8 +55,9 @@
                     class="bg-gray-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                     type="button"
                     style="transition: all 0.15s ease 0s;"
+                  
                   >
-                    Settings
+                  <router-link to="/setting">Setting</router-link>
                   </button>
                 </div>
               </div>
@@ -87,20 +88,20 @@
               <h3
                 class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
               >
-                {user.firstName}
+                {{user.firstName}}
               </h3>
               <div
                 class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
               >
                 <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-                {user.location}
+                {{user.city}}
               </div>
             </div>
             <div class="mt-10 py-10 border-t border-gray-300 text-center">
               <div class="flex flex-wrap justify-center">
                 <div class="w-full lg:w-9/12 px-4">
                   <p class="mb-4 text-lg leading-relaxed text-gray-800">
-                    {user.bio}
+                    {{user.bio}}
                   </p>
                   <!-- <a href="" class="font-normal text-pink-500"
                       >Show more</a
