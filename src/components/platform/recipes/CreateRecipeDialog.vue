@@ -11,7 +11,11 @@
       >
       <v-card>
         <v-card-title>
-          <span class="headline text-purple-600">New Recipe</span>
+          <v-btn  @click="$emit('close-dialog')">
+
+          <font-awesome-icon :icon="appIcon" class="text-2xl text-purple-600"/>
+          </v-btn>
+          <span class="headline text-2xl text-purple-600 pl-2">New Recipe</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -175,6 +179,7 @@
 
 <script>
   import RecipeService from '../../../service/RecipeService'
+  import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
   export default {
   name: "CreateRecipeDialog",
   props: ['open'],
@@ -209,5 +214,10 @@
       this.$emit('close-dialog')
     },
   },
+  computed: {
+    appIcon () {
+      return faChevronLeft
+    }
+  }
 }
 </script>

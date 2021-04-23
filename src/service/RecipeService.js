@@ -21,6 +21,20 @@ module.exports = {
         
     },
 
+    // get all recipes associated with ID
+    getRecipes: (data) => {
+        try {
+            axios.post(url, {
+                username: data.username,
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+        
+    },
+
+    // get 1 recipe with ID
     getRecipe: (data) => {
         console.log('here')
         try {
