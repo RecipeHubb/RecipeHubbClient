@@ -51,12 +51,21 @@ module.exports = {
           },
         });
         localStorage.setItem("user", JSON.stringify(user.data));
-            return res;
+        return res;
       }
-      return false
-
+      return false;
     } catch (err) {
       console.log(err);
     }
+  },
+  getToken() {
+    const token = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      .split("=")[1];
+    return token;
+  },
+  clearToken() {
+    document.cookie = "token=;";
   },
 };
