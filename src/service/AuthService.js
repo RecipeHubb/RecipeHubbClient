@@ -1,7 +1,8 @@
 // Login/Signup and Auth service page
 const axios = require("axios");
-let URL = "https://recipehubbapi.herokuapp.com/";
-
+let URL = process.env.API_URL;
+console.log(process.env.NODE_ENV)
+console.log(process.env)
 if (process.env.NODE_ENV === "development") {
   URL = "http://localhost:8000/";
 }
