@@ -137,6 +137,7 @@
 </template>
 <script>
 import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
+import AuthService from '../../service/AuthService'
 export default {
   name: "PublicHeader",
   components: {
@@ -151,7 +152,7 @@ export default {
   },
   mounted() {
     //get token before everything is mounted
-    const token = this.getToken()
+    const token = AuthService.getToken()
     //check token to verify if they are logged in
     if (token && token !== null) {
       this.loggedIn = true;
@@ -164,22 +165,11 @@ export default {
     logOut() {
       console.log('here')
       localStorage.clear();
-      this.clearToken();
+      AuthService.clearToken();
       
       // pushes to home page and refreshes the page for new nav
       this.$router.push('/')
       this.$router.go(0)
-    },
-    getToken() {
-      const token = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        .split("=")[1];
-
-        return token
-    },
-    clearToken() {
-      document.cookie ="token=;"
     },
 
     // Create Recipe Dialog

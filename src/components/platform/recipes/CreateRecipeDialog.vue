@@ -11,7 +11,7 @@
       >
       <v-card>
         <v-card-title>
-          <span class="headline">New Recipe</span>
+          <span class="headline text-purple-600">New Recipe</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -34,15 +34,52 @@
                 sm="6"
                 md="4"
               >
-                <v-text-field
-                outlined
-                  label="Ingredients"
-                  hint="add ingredients"
-                ></v-text-field>
+                <v-select
+                  :items="['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack']"
+                  v-model="type"
+                  label="Type"
+                  required
+                  outlined
+                ></v-select>
               </v-col>
               <v-col
                 cols="12"
                 md="4"
+              >
+                <v-autocomplete
+                  :items="['American', 'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Meat', 'Vegetables', 'Fruit']"
+                  v-model="categories"
+                  label="Categories"
+                  multiple
+                  outlined
+                ></v-autocomplete>
+
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="4"
+              >
+                Image Upload
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="4"
+              >
+                <v-textarea
+                  outlined
+                  name="input-7-4"
+                  label="Ingredients"
+                  placeholder="2 chicken breasts, 1/2 cup water, etc."
+                  v-model="ingredients"
+                  :value="ingredients"
+                ></v-textarea>
+              </v-col>
+
+              <v-col
+                cols="12"
+                sm="4"
               >
                 <v-textarea
                   outlined
@@ -53,36 +90,7 @@
                   :value="instructions"
                 ></v-textarea>
               </v-col>
-              
-              <!-- <v-col cols="12">
-                <v-text-field
-                  label="Password*"
-                  type="password"
-                  required
-                ></v-text-field>
-              </v-col> -->
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['1', '2', '3', '4', '5']"
-                  label="Type"
-                  required
-                  outlined
-                ></v-select>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['American', 'Mexican', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Meat', 'Vegetables', 'Fruit']"
-                  label="Category"
-                  multiple
-                  outlined
-                ></v-autocomplete>
-              </v-col>
+
               <v-row justify="center">
                 <v-col
                   cols="12"
@@ -91,23 +99,16 @@
                   xs='10'
                 >
                   <v-slider
-                    v-model="soEasyMeter"
+                    v-model="soEasyRating"
                     class="align-center"
                     max="5"
                     min="0"
+                    label="So-Easy Meter"
                     hide-details
                   >
-                  {{soEasyMeter}}
-                    <!-- <template v-slot:append>
-                      <v-text-field
-                        v-model="soEasyMeter"
-                        class="mt-0 pt-0"
-                        hide-details
-                        single-line
-                        type="number"
-                        style="width: 30px"
-                      ></v-text-field>
-                    </template> -->
+                    <template v-slot:append>
+                      <span class="pt-1 text-purple-600">{{soEasyRating}}</span>
+                    </template>
                   </v-slider>
                 </v-col>
                 <v-col
@@ -116,7 +117,18 @@
                   sm='6'
                   xs='10'
                 >
-
+                  <v-slider
+                    v-model="numPeopleServed"
+                    class="align-center"
+                    max="20"
+                    min="0"
+                    label="Serves up to: "
+                    hide-details
+                  >
+                    <template v-slot:append>
+                      <span class="pt-1 text-purple-600">{{numPeopleServed}}</span>
+                    </template>
+                  </v-slider>
                 </v-col>
                 <v-col
                   cols="12"
@@ -131,6 +143,7 @@
                   ></v-switch>
                 </v-col>
               </v-row>
+
             </v-row>
           </v-container>
           <small>*indicates required field</small>
@@ -145,11 +158,11 @@
           >
             Close
           </v-btn>
-          &nbsp;
+          
           <v-btn
             color="blue darken-1"
             text
-            class="bg-purple-400"
+            class="bg-purple-400 ml-3"
             @click="createRecipe"
           >
             Save
@@ -170,27 +183,31 @@
       name: '',
       image: '',
       instructions: '',
-      category: 0,
-      type: 0,
+      categories: [],
+      type: '',
       numPeopleServed: 0,
-      soEasyMeter: 0,
-      ingredients: [],
+      soEasyRating: 0,
+      ingredients: '',
       isPublic: false
     };
   },
   methods: {
     createRecipe: async function() {
-      console.log(this.name)
       const res = await RecipeService.createRecipe({
         name: this.name,
+        recipeImage: this.image,
         instructions: this.instructions,
+        ingredients: this.ingredients,
+        type: this.type,
+        categories: this.categories,
+        servingSize: this.numPeopleServed,
+        soEasyRating: this.soEasyRating,
+        isPublic: this.isPublic,
       })
       console.log(res)
-      //close popup
+      // close popup
       this.$emit('close-dialog')
     },
   },
-  mounted() {
-  },
-};
+}
 </script>
