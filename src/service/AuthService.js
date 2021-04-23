@@ -51,10 +51,9 @@ module.exports = {
           },
         });
         localStorage.setItem("user", JSON.stringify(user.data));
-            return res;
+        return res;
       }
-      return false
-
+      return false;
     } catch (err) {
       console.log(err);
     }
