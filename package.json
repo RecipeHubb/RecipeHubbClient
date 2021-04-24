@@ -22,8 +22,7 @@
     "vue-feather-icon-corrected": "^1.0.2",
     "vue-router": "^3.5.1",
     "vue-toastify": "^1.8.0",
-    "vuetify": "^2.4.9",
-    "vuetify-image-upload-resize": "^1.0.7"
+    "vuetify": "^2.4.9"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
