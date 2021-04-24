@@ -60,7 +60,7 @@
                 </li>
                 <li
                   v-else
-                  v-on:click="logOut"
+                  @click="openLogoutDialog"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   Sign Out
@@ -122,7 +122,7 @@
           </button>
           <button
             v-else
-            v-on:click="logOut"
+            @click="openLogoutDialog"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             Sign Out
@@ -131,23 +131,29 @@
       </div>
     </div>
     <div data-app>
-        <CreateRecipeDialog @close-dialog="closeDialog" :open="open" />
+      <CreateRecipeDialog @close-dialog="closeDialog" :open="open" />
+    </div>
+    <div data-app>
+      <LogoutDialog @close-dialog="closeLogoutDialog" @log-out="logout" :open="logoutOpen" />
     </div>
   </div>
 </template>
 <script>
 import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
+import LogoutDialog from '../utility/LogoutDialog'
 import AuthService from '../../service/AuthService'
 export default {
   name: "PublicHeader",
   components: {
-    CreateRecipeDialog
+    CreateRecipeDialog,
+    LogoutDialog
   },
   data() {
     return {
       isOpen: false,
       loggedIn: false,
       open: false,
+      logoutOpen: false,
     };
   },
   mounted() {
@@ -162,9 +168,10 @@ export default {
     handleMenu() {
       this.isOpen = !this.isOpen;
     },
-    logOut() {
+    logout() {
       localStorage.clear();
       AuthService.clearToken();
+      this.logoutOpen = false;
       
       // pushes to home page and refreshes the page for new nav
       this.$router.push('/')
@@ -174,6 +181,12 @@ export default {
     // Create Recipe Dialog
     closeDialog() {
       this.open = false;
+    },
+    openLogoutDialog() {
+      this.logoutOpen = true
+    },
+    closeLogoutDialog() {
+      this.logoutOpen = false;
     },
   },
 };

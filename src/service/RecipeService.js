@@ -7,6 +7,7 @@ const url = 'http://localhost:8000/'
 module.exports = {
 
     createRecipe: (data) => {
+        console.log(data)
         try {
             return axios.post(`${url}recipe/`, {
                 data,
@@ -21,6 +22,20 @@ module.exports = {
         
     },
 
+    // get all recipes associated with ID
+    getRecipes: (data) => {
+        try {
+            axios.post(url, {
+                username: data.username,
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+        
+    },
+
+    // get 1 recipe with ID
     getRecipe: (data) => {
         console.log('here')
         try {

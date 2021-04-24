@@ -24,7 +24,10 @@
 </template>
 
 <script>
+import RecipeService from "../../../service/RecipeService";
+
 import RecipeCard from './RecipeCard'
+import AuthService from'../../../service/AuthService'
 export default {
   name: "Recipes",
   components: {
@@ -62,10 +65,25 @@ export default {
       ],
     }
   },
-  mounted() {
-    // get list of recipes
-    let user = JSON.parse(localStorage.getItem("user"));
-    this.user = user;
+  methods: {
+    getRecipes: async function(user) {
+      let res = RecipeService.getRecipes({
+        username: user.username
+      })
+      return res
+    }
+  },
+  mounted: async function() {
+    // validate authorized user
+    if (!AuthService.getToken()) {
+      AuthService.logOut()
+    } else {
+      let user = JSON.parse(localStorage.getItem("user"));
+      this.user = user;
+      // get list of recipes
+      let res = await this.getRecipes(user)
+      this.recipes = res.data.result
+    }
   },
 };
 </script>

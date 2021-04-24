@@ -57,14 +57,23 @@ module.exports = {
       console.log(err);
     }
   },
-  getToken() {
+  getToken: function() {
     const token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="))
       .split("=")[1];
-    return token;
+
+      return token
   },
-  clearToken() {
-    document.cookie = "token=;";
+  clearToken: function() {
+    document.cookie ="token=;"
+  },
+  logOut: function() {
+    localStorage.clear()
+    this.clearToken()
+    
+    // pushes to home page and refreshes the page for new nav
+    this.$router.push('/')
+    this.$router.go(0)
   },
 };
