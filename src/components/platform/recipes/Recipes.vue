@@ -73,7 +73,7 @@ export default {
       return res
     }
   },
-  mounted: function() {
+  mounted: async function() {
     // validate authorized user
     if (!AuthService.getToken()) {
       AuthService.logOut()
@@ -81,7 +81,7 @@ export default {
       let user = JSON.parse(localStorage.getItem("user"));
       this.user = user;
       // get list of recipes
-      let res = this.getRecipes(user)
+      let res = await this.getRecipes(user)
       this.recipes = res.data.result
     }
   },
