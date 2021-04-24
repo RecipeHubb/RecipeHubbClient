@@ -73,7 +73,7 @@ module.exports = {
     this.clearToken()
     
     // pushes to home page and refreshes the page for new nav
-    this.$router.push('/')
+    this.$router.push('/login')
     this.$router.go(0)
   },
 };

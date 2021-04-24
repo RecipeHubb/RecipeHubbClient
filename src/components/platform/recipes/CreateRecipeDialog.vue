@@ -297,9 +297,9 @@
       this.$emit('close-dialog')
     },
     previewImage: function(event) {
-        var input = event.target
+        const input = event.target
         if (input.files && input.files[0]) {
-            var reader = new FileReader()
+            const reader = new FileReader()
             reader.onload = (e) => {
                 this.previewImg = e.target.result;
                 this.image = e.target.result
