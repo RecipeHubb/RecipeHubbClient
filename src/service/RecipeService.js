@@ -7,6 +7,7 @@ const url = 'http://localhost:8000/'
 module.exports = {
 
     createRecipe: (data) => {
+        console.log(data)
         try {
             return axios.post(`${url}recipe/`, {
                 data,
