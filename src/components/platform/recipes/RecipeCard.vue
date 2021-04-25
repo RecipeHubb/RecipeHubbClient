@@ -19,7 +19,18 @@
     <v-card-text class="text--primary">
       <div>Date Added: 04/04/2021</div>
 
-      <div>Category Tags</div>
+      <div>
+        <v-chip-group
+          multiple
+        >
+          <v-chip
+            v-for="tag in recipe.tags"
+            :key="tag"
+          >
+            {{ tag }}
+          </v-chip>
+        </v-chip-group>
+      </div>
     </v-card-text>
 
     <v-card-actions>
