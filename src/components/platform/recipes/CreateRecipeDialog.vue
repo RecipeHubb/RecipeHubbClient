@@ -290,7 +290,7 @@
         soEasyRating: this.soEasyRating,
         tags: this.tags,
         favorited: this.favorited,
-        isPublic: this.isPublic
+        public: this.isPublic
       })
       console.log(res)
       this.$emit('close-dialog')
