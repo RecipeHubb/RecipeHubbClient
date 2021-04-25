@@ -13,7 +13,7 @@
       <v-card>
         <v-card-title>
           <button  @click="closeModal" title="exit create recipe">
-            <font-awesome-icon :icon="appIcon" class="text-2xl text-purple-600 mr-2 ml-1 text-center"/>
+            <i class="fas fa-chevron-left text-2xl text-purple-600 mr-2 ml-1 text-center"></i>
           </button>
           <span class="headline text-2xl text-purple-600 pl-2">New Recipe</span>
         </v-card-title>
@@ -174,6 +174,7 @@
                   min="0"
                   label="So-Easy Meter"
                   hide-details
+                  title="Rating of 1-5 on how easy this recipe is to make (tools needed, time to prepare, etc)"
                 >
                   <template v-slot:append>
                     <span class="pt-1 text-purple-600">{{soEasyRating}}</span>
@@ -256,7 +257,6 @@
 
 <script>
   import RecipeService from '../../../service/RecipeService'
-  import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
   export default {
   name: "CreateRecipeDialog",
   props: ['open'],
@@ -293,7 +293,6 @@
         isPublic: this.isPublic
       })
       console.log(res)
-      // close popup
       this.$emit('close-dialog')
     },
     previewImage: function(event) {
@@ -306,7 +305,6 @@
             }
             reader.readAsDataURL(input.files[0]);
         }
-
     },
     closeModal: function(){ // clear state and close dialod
       this.name =null,
@@ -338,9 +336,6 @@
     }
   },
   computed: {
-    appIcon () {
-      return faChevronLeft
-    },
     isAddIngredientBlank () {
       return this.newIngredient === ''
     } 

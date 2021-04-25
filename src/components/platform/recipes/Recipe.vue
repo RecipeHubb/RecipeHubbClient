@@ -391,6 +391,7 @@ export default {
     } 
     //get recipe data from API/DB from params
     console.log('Mounted Recipe.vue')
+    // console.log(this.$router.params.id)
   },
   methods: {
     updateRecipe: async function() {
