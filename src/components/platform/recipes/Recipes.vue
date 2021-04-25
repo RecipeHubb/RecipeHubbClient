@@ -40,27 +40,33 @@ export default {
         {
           id: 1,
           name: 'recipe 1',
-          img: "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          img: "https://cdn.vuetifyjs.com/images/cards/docks.jpg",
+          tags: ['Dinner', "Savory", "Meat"]
+
         },
         {
           id: 2,
           name: 'recipe 2',
-          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          tags: ['Dinner', "Savory", "Meat"]
         },
         {
           id: 3,
           name: 'recipe 3',
-          img: 'https://picsum.photos/510/300?random'
+          img: 'https://picsum.photos/510/300?random',
+          tags: ['Dinner', "Savory", "Meat"]
         },
         {
           id: 4,
           name: 'recipe 4',
-          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
+          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png',
+          tags: ['Dinner', "Savory", "Meat"]
         },
         {
           id: 5,
           name: 'recipe 5',
-          img: 'https://picsum.photos/510/300?random'
+          img: 'https://picsum.photos/510/300?random',
+          tags: ['Dinner', "Savory", "Meat"]
         },
       ],
     }
@@ -73,7 +79,7 @@ export default {
       return res
     }
   },
-  mounted: function() {
+  mounted: async function() {
     // validate authorized user
     if (!AuthService.getToken()) {
       AuthService.logOut()
@@ -81,7 +87,7 @@ export default {
       let user = JSON.parse(localStorage.getItem("user"));
       this.user = user;
       // get list of recipes
-      let res = this.getRecipes(user)
+      let res = await this.getRecipes(user)
       this.recipes = res.data.result
     }
   },
