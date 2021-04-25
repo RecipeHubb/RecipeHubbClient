@@ -7,14 +7,15 @@ const url = 'http://localhost:8000/'
 module.exports = {
 
     createRecipe: (data) => {
-        console.log(data)
+        console.log(AuthService.getToken())
         try {
-            return axios.post(`${url}recipe/`, {
-                data,
-                headers: {
-                    token: AuthService.getToken()
+            return axios.post(`${url}recipe/`, data,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
                 }
-            })
+            )
         }
         catch(err){
             return console.log(err)
@@ -23,11 +24,15 @@ module.exports = {
     },
 
     // get all recipes associated with ID
-    getRecipes: (data) => {
+    getRecipes: () => {
         try {
-            axios.post(url, {
-                username: data.username,
-            })
+            return axios.get(`${url}recipe/`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
+                }
+            )
         }
         catch(err){
             console.log(err)

@@ -292,7 +292,11 @@
         favorited: this.favorited,
         public: this.isPublic
       })
-      console.log(res)
+      if (res.status === 200){
+        this.$vToastify.success(`${this.name} sucessfully created!`)
+      }
+      this.$router.push('/recipes')
+      this.$router.go()
       this.$emit('close-dialog')
     },
     previewImage: function(event) {
