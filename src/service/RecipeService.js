@@ -18,12 +18,12 @@ module.exports = {
             )
         }
         catch(err){
-            return console.log(err)
+            return err
         }
         
     },
 
-    // get all recipes associated with ID
+    // get all recipes associated with user
     getRecipes: () => {
         try {
             return axios.get(`${url}recipe/`,
@@ -35,23 +35,50 @@ module.exports = {
             )
         }
         catch(err){
-            console.log(err)
+            return err
         }
         
     },
 
-    // get 1 recipe with ID
-    getRecipe: (data) => {
-        console.log('here')
+    getRecipeByID: (id) => {
         try {
-            axios.post(url, {
-                username: data.username,
-                email: data.email,
-                password: data.password
-            })
+            return axios.get( `${url}recipe/${id}`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    } 
+                }
+            )
         }
         catch(err){
-            console.log(err)
+            return err
+        }
+        
+    },
+
+    updateRecipe: (id, data) => {
+        try {
+            return axios.put(`${url}recipe/${id}`, data,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
+                }
+            )        
+        }
+        catch(err){
+            return err
+        }
+        
+    },
+
+    deleteRecipe: (id) => {
+        console.log('In Delete')
+        try {
+            return axios.delete(`${url}recipe/`, {id})
+        }
+        catch(err){
+            return err
         }
         
     },

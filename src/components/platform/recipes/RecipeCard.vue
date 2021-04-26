@@ -45,7 +45,7 @@
         color="orange"
         text
       >
-        <router-link :to="{name: 'singleRecipe', params: {id: this.recipe.id}}">
+        <router-link :to="{name: 'singleRecipe', params: {id: this.recipe._id, recipeName: this.recipe.name}}">
             View
         </router-link>
       </v-btn>
@@ -66,7 +66,7 @@ export default {
    },
    methods: {
      routeToRecipe() {
-        this.$router.push({name: 'singleRecipe', params: { id: this.recipe.id }})
+        this.$router.push({name: 'singleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
 
