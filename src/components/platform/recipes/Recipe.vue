@@ -217,10 +217,17 @@
         <v-row justify="center">
           <v-btn 
             outlined
-            class="bg-purple-400" 
+            class="bg-green-500 mr-4" 
             @click="updateRecipe"
           >
             Save
+          </v-btn>
+          <v-btn 
+            outlined
+            class="bg-red-500" 
+            @click="openDialog"
+          >
+            Delete
           </v-btn>
 
         </v-row>
@@ -372,18 +379,26 @@
         </v-row>
 
       </v-container>
+      <div data-app>
+        <ConfirmDeleteDialog @close-dialog="closeDialog" @delete-recipe="deleteRecipe" :open="deleteOpen" />
+      </div>
     </div>
 </template>
 
 <script>
 import AuthService from '../../../service/AuthService'
 import RecipeService from '../../../service/RecipeService'
+import ConfirmDeleteDialog from '../../utility/ConfirmDeleteDialog'
 export default {
   name: "Recipe",
+  components: {
+    ConfirmDeleteDialog
+  },
   data() {
     return {
       recipe: {},
       editMode: false,
+      deleteOpen: false,
 
       name: null,
       recipeImage: null,
@@ -425,7 +440,7 @@ export default {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: this.image,
+        recipeImage: this.recipeImage,
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
@@ -434,7 +449,16 @@ export default {
       })
       if (res.status === 200){
         this.editMode = false
-        this.$vToastify.success(`${this.name} sucessfully updated!`)
+        this.$vToastify.success(`${this.name} sucessfully updated`)
+      }
+    },
+
+    deleteRecipe: async function() {
+      const res = await RecipeService.deleteRecipe(this.recipeID)
+      if (res.status === 200){
+        this.editMode = false
+        this.$vToastify.success(`${this.name} sucessfully deleted`)
+        this.$router.push('/recipes')
       }
     },
 
@@ -472,6 +496,14 @@ export default {
 
     goBack: function(){
       this.$router.push('/recipes')
+    },
+
+    closeDialog: function() {
+      this.deleteOpen = false
+    },
+
+    openDialog: function() {
+      this.deleteOpen = true
     }
   },
   computed: {
