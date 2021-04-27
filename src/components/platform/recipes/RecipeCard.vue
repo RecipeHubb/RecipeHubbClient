@@ -6,13 +6,13 @@
     title="Click to view more recipe details"
   >
     <v-img
-      v-if="recipe.img"
+      v-if="recipe.recipeImage"
       alt="No Image Available"
       class="white--text align-end"
       height="200px"
       max-height="200px"
       position="center"
-      :src="recipe.img"
+      :src="recipe.recipeImage"
     >
       <!-- <v-card-title><span class="text-white">{{recipe.name}}</span></v-card-title> -->
     </v-img>
