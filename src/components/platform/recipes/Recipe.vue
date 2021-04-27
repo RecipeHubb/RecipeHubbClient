@@ -1,12 +1,30 @@
 <template lang="">
     <div>
-      <v-row justify="center">
-        <h1 class="text-5xl pt-10 pb-10 text-purple-500">
-          {{name}}
-          <v-btn @click="editMode = !editMode" class="bg-purple-500 text-black">switch</v-btn>
-        </h1>
+      <v-row justify="start" align="center" class="textlsl pt-125 pt-10 -pb-3">
+        <span @click="goBack" title="Go back to Recipes List" class="mt-4">
+          <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+        </span>
       </v-row>
       <v-container v-if="editMode" fluid>
+        <v-row justify="center" class="text-5xl pb-10 -mt-5 text-purple-500">
+          <v-col
+            cols='12'
+            lg='3'
+          >
+            <v-text-field
+              outlined
+              label="Name*"
+              v-model="name"
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col
+            cols='12'
+            lg='1'
+          >
+            <span v-if="editMode" @click="switchIcon" title="Toggle Preview Mode"><i class="fas fa-eye mr-2 text-3xl text-gray-900 cursor-pointer "></i></span>
+          </v-col>
+        </v-row>
         <v-row justify="center" align="center">
           <v-col
             cols='12'
@@ -209,6 +227,13 @@
       </v-container>
       <!-- - - - - - - - - Preview Mode - - - - - - - - - - - - - - -->
       <v-container v-else fluid>
+        <v-row justify="center">
+          <h1 class="text-5xl pt-10 pb-10 text-purple-500">
+            {{name}}
+
+            <span v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
+          </h1>
+        </v-row>
         <v-row justify="center" align="center">
           <v-col
             cols='12'
@@ -352,6 +377,7 @@
 
 <script>
 import AuthService from '../../../service/AuthService'
+import RecipeService from '../../../service/RecipeService'
 export default {
   name: "Recipe",
   data() {
@@ -359,47 +385,62 @@ export default {
       recipe: {},
       editMode: false,
 
-      // name: null,
-      // recipeImage: null,
-      // previewImg: null,
-      // instructions: null,
-      // tags: [],
-      // servingSize: 0,
-      // soEasyRating: 0,
-      // ingredients: [],
-      // newIngredient: '',
-      // isPublic: false,
-      // favorited: false
-
-      //test data
-      name: "Chicken Hearts",
+      name: null,
       recipeImage: null,
       previewImg: null,
-      instructions: "You have to make these the right way, if you dont, they wont taste good.",
-      tags: ['Chicken', 'Dinner', 'Savory'],
-      servingSize: 6,
-      soEasyRating: 3,
-      ingredients: ['2 lb chicken heart', '1 tbsp seasoning'],
+      instructions: null,
+      tags: [],
+      servingSize: 0,
+      soEasyRating: 0,
+      ingredients: [],
       newIngredient: '',
-      isPublic: true,
-      favorited: true
+      isPublic: false,
+      favorited: false,
     };
   },
-  mounted() {
+  mounted: async function() {
     if (!AuthService.getToken()) {
       AuthService.logOut()
     } 
     //get recipe data from API/DB from params
-    console.log('Mounted Recipe.vue')
-    // console.log(this.$router.params.id)
+    let res = await RecipeService.getRecipeByID(this.$route.params.id)
+    this.name = res.data.name
+    this.recipeImage = res.data.recipeImage
+    this.instructions = res.data.instructions
+    this.tags = res.data.tags
+    this.servingSize = res.data.servingSize
+    this.soEasyRating = res.data.soEasyRating
+    this.ingredients = res.data.ingredients
+    this.isPublic = res.data.public
+    this.favorited = res.data.favorited
+    this.recipeID = res.data._id
   },
   methods: {
     updateRecipe: async function() {
-      this.$vToastify.success("Updated Recipe Successfully")
+      if (!this.name){
+        this.$vToastify.error("Please fill out required fields before updating")
+        return
+      }
+      const res = await RecipeService.updateRecipe(this.recipeID,{
+        name: this.name,
+        ingredients: this.ingredients,
+        instructions: this.instructions,
+        recipeImage: this.image,
+        servingSize: this.numPeopleServed,
+        soEasyRating: this.soEasyRating,
+        tags: this.tags,
+        favorited: this.favorited,
+        public: this.isPublic
+      })
+      if (res.status === 200){
+        this.editMode = false
+        this.$vToastify.success(`${this.name} sucessfully updated!`)
+      }
     },
 
     previewImage: function(event) {
       const input = event.target
+      console.log(input)
       if (input.files && input.files[0]) {
           const reader = new FileReader()
           reader.onload = (e) => {
@@ -423,10 +464,17 @@ export default {
 
     deleteIngredient: function(index){
       this.ingredients.splice(index, 1)
+    },
+
+    switchIcon: function(){
+      this.editMode = !this.editMode
+    },
+
+    goBack: function(){
+      this.$router.push('/recipes')
     }
   },
   computed: {
-
     isAddIngredientBlank () {
       return this.newIngredient === ''
     } 

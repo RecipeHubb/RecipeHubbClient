@@ -44,7 +44,7 @@ const routes = [
   { path: '/profile', component: Profile },
   { path: '/recipes', component: Recipes },
   { path: '/setting', component: Setting },
-  { path: '/recipes/:id', name: 'singleRecipe', component: Recipe }
+  { path: '/recipes/:id/:recipeName', name: 'singleRecipe', component: Recipe }
 ]
 
 const router = new VueRouter({
