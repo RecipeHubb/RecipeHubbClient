@@ -1,17 +1,16 @@
 <template>
   <v-row justify="center">
     <v-dialog
-
       v-model="open"
       persistent
       max-width="500"
       @click:outside="closeDialog"
     >
       <v-card>
-        <v-card-title class="headline text-purple-500 text-xl">
-          Logout?
+        <v-card-title class="headline text-purple-500">
+          Confirm Delete?
         </v-card-title>
-        <v-card-text class="text-lg">This will take you back to the home page. Continue?</v-card-text>
+        <v-card-text class="text-lg">This action cannot be undone...</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -25,8 +24,8 @@
           <v-btn
             color="green darken-1"
             text
-            class="bg-green-500 mr-2"
-            @click="confirmLogout"
+            class="bg-green-500"
+            @click="confirmDelete"
           >
             Confirm
           </v-btn>
@@ -37,14 +36,14 @@
 </template>
 <script>
 export default {
-    name: 'LogoutDialog',
+    name: 'ConfirmDeleteDialog',
     props: ['open'],
     methods: {
         closeDialog: function() {
             this.$emit('close-dialog')
         },
-        confirmLogout: function() {
-            this.$emit('log-out')
+        confirmDelete: function() {
+            this.$emit('delete-recipe')
         }
     }
 }

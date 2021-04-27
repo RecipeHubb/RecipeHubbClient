@@ -73,9 +73,14 @@ module.exports = {
     },
 
     deleteRecipe: (id) => {
-        console.log('In Delete')
         try {
-            return axios.delete(`${url}recipe/`, {id})
+            return axios.delete(`${url}recipe/${id}`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    } 
+                }
+            )
         }
         catch(err){
             return err
