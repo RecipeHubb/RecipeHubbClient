@@ -233,17 +233,17 @@
           <v-btn
             color="blue darken-1"
             text
-            class="bg-purple-400 pr-5"
+            class="bg-red-500 pr-5"
             @click="closeModal"
             title="cancel and close this popup"
           >
-            Close
+            Cancel
           </v-btn>
           
           <v-btn
             color="blue darken-1"
             text
-            class="bg-purple-400 ml-3"
+            class="bg-green-500 ml-3"
             @click="createRecipe"
             title="Save and create this recipe"
           >
