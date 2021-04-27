@@ -1,6 +1,9 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
-const url = 'http://recipeapi-env.eba-mrkgc9ge.us-east-1.elasticbeanstalk.com/'
+let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
+if (process.env.NODE_ENV === "development") {
+  URL = "http://localhost:8000/";
+}
 
 module.exports = {
 

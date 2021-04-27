@@ -1,15 +1,17 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
 const AuthService = require('./AuthService')
-const url = 'http://localhost:8000/'
-// const url = process.env.API_KEY
+let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
+if (process.env.NODE_ENV === "development") {
+  URL = "http://localhost:8000/";
+}
 
 module.exports = {
 
     createRecipe: (data) => {
         console.log(AuthService.getToken())
         try {
-            return axios.post(`${url}recipe/`, data,
+            return axios.post(`${URL}recipe/`, data,
                 {
                     headers: {
                         token: AuthService.getToken()
@@ -26,7 +28,7 @@ module.exports = {
     // get all recipes associated with user
     getRecipes: () => {
         try {
-            return axios.get(`${url}recipe/`,
+            return axios.get(`${URL}recipe/`,
                 {
                     headers: {
                         token: AuthService.getToken()
@@ -42,7 +44,7 @@ module.exports = {
 
     getRecipeByID: (id) => {
         try {
-            return axios.get( `${url}recipe/${id}`,
+            return axios.get( `${URL}recipe/${id}`,
                 {
                     headers: {
                         token: AuthService.getToken()
@@ -58,7 +60,7 @@ module.exports = {
 
     updateRecipe: (id, data) => {
         try {
-            return axios.put(`${url}recipe/${id}`, data,
+            return axios.put(`${URL}recipe/${id}`, data,
                 {
                     headers: {
                         token: AuthService.getToken()
@@ -74,7 +76,7 @@ module.exports = {
 
     deleteRecipe: (id) => {
         try {
-            return axios.delete(`${url}recipe/${id}`,
+            return axios.delete(`${URL}recipe/${id}`,
                 {
                     headers: {
                         token: AuthService.getToken()
