@@ -263,7 +263,7 @@
   data() {
     return {
       name: null,
-      image: null,
+      recipeImage: null,
       previewImg: null,
       instructions: null,
       tags: [],
@@ -285,7 +285,7 @@
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: this.image,
+        recipeImage: JSON.stringify(this.recipeImage),
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
@@ -305,7 +305,7 @@
             const reader = new FileReader()
             reader.onload = (e) => {
                 this.previewImg = e.target.result;
-                this.image = e.target.result
+                this.recipeImage = e.target.result
             }
             reader.readAsDataURL(input.files[0]);
         }
