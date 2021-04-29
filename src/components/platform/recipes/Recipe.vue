@@ -471,7 +471,7 @@ export default {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: this.recipeImage,
+        recipeImage: JSON.stringify(this.recipeImage),
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
