@@ -52,12 +52,13 @@
               >
                 <div class="py-6 px-3 mt-32 sm:mt-0">
                   <button
-                    class="bg-gray-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                    class="bg-purple-400 active:bg-pink-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                     type="button"
                     style="transition: all 0.15s ease 0s;"
-                  
+                    @click="openEditDialog"
+                    title="edit profile settings here"
                   >
-                  <router-link to="/setting">Setting</router-link>
+                    Settings
                   </button>
                 </div>
               </div>
@@ -88,7 +89,7 @@
               <h3
                 class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
               >
-                {{user.firstName}}
+                {{user.firstName}} {{user.lastName}}
               </h3>
               <div
                 class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -113,22 +114,37 @@
         </div>
       </div>
     </section>
+    <div data-app>
+      <EditSettingsDialog @close-dialog="closeDialog" :open="editOpen" />
+    </div>
   </div>
 </template>
 
 <script>
+import EditSettingsDialog from '../../utility/EditSettingsDialog'
 export default {
   name: "ProfilePage",
+  components: {
+    EditSettingsDialog
+  },
   data() {
     return {
       user: {},
-      defaultImage:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1",
+      editOpen: false,
+      defaultImage: null
     };
   },
+  methods: {
+    closeDialog() {
+      this.editOpen = false
+    },
+    openEditDialog() {
+      this.editOpen = true
+    }
+  },
   mounted() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    this.user = user;
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.defaultImage = JSON.parse(this.user.profilePic) || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
   },
 };
 </script>

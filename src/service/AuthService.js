@@ -57,6 +57,20 @@ module.exports = {
       console.log(err);
     }
   },
+
+  updateUser: async (data) => {
+    try {
+      return axios.put(`${URL}user-auth/`, data, {
+          headers: {
+              token: this.getToken
+          }
+      })
+    }
+    catch(err){
+        console.log(err)
+    }
+  },
+
   getToken: function() {
     const token = document.cookie
       .split("; ")
