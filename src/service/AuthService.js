@@ -1,7 +1,6 @@
 // Login/Signup and Auth service page
 const axios = require("axios");
-let URL = "https://recipehubbapi.herokuapp.com/";
-
+let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
 if (process.env.NODE_ENV === "development") {
   URL = "http://localhost:8000/";
 }
@@ -58,14 +57,37 @@ module.exports = {
       console.log(err);
     }
   },
-  getToken() {
+
+  updateUser: async (data) => {
+    try {
+      return axios.put(`${URL}user-auth/`, data, {
+          headers: {
+              token: this.getToken
+          }
+      })
+    }
+    catch(err){
+        console.log(err)
+    }
+  },
+
+  getToken: function() {
     const token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="))
       .split("=")[1];
-    return token;
+
+      return token
   },
-  clearToken() {
-    document.cookie = "token=;";
+  clearToken: function() {
+    document.cookie ="token=;"
+  },
+  logOut: function() {
+    localStorage.clear()
+    this.clearToken()
+    
+    // pushes to home page and refreshes the page for new nav
+    this.$router.push('/login')
+    this.$router.go(0)
   },
 };

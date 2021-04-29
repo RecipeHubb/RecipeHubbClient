@@ -1,37 +1,91 @@
 // Login/Signup and Auth service page
 const axios = require('axios')
 const AuthService = require('./AuthService')
-const url = 'http://localhost:8000/'
-// const url = process.env.API_KEY
+let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
+if (process.env.NODE_ENV === "development") {
+  URL = "http://localhost:8000/";
+}
 
 module.exports = {
 
     createRecipe: (data) => {
+        console.log(AuthService.getToken())
         try {
-            return axios.post(`${url}recipe/`, {
-                data,
-                headers: {
-                    token: AuthService.getToken()
+            return axios.post(`${URL}recipe/`, data,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
                 }
-            })
+            )
         }
         catch(err){
-            return console.log(err)
+            return err
         }
         
     },
 
-    getRecipe: (data) => {
-        console.log('here')
+    // get all recipes associated with user
+    getRecipes: () => {
         try {
-            axios.post(url, {
-                username: data.username,
-                email: data.email,
-                password: data.password
-            })
+            return axios.get(`${URL}recipe/`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
+                }
+            )
         }
         catch(err){
-            console.log(err)
+            return err
+        }
+        
+    },
+
+    getRecipeByID: (id) => {
+        try {
+            return axios.get( `${URL}recipe/${id}`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    } 
+                }
+            )
+        }
+        catch(err){
+            return err
+        }
+        
+    },
+
+    updateRecipe: (id, data) => {
+        try {
+            return axios.put(`${URL}recipe/${id}`, data,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
+                }
+            )        
+        }
+        catch(err){
+            return err
+        }
+        
+    },
+
+    deleteRecipe: (id) => {
+        try {
+            return axios.delete(`${URL}recipe/${id}`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    } 
+                }
+            )
+        }
+        catch(err){
+            return err
         }
         
     },

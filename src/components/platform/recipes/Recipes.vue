@@ -24,7 +24,10 @@
 </template>
 
 <script>
+import RecipeService from "../../../service/RecipeService";
+
 import RecipeCard from './RecipeCard'
+import AuthService from'../../../service/AuthService'
 export default {
   name: "Recipes",
   components: {
@@ -33,39 +36,20 @@ export default {
 
   data() {
     return {
-      recipes: [
-        {
-          id: 1,
-          name: 'recipe 1',
-          img: "https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-        },
-        {
-          id: 2,
-          name: 'recipe 2',
-          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-        },
-        {
-          id: 3,
-          name: 'recipe 3',
-          img: 'https://picsum.photos/510/300?random'
-        },
-        {
-          id: 4,
-          name: 'recipe 4',
-          img: 'https://cdn.vuetifyjs.com/images/cards/cooking.png'
-        },
-        {
-          id: 5,
-          name: 'recipe 5',
-          img: 'https://picsum.photos/510/300?random'
-        },
-      ],
+      recipes: null
     }
   },
-  mounted() {
+  methods: {
+
+  },
+  mounted: async function() {
+    // validate authorized user
+    if (!AuthService.getToken()) {
+      AuthService.logOut()
+    }
     // get list of recipes
-    let user = JSON.parse(localStorage.getItem("user"));
-    this.user = user;
+    let res = await RecipeService.getRecipes()
+    this.recipes = res.data
   },
 };
 </script>
