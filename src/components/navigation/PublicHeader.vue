@@ -82,7 +82,7 @@
         </div>
         <input type="checkbox" id="menu-toggle" class="mt-4 hidden" />
 
-        <div class="lg:inline lg:float-right hidden">
+        <div class="lg:inline lg:float-right hidden mt-2">
           <button
             v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
