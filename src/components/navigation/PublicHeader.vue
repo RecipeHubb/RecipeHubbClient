@@ -44,6 +44,12 @@
                   v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
+                  <router-link to="/public/recipes">Public</router-link>
+                </li>
+                <li
+                  v-show="loggedIn"
+                  class="border-transparent border-b-2 hover:border-purple-600"
+                >
                   <router-link to="/recipes">Recipes</router-link>
                 </li>
                 <li
@@ -81,51 +87,60 @@
             v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/">Home</router-link>
+            <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
           </button>
           <button
             v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/about">About</router-link>
+            <router-link to="/about"><span class="text-black hover:text-purple-500">About</span></router-link>
           </button>
           <button
             v-show="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/register">Sign Up</router-link>
+            <router-link to="/register"><span class="text-black hover:text-purple-500">Sign up</span></router-link>
           </button>
           <button
             v-show="loggedIn"
             @click="open = true"
-            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            title="Create a new recipe here"
+            class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Create
+            <span class="text-black hover:text-purple-500">Create</span>
           </button>
           <button
             v-show="loggedIn"
-            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            title="View all public recipes here"
           >
-            <router-link to="/recipes">Recipes</router-link>
+            <router-link to="/public/recipes"><span class="text-black hover:text-purple-500">Public</span></router-link>
           </button>
           <button
             v-show="loggedIn"
-            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            title="View your personal list of recipes here"
           >
-            <router-link to="/profile">Profile</router-link>
+            <router-link to="/recipes"><span class="text-black hover:text-purple-500">Recipes</span></router-link>
+          </button>
+          <button
+            v-show="loggedIn"
+            class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/profile"><span class="text-black hover:text-purple-500">Profile</span></router-link>
           </button>
           <button
             v-if="!loggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/login">Sign In</router-link>
+            <router-link to="/login"><span class="text-black hover:text-purple-500">Sign In</span></router-link>
           </button>
           <button
             v-else
             @click="openLogoutDialog"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            Sign Out
+            <span class="text-black hover:text-purple-500">Sign Out</span>
           </button>
         </div>
       </div>

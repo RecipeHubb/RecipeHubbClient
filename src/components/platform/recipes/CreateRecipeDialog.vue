@@ -33,10 +33,11 @@
                     sm="6"
                     md="6"
                   >
-                  <div class="ml-2 text-purple-400 text-md">Recipe Name</div>
+                  <!-- <div class="ml-2 text-purple-400 text-md">Recipe Name</div> -->
                       <v-text-field
                         outlined
                         placeholder="Chicken Pot Pie"
+                        label="Name*"
                         v-model="name"
                         dense
                       ></v-text-field>
@@ -47,7 +48,7 @@
                       md="6"
                       xs='10'
                     >
-                    <div class="ml-2 text-purple-400 text-md">Tags</div>
+                    <!-- <div class="ml-2 text-purple-400 text-md">Tags</div> -->
                       <v-autocomplete
                         :items="['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack','American',
                         'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Chicken',
@@ -55,6 +56,7 @@
                         ]"
                         v-model="tags"
                         placeholder="Dinner"
+                        label="Tags"
                         multiple
                         outlined
                         dense
@@ -66,7 +68,7 @@
                       sm="6"
                     >
                       <div>
-                        <div class="ml-2 text-purple-400 text-md">Add Image</div>
+                        <!-- <div class="ml-2 text-purple-400 text-md">Add Image</div> -->
                         <div>
                           <img 
                             :src="previewImg" 
@@ -88,10 +90,11 @@
                       cols="12"
                       sm="6"
                     >
-                    <div class="ml-2 text-purple-400 text-md">Additional Instructions</div>
+                    <!-- <div class="ml-2 text-purple-400 text-md">Additional Instructions</div> -->
                       <v-textarea
                         outlined
                         name="input-7-4"
+                        label="Instructions"
                         placeholder="Enter additonal recipe prep instructions here..."
                         height="200px"
                         v-model="instructions"
@@ -103,7 +106,8 @@
                 cols="12"
                 sm="6"
               >
-                <div class="ml-4 text-purple-400 text-lg">Add/Remove Ingredients</div>
+                <div class="ml-4 text-purple-400 text-lg pb-4">Add/Remove Ingredients</div>
+                <div class="pb-4">
                   <v-row>
                     <v-col
                       cols="12"
@@ -149,19 +153,21 @@
                     <v-col
                       cols="12"
                       sm='1'
+                      align-self="center"
                     >
-                      <span 
-                        class="text-green-600 text-3xl cursor-pointer" 
+                      <div 
+                        class="text-green-600 text-5xl cursor-pointer -mt-4 pb-5" 
                         :disabled="isAddIngredientBlank" 
                         title="Add this ingredient" 
                         @click="addIngredient"
                       >
                       +
-                      </span>
+                      </div>
                     </v-col>
-                </v-row>
+                  </v-row>
+                </div>
               <!-- Ingredients List -->
-                <div class="overflow-y-auto h-60">
+                <div class="overflow-y-auto h-60 pt-2 pl-3">
                   <span v-for="(ingredient, index) of ingredients" :key="index">
                     <v-row>
                       <v-col
@@ -203,11 +209,12 @@
                   max="5"
                   min="0"
                   label="So-Easy Meter"
+                  color='purple darken-1'
                   hide-details
                   title="Rating of 1-5 on how easy this recipe is to make (tools needed, time to prepare, etc)"
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600">{{soEasyRating}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{soEasyRating}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -223,10 +230,11 @@
                   max="20"
                   min="0"
                   label="Serves up to: "
+                  color='purple darken-1'
                   hide-details
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600 ">{{numPeopleServed}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{numPeopleServed}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -239,6 +247,7 @@
                 <v-checkbox
                   v-model="isPublic"
                   :label="`Public`"
+                  color='purple darken-1'
                 ></v-checkbox>
               </v-col>
               <v-col
@@ -249,6 +258,7 @@
               >
                 <v-checkbox
                   v-model="favorited"
+                  color='purple darken-1'
                   :label="`Favorite`"
                 ></v-checkbox>
               </v-col>
@@ -259,9 +269,9 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
+            color="black darken-1"
             text
-            class="bg-red-500 pr-5"
+            class="bg-red-500 text-black-900"
             @click="closeModal"
             title="cancel and close this popup"
           >
@@ -269,7 +279,7 @@
           </v-btn>
           
           <v-btn
-            color="blue darken-1"
+            color="black darken-1"
             text
             class="bg-green-500 ml-3"
             @click="createRecipe"
@@ -383,3 +393,9 @@
   }
 }
 </script>
+<style >
+.v-text-field {
+  border-color: purple;
+}
+
+</style>

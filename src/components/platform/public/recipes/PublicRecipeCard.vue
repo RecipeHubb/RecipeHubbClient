@@ -56,7 +56,7 @@
 </template>
 <script>
 export default {
-   name: 'RecipeCard',
+   name: 'PublicRecipeCard',
    props: ['recipe'],
 
    data: function() {
@@ -66,7 +66,7 @@ export default {
    },
    methods: {
      routeToRecipe() {
-        this.$router.push({name: 'singleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
+        this.$router.push({name: 'publicSingleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
 
