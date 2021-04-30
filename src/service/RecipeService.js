@@ -28,7 +28,24 @@ module.exports = {
     // get all recipes associated with user
     getRecipes: () => {
         try {
-            return axios.get(`${URL}recipe/`,
+            return axios.get(`${URL}recipe/user/`,
+                {
+                    headers: {
+                        token: AuthService.getToken()
+                    }
+                }
+            )
+        }
+        catch(err){
+            return err
+        }
+        
+    },
+
+    // get all recipes associated with user
+    getPublicRecipes: () => {
+        try {
+            return axios.get(`${URL}public/recipe/`,
                 {
                     headers: {
                         token: AuthService.getToken()

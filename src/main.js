@@ -10,6 +10,7 @@ import SignUp from './components/public/SignUp'
 import Profile from './components/platform/profileDetails/ProfilePage'
 import Recipes from './components/platform/recipes/Recipes'
 import Recipe from './components/platform/recipes/Recipe'
+import PublicRecipes from './components/platform/public/PublicRecipes'
 // dependancies
 import VueFeatherIcon from 'vue-feather-icon-corrected'
 import VueToastify from "vue-toastify";
@@ -42,7 +43,10 @@ const routes = [
   { path: '/register', component: SignUp },
   { path: '/profile', component: Profile },
   { path: '/recipes', component: Recipes },
-  { path: '/recipes/:id/:recipeName', name: 'singleRecipe', component: Recipe }
+  { path: '/recipes/:id/:recipeName', name: 'singleRecipe', component: Recipe },
+  { path: '/public/recipes', component: PublicRecipes },
+  { path: '/public/recipes/:id/:recipeName', name: 'publicSingleRecipe', component: Recipe }
+
 ]
 
 const router = new VueRouter({

@@ -1,15 +1,21 @@
 <template lang="">
-    <div>
-      <v-row justify="start" align="center" class="textlsl pt-125 pt-10 -pb-3">
-        <span @click="goBack" title="Go back to Recipes List" class="mt-4">
-          <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
-        </span>
-      </v-row>
+    <div class='pt-10'>
       <v-container v-if="editMode" fluid>
-        <v-row justify="center" class="text-5xl pb-10 -mt-5 text-purple-500">
+        <v-row justify="center" class="text-5xl pb-10 text-purple-500">
           <v-col
-            cols='12'
-            lg='3'
+            cols='10'
+            sm='1'
+            lg='1'
+          >
+            <span @click="goBack" title="Go back to Recipes List">
+              <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+            </span>   
+          </v-col>
+          <v-col cols='10' lg='2' sm='2'></v-col>
+          <v-col
+            cols='10'
+            lg='4'
+            sm='4'
           >
             <v-text-field
               outlined
@@ -19,11 +25,15 @@
             ></v-text-field>
           </v-col>
           <v-col
-            cols='12'
+            cols='10'
+            sm='1'
             lg='1'
           >
-            <span v-if="editMode" @click="switchIcon" title="Toggle Preview Mode"><i class="fas fa-eye mr-2 text-3xl text-gray-900 cursor-pointer "></i></span>
+            <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" mr-2 mb-5">
+              <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
+            </div>
           </v-col>
+          <v-col cols='10' lg='1' sm='2'></v-col>
         </v-row>
         <v-row justify="center" align="center">
           <v-col
@@ -81,11 +91,12 @@
                   class="align-center"
                   max="5"
                   min="0"
-                  label="So-Easy Rating: "
+                  label="So-Easy Rating:"
+                  color="purple"
                   hide-details
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600 ">{{soEasyRating}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{soEasyRating}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -99,11 +110,12 @@
                   class="align-center"
                   max="20"
                   min="0"
-                  label="Serves: "
+                  label="Serves:"
+                  color='purple'
                   hide-details
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600 ">{{servingSize}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{servingSize}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -113,16 +125,16 @@
                 cols='12'
                 sm='12'
               >
-                <v-switch
+                <v-checkbox
                   v-model="isPublic"
                   color="purple"
-                  :label="`Public ${isPublic}`"
-                ></v-switch>
-                <v-switch
+                  :label="`Public`"
+                ></v-checkbox>
+                <v-checkbox
                   v-model="favorited"
                   color="purple"
-                  :label="`Favorite ${favorited}`"
-                ></v-switch>
+                  :label="`Favorite`"
+                ></v-checkbox>
               </v-col>
             </v-row>
           </v-col>
@@ -138,11 +150,37 @@
                 cols="12"
                 sm="12"
               >
-                <div class="ml-4">Add/Remove Ingredients</div>
+                <div class="ml-2 text-purple-500 text-xl pb-4">Add/Remove Ingredients</div>
                   <v-row>
                     <v-col
                       cols="12"
-                      sm='10'
+                      sm='3'
+                      class="ma-0 pa-0"
+                    >
+                      <v-select
+                      dense
+                        :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
+                        outlined
+                        placeholder="3"
+                        v-model="newIngredientAmount"
+                      ></v-select>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm='3'
+                      class="ma-0 pa-0"
+                    >
+                      <v-select
+                      dense
+                        :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
+                        placeholder="oz"
+                        outlined
+                        v-model="newIngredientMeasurement"
+                      ></v-select>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm='5'
                       class="ma-0 pa-0"
                     >
                       <v-text-field
@@ -150,9 +188,7 @@
                         dense
                         label="New Ingredient"
                         placeholder="2 lb Chicken breast"
-                        v-model="newIngredient"
-                        :value="newIngredient"
-                        required
+                        v-model="newIngredientName"
                         @keydown.enter="addIngredient"
                         class="ma-0 pa-0"
                       ></v-text-field>
@@ -161,30 +197,31 @@
                       cols="12"
                       sm='1'
                     >
-                      <span 
-                        class="text-green-600 text-3xl cursor-pointer" 
+                      <div 
+                        class="text-green-600 text-5xl cursor-pointer -mt-4 pb-5" 
                         :disabled="isAddIngredientBlank" 
                         title="Add this ingredient" 
                         @click="addIngredient"
                       >
                       +
-                      </span>
+                      </div>
                     </v-col>
                 </v-row>
                 <!-- Ingredients List -->
-                <div class="overflow-y-auto h-60">
-                  <span v-for="(ingredient, index) of ingredients" :key="ingredient">
+                <div class="overflow-y-auto h-60 pt-2 pl-3">
+                  <span v-for="(ingredient, index) of ingredients" :key="index">
                     <v-row>
                       <v-col
                         cols="12"
                         sm='10'
                         class="ma-0 pa-0"
                       >
-                        <v-text-field
+                      <div class="text-lg">{{ingredient.value}}</div>
+                        <!-- <v-text-field
                           outlined
                           dense
                           :value="ingredient"
-                        ></v-text-field>
+                        ></v-text-field> -->
                       </v-col>
                       <v-col
                         cols="12"
@@ -202,10 +239,10 @@
                 cols='12'
                 sm='12'
               >
+              <div class="ml-2 text-purple-500 text-xl">Instructions</div>
                 <v-textarea
                   outlined
                   name="input-7-4"
-                  label="Instructions"
                   placeholder="Enter additonal cooking instructions here..."
                   v-model="instructions"
                 ></v-textarea>
@@ -234,14 +271,41 @@
       </v-container>
       <!-- - - - - - - - - Preview Mode - - - - - - - - - - - - - - -->
       <v-container v-else fluid>
-        <v-row justify="center">
-          <h1 class="text-5xl pt-10 pb-10 text-purple-500">
-            {{name}}
+        <v-row justify="center" class="pt-12">
+          <v-col
+            cols='12'
+            sm='1'
+            lg='1'
+          >
+            <span @click="goBack" title="Go back to Recipes List" class="mt-4">
+              <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+            </span>   
+          </v-col>
 
-            <span v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
+          <v-col cols='12' sm='2' lg='2'></v-col>
+
+          <v-col
+            cols='12'
+            sm='6'
+            lg='4'
+          >
+          <h1 class="text-5xl pb-10 text-purple-500">
+            {{name}}
           </h1>
+          </v-col>
+          
+          <v-col
+            cols='12'
+            sm='2'
+            lg='1'
+          >
+            <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
+          </v-col>
+
+          <v-col cols='12' sm='2' lg='1'></v-col>
+          
         </v-row>
-        <v-row justify="center" align="center">
+        <v-row justify="center">
           <v-col
             cols='12'
             lg='4'
@@ -296,7 +360,7 @@
                   disabled
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600 ">{{soEasyRating}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{soEasyRating}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -315,7 +379,7 @@
                   disabled
                 >
                   <template v-slot:append>
-                    <span class="pt-1 text-purple-600 ">{{servingSize}}</span>
+                    <span class="pt-1 text-purple-600 text-xl">{{servingSize}}</span>
                   </template>
                 </v-slider>
               </v-col>
@@ -325,18 +389,20 @@
                 cols='12'
                 sm='12'
               >
-                <v-switch
+                <v-checkbox
+                  v-show="editAccess"
                   v-model="isPublic"
                   color="purple"
                   :label="`Public`"
                   disabled
-                ></v-switch>
-                <v-switch
+                ></v-checkbox>
+                <v-checkbox
+                  v-show="editAccess"
                   v-model="favorited"
                   color="purple"
                   :label="`Favorite`"
                   disabled
-                ></v-switch>
+                ></v-checkbox>
               </v-col>
             </v-row>
           </v-col>
@@ -352,13 +418,13 @@
                 cols="12"
                 sm="12"
               >
-                <h3 class="text-2xl pb-2 text-purple-500">
+                <h3 class="text-2xl -pt-30 pb-2 text-purple-500">
                 Ingredients
                 </h3>
-                <ul v-for="ingredient of ingredients" :key="ingredient">
-                  <li>
-                    {{ingredient}}
-                  </li>
+                <ul v-for="(ingredient, index) of ingredients" :key="index">
+                  <div>
+                    {{ingredient.value}}
+                  </div>
                 </ul>
               </v-col> 
               <!-- Instructions -->
@@ -408,9 +474,13 @@ export default {
       servingSize: 0,
       soEasyRating: 0,
       ingredients: [],
+      newIngredientAmount: '',
+      newIngredientMeasurement: '',
+      newIngredientName: '',
       newIngredient: '',
       isPublic: false,
       favorited: false,
+      recipeID: null
     };
   },
   mounted: async function() {
@@ -436,11 +506,11 @@ export default {
         this.$vToastify.error("Please fill out required fields before updating")
         return
       }
-      const res = await RecipeService.updateRecipe(this.recipeID,{
+      const res = await RecipeService.updateRecipe(this.recipeID, {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: JSON.stringify(this.recipeImage),
+        recipeImage: this.recipeImage ? JSON.stringify(this.recipeImage) : null,
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
@@ -458,13 +528,16 @@ export default {
       if (res.status === 200){
         this.editMode = false
         this.$vToastify.success(`${this.name} sucessfully deleted`)
-        this.$router.push('/recipes')
+        if (this.$router.history.current.fullPath.includes('/recipes')) {
+          this.$router.push('/recipes')
+          this.$router.go()
+        }
+        else this.$router.push('/recipes')
       }
     },
 
     previewImage: function(event) {
       const input = event.target
-      console.log(input)
       if (input.files && input.files[0]) {
           const reader = new FileReader()
           reader.onload = (e) => {
@@ -477,11 +550,18 @@ export default {
 
     addIngredient: function(){
       if (!this.isAddIngredientBlank){
-        this.ingredients.push(this.newIngredient)
-        this.newIngredient = ''
+        this.ingredients.push({
+          name: this.newIngredientName,
+          amount: this.newIngredientAmount,
+          measurement: this.newIngredientMeasurement,
+          value: `${this.newIngredientAmount} ${this.newIngredientMeasurement} ${this.newIngredientName}`
+        })
+        this.newIngredientName = ''
+        this.newIngredientAmount = ''
+        this.newIngredientMeasurement = ''
       }
       else{
-        this.$vToastify.warning("Fill out new ingredient before adding")
+        this.$vToastify.warning("all ingredient fields needed before adding")
         return
       }
     },
@@ -495,7 +575,10 @@ export default {
     },
 
     goBack: function(){
-      this.$router.push('/recipes')
+      if (!this.editAccess){
+        this.$router.push('/public/recipes')
+      }
+      else this.$router.push('/recipes')
     },
 
     closeDialog: function() {
@@ -508,8 +591,11 @@ export default {
   },
   computed: {
     isAddIngredientBlank () {
-      return this.newIngredient === ''
-    } 
+      return this.newIngredientName === '' || this.newIngredientAmount === '' || this.newIngredientMeasurement === ''
+    },
+    editAccess() {
+      return !this.$router.history.current.fullPath.includes('/public/')
+    }
   }
 };
 </script>

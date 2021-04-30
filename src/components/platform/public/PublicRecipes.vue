@@ -3,7 +3,7 @@
     <v-container >
       <v-row justify="center">
         <h1 class="text-5xl pt-10 pb-10 text-purple-500">
-          My Recipes
+          Public Recipes
         </h1>
       </v-row>
       <div v-if="!recipes">
@@ -26,11 +26,11 @@
             v-for="recipe in recipes" 
             :key="recipe.id"
             cols="12"
-            lg="4"
+            :lg="colWidth"
             sm="6"
-            xs="9"
+            xs="10"
           >
-            <RecipeCard :recipe="recipe" />
+            <PublicRecipeCard :recipe="recipe" />
           </v-col>
         </v-row> 
       </div>
@@ -41,19 +41,18 @@
 <script>
 import RecipeService from "../../../service/RecipeService"
 import AuthService from'../../../service/AuthService'
-import RecipeCard from './RecipeCard'
+import PublicRecipeCard from '../public/recipes/PublicRecipeCard'
 
 export default {
   name: "Recipes",
   components: {
-    RecipeCard
+    PublicRecipeCard
   },
 
   data() {
     return {
       recipes: null,
-      title: null,
-      colWidth: 6
+      title: null
     }
   },
   methods: {
@@ -64,7 +63,7 @@ export default {
     if (!AuthService.getToken()) {
       AuthService.logOut()
     }
-    let res = await RecipeService.getRecipes()
+    let res = await RecipeService.getPublicRecipes()
     this.recipes = res.data
     if (this.recipes.length == 1) this.colWidth = 12
     else if (this.recipes.length == 2) this.colWidth = 6
