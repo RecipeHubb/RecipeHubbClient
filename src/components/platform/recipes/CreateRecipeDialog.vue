@@ -39,6 +39,8 @@
                         placeholder="Chicken Pot Pie"
                         label="Name*"
                         v-model="name"
+                        color="deep-purple accent-2"
+                        type="text"
                         dense
                       ></v-text-field>
                   </v-col>
@@ -59,7 +61,10 @@
                         label="Tags"
                         multiple
                         outlined
+                        color="deep-purple accent-2"
                         dense
+                        chips
+                        small-chips
                       ></v-autocomplete>
                     </v-col>
               
@@ -98,6 +103,7 @@
                         placeholder="Enter additonal recipe prep instructions here..."
                         height="200px"
                         v-model="instructions"
+                        color="deep-purple accent-2"
                       ></v-textarea>
                     </v-col>
                   </v-row>
@@ -106,7 +112,7 @@
                 cols="12"
                 sm="6"
               >
-                <div class="ml-4 text-purple-400 text-lg pb-4">Add/Remove Ingredients</div>
+                <div class="ml-4 text-purple-400 text-lg font-medium pb-4">Add/Remove Ingredients</div>
                 <div class="pb-4">
                   <v-row>
                     <v-col
@@ -119,6 +125,7 @@
                         :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
                         outlined
                         placeholder="3"
+                        color="deep-purple accent-2"
                         v-model="newIngredientAmount"
                       ></v-select>
                     </v-col>
@@ -132,6 +139,7 @@
                         :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
                         placeholder="oz"
                         outlined
+                        color="deep-purple accent-2"
                         v-model="newIngredientMeasurement"
                       ></v-select>
                     </v-col>
@@ -146,6 +154,7 @@
                         placeholder="Chicken breast"
                         v-model="newIngredientName"
                         required
+                        color="deep-purple accent-2"
                         @keydown.enter="addIngredient"
                         class="ma-0 pa-0"
                       ></v-text-field>
@@ -209,7 +218,7 @@
                   max="5"
                   min="0"
                   label="So-Easy Meter"
-                  color='purple darken-1'
+                  color="deep-purple accent-2"
                   hide-details
                   title="Rating of 1-5 on how easy this recipe is to make (tools needed, time to prepare, etc)"
                 >
@@ -230,7 +239,7 @@
                   max="20"
                   min="0"
                   label="Serves up to: "
-                  color='purple darken-1'
+                  color="deep-purple accent-2"
                   hide-details
                 >
                   <template v-slot:append>
@@ -247,7 +256,7 @@
                 <v-checkbox
                   v-model="isPublic"
                   :label="`Public`"
-                  color='purple darken-1'
+                  color="deep-purple accent-2"
                 ></v-checkbox>
               </v-col>
               <v-col
@@ -258,7 +267,7 @@
               >
                 <v-checkbox
                   v-model="favorited"
-                  color='purple darken-1'
+                  color="deep-purple accent-2"
                   :label="`Favorite`"
                 ></v-checkbox>
               </v-col>
@@ -393,9 +402,9 @@
   }
 }
 </script>
-<style >
-.v-text-field {
-  border-color: purple;
-}
+<style scoped>
+/* .v-text-field--outlined >>> fieldset {
+  border-color: rgba(172, 90, 197, 0.986);
+} */
 
 </style>
