@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="h-screen">
       <v-row justify="start" align="center" class="textlsl pt-125 pt-10 -pb-3">
         <span @click="goBack" title="Go back to Recipes List" class="mt-4">
           <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>

@@ -6,6 +6,7 @@ import About from './components/public/About'
 import Home from './components/public/Home'
 import SignIn from './components/public/SignIn'
 import SignUp from './components/public/SignUp'
+import Search from './components/public/Search'
 // platform
 import Profile from './components/platform/profileDetails/ProfilePage'
 import Recipes from './components/platform/recipes/Recipes'
@@ -41,6 +42,7 @@ const routes = [
   { path: '/about', component: About },
   { path: '/login', component: SignIn },
   { path: '/register', component: SignUp },
+  { path: '/search', component: Search },
   { path: '/profile', component: Profile },
   { path: '/recipes', component: Recipes },
   { path: '/recipes/:id/:recipeName', name: 'singleRecipe', component: Recipe }

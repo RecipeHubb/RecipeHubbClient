@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div class="">
     <section class="relative block w-screen" style="height: 500px;">
       <div
         class="absolute top-0 w-full h-full bg-center bg-cover"
@@ -52,7 +52,7 @@
               >
                 <div class="py-6 px-3 mt-32 sm:mt-0">
                   <button
-                    class="bg-purple-400 active:bg-pink-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
+                    class="bg-gray-300 active:bg-pink-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                     type="button"
                     style="transition: all 0.15s ease 0s;"
                     @click="openEditDialog"

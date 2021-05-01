@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white h-full">
+  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white">
     <div class="bg-hue h-full font-serif flex-1">
       <!-- NAVBAR -->
       <div
@@ -7,14 +7,17 @@
       >
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>
+        <router-link to="/">
           <img
             width="50px"
             height="50px"
             alt="Vue logo"
             src="https://recipehubb.s3.us-east-2.amazonaws.com/assets/recipehubb_main.png"
           />
+          </router-link>
 
           <!-- show this section if theey click on the hamburger-->
+           <!-- Mobile -->
           <div class="pt-3" v-show="isOpen">
             <nav class="cursor-pointer">
               <ul>
@@ -40,6 +43,7 @@
                 >
                   <router-link to="/createrecipe">Create</router-link>
                 </li>
+
                 <li
                   v-show="loggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
@@ -95,6 +99,16 @@
           >
             <router-link to="/register">Sign Up</router-link>
           </button>
+
+
+          <!-- DESKTOP -->
+            <button
+            v-show="loggedIn"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+          >
+            <router-link to="/search">Search</router-link>
+          </button>
+          
           <button
             v-show="loggedIn"
             @click="open = true"
