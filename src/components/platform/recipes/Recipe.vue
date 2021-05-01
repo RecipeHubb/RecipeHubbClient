@@ -22,6 +22,7 @@
               label="Name*"
               v-model="name"
               dense
+              color="deep-purple accent-2"
             ></v-text-field>
           </v-col>
           <v-col
@@ -77,6 +78,7 @@
                   ]"
                   v-model="tags"
                   label="Tags"
+                  color="deep-purple accent-2"
                   multiple
                   outlined
                 ></v-autocomplete>
@@ -92,7 +94,7 @@
                   max="5"
                   min="0"
                   label="So-Easy Rating:"
-                  color="purple"
+                  color="deep-purple accent-2"
                   hide-details
                 >
                   <template v-slot:append>
@@ -111,8 +113,9 @@
                   max="20"
                   min="0"
                   label="Serves:"
-                  color='purple'
+                  color="deep-purple accent-2"
                   hide-details
+
                 >
                   <template v-slot:append>
                     <span class="pt-1 text-purple-600 text-xl">{{servingSize}}</span>
@@ -127,13 +130,13 @@
               >
                 <v-checkbox
                   v-model="isPublic"
-                  color="purple"
                   :label="`Public`"
+                  color="deep-purple accent-2"
                 ></v-checkbox>
                 <v-checkbox
                   v-model="favorited"
-                  color="purple"
                   :label="`Favorite`"
+                  color="deep-purple accent-2"
                 ></v-checkbox>
               </v-col>
             </v-row>
@@ -150,7 +153,7 @@
                 cols="12"
                 sm="12"
               >
-                <div class="ml-2 text-purple-500 text-xl pb-4">Add/Remove Ingredients</div>
+                <div class="ml-2 text-purple-500 text-xl font-medium pb-4">Add/Remove Ingredients</div>
                   <v-row>
                     <v-col
                       cols="12"
@@ -163,6 +166,7 @@
                         outlined
                         placeholder="3"
                         v-model="newIngredientAmount"
+                        color="deep-purple accent-2"
                       ></v-select>
                     </v-col>
                     <v-col
@@ -176,6 +180,7 @@
                         placeholder="oz"
                         outlined
                         v-model="newIngredientMeasurement"
+                        color="deep-purple accent-2"
                       ></v-select>
                     </v-col>
                     <v-col
@@ -190,6 +195,7 @@
                         placeholder="2 lb Chicken breast"
                         v-model="newIngredientName"
                         @keydown.enter="addIngredient"
+                        color="deep-purple accent-2"
                         class="ma-0 pa-0"
                       ></v-text-field>
                     </v-col>
@@ -245,6 +251,7 @@
                   name="input-7-4"
                   placeholder="Enter additonal cooking instructions here..."
                   v-model="instructions"
+                  color="deep-purple accent-2"
                 ></v-textarea>
               </v-col>
             </v-row>

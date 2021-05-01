@@ -11,7 +11,7 @@
           <div class="text-purple-500 text-2xl">Loading Recipes...</div>
           <v-progress-circular
             indeterminate
-            color="purple"
+            color="deep-purple accent-1"
           ></v-progress-circular>
         </v-row>
       </div>

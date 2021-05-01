@@ -37,6 +37,7 @@
                         dense
                         label="First Name*"
                         v-model="firstName"
+                        color="deep-purple accent-2"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -50,6 +51,7 @@
                         dense
                         label="Last Name*"
                         v-model="lastName"
+                        color="deep-purple accent-2"
                         ></v-text-field>
                     </v-col>
 
@@ -63,6 +65,7 @@
                         dense
                         label="Email*"
                         v-model="email"
+                        color="deep-purple accent-2"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -76,6 +79,7 @@
                         dense
                         label="Username*"
                         v-model="userName"
+                        color="deep-purple accent-2"
                         ></v-text-field>
                     </v-col>
               
@@ -88,6 +92,7 @@
                         dense
                         label="City"
                         v-model="city"
+                        color="deep-purple accent-2"
                       ></v-text-field>
                     </v-col>
 
@@ -101,6 +106,7 @@
                         label="Bio"
                         placeholder="Enter any cool profile information here..."
                         v-model="bio"
+                        color="deep-purple accent-2"
                       ></v-textarea>
                     </v-col>
                   </v-row>
@@ -134,7 +140,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
+            color="black darken-1"
             text
             class="bg-red-500 pr-5"
             @click="closeDialog"
@@ -144,7 +150,7 @@
           </v-btn>
           
           <v-btn
-            color="blue darken-1"
+            color="black darken-1"
             text
             class="bg-green-500 ml-3"
             @click="updateProfile"
