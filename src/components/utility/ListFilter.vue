@@ -24,7 +24,6 @@ export default {
     },
     methods: {
       filterRecipes: function(filter) {
-        console.log
         if (filter.key === 'Backspace') this.$emit('filter-recipes', this.filterBy)
         else this.$emit('filter-recipes', this.filterBy)
       }

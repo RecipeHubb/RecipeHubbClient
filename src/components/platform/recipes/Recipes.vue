@@ -26,11 +26,6 @@
           <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
         </v-col>
       </v-row>
-      <!-- <v-row justify="center">
-        <h1 class="text-5xl  pb-10 text-purple-500">
-          My Recipes
-        </h1>
-      </v-row> -->
       <div v-if="!recipes">
         <v-row justify="center">
           <div class="text-purple-500 text-2xl">Loading Recipes...</div>
@@ -82,7 +77,6 @@ export default {
     return {
       recipes: null,
       originalList: null,
-      title: null,
       colWidth: null,
       filterBy: null
     }
