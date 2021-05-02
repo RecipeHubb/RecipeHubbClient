@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === "development") {
 module.exports = {
 
     createRecipe: (data) => {
-        console.log(AuthService.getToken())
         try {
             return axios.post(`${URL}recipe/`, data,
                 {
