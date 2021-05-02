@@ -1,9 +1,9 @@
 <template lang="">
-  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white h-full">
-    <div class="bg-hue h-full font-serif flex-1">
+  <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white">
+    <div class="bg-hue  font-serif flex-1">
       <!-- NAVBAR -->
       <div
-        class="lg:px-6 mt-2 px-4 border-b-2 border-gray-600 flex justify-between bg-white"
+        class="lg:px-6 mt-2 px-4 flex justify-between bg-white"
       >
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>
