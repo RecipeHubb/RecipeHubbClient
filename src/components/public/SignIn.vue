@@ -1,5 +1,5 @@
 <template lang="">
-  <div class=" p-12 flex justify-center ">
+  <div class=" p-6 flex justify-center ">
     <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
       <div class=" flex justify-center">
         <div class="relative w-1/2 hidden lg:block ">

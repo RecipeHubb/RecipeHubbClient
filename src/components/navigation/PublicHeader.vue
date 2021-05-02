@@ -1,6 +1,6 @@
 <template lang="">
   <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white">
-    <div class="bg-hue  font-serif flex-1">
+    <div class="bg-hue flex-1">
       <!-- NAVBAR -->
       <div
         class="lg:px-6 mt-2 px-4 flex justify-between bg-white"

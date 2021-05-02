@@ -1,7 +1,8 @@
 <template>
   <v-card
     class="mx-auto"
-    min-width="400"
+    min-width="300"
+    min-height="300"
     elevation='15'
   >
     <v-img
@@ -23,11 +24,11 @@
     </v-card-subtitle>
 
     <v-card-text class="text--primary">
-      <div>{{recipe.dateCreated}}</div>
+      <div>Date Added: {{createdDate}}</div>
 
-      <div>
+      <div v-if="recipe.tags.length > 0">
         <v-chip-group
-        multiple
+          multiple
         >
           <v-chip
             v-for="tag in recipe.tags"
@@ -37,6 +38,9 @@
           </v-chip>
         </v-chip-group>
       </div>
+      <div v-else class="pt-3.5 pb-3 text-purple-400">
+        No Tags Included
+      </div>
     </v-card-text>
 
     <v-card-actions>
@@ -45,7 +49,7 @@
         color="purple darken-1"
         text
       >
-        <router-link :to="{name: 'publicSingleRecipe', params: {id: this.recipe._id, recipeName: this.recipe.name}}">
+        <router-link :to="{name: 'singleRecipe', params: {id: this.recipe._id, recipeName: this.recipe.name}}">
             View
         </router-link>
       </v-btn>
@@ -61,7 +65,7 @@ export default {
 
    data: function() {
        return {
-
+         createdDate: null
        }
    },
    methods: {
@@ -69,6 +73,9 @@ export default {
         this.$router.push({name: 'singleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
+   mounted: function() {
+     this.createdDate = (new Date(this.recipe.dateCreated)).toDateString()
+   }
 
 }
 </script>

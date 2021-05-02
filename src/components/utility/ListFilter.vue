@@ -1,12 +1,13 @@
 <template>
   <div class="text-purple-500 text-lg pt-5" >
-    Filter by...
+    Filter by name
     <v-text-field
       color="deep-purple accent-2"
       v-model="filterBy"
+      placeholder="Chicken Pot Pie"
       outlined
       dense
-      @change="filterRecipes"
+      @keyup="filterRecipes"
     >
     </v-text-field>
   </div>
@@ -18,12 +19,14 @@ export default {
     props: ['recipes'],
     data() {
       return {
-        filterBy: 'Oldest'
+        filterBy: null
       }
     },
     methods: {
       filterRecipes: function(filter) {
-        this.$emit('filter-recipes', filter)
+        console.log
+        if (filter.key === 'Backspace') this.$emit('filter-recipes', this.filterBy)
+        else this.$emit('filter-recipes', this.filterBy)
       }
     }
 }
