@@ -22,6 +22,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import vuetify from './plugins/vuetify';
 import "@/assets/styles/main.css";
+import "@/assets/styles/main.css";
 
 library.add(faCoffee)
 
