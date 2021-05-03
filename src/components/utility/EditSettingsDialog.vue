@@ -221,9 +221,8 @@
             delete profileRes.data.newUserName
             this.$vToastify.success(`profile sucessfully updated`)
             localStorage.setItem('user', JSON.stringify(profileRes.data))
-            this.$router.push('/profile')
-            this.$router.go()
-            this.$emit('close-dialog')
+
+            this.$emit('edit-complete',  profileRes.data)
         }
         else {
             this.$vToastify.error(`Error updating profile, try again later.`) 
