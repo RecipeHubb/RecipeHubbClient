@@ -7,9 +7,9 @@
             sm='1'
             lg='1'
           >
-            <span @click="goBack" title="Go back to Recipes List">
+            <!-- <span @click="goBack" title="Go back to Recipes List">
               <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
-            </span>   
+            </span>    -->
           </v-col>
           <v-col cols='10' lg='2' sm='2'></v-col>
           <v-col
@@ -133,17 +133,24 @@
                   :label="`Public`"
                   color="deep-purple accent-2"
                 ></v-checkbox>
-                <v-checkbox
+                <!-- <v-checkbox
                   v-model="favorited"
                   :label="`Favorite`"
                   color="deep-purple accent-2"
-                ></v-checkbox>
+                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-col>
+
           <v-col
             cols='12'
-            lg='5'
+            lg='1'
+          >
+          </v-col>
+
+          <v-col
+            cols='12'
+            lg='4'
             sm='6'
             xs='10'
           >
@@ -204,7 +211,7 @@
                       sm='1'
                     >
                       <div 
-                        class="text-green-600 text-5xl cursor-pointer -mt-4 pb-5" 
+                        class="text-green-600 text-5xl cursor-pointer -mt-4 pb-5 -ml-3" 
                         :disabled="isAddIngredientBlank" 
                         title="Add this ingredient" 
                         @click="addIngredient"
@@ -257,7 +264,9 @@
             </v-row>
           
           </v-col>
-        </v-row>
+
+
+        </v-row> <!-- End Main section-->
         <v-row justify="center">
           <v-btn 
             outlined
@@ -403,19 +412,26 @@
                   :label="`Public`"
                   disabled
                 ></v-checkbox>
-                <v-checkbox
+                <!-- <v-checkbox
                   v-show="editAccess"
                   v-model="favorited"
                   color="purple"
                   :label="`Favorite`"
                   disabled
-                ></v-checkbox>
+                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-col>
+
           <v-col
             cols='12'
-            lg='5'
+            lg='1'
+          >
+          </v-col>
+
+          <v-col
+            cols='12'
+            lg='3'
             sm='6'
             xs='10'
           >
@@ -449,11 +465,97 @@
             </v-row>
           
           </v-col>
+
+          <v-col
+            cols='12'
+            lg='1'
+          >
+          </v-col>
+
+          <!-- Comment Section -->
+          <v-col
+            cols='12'
+            lg='3'
+            sm='6'
+            xs='10'
+          >
+           <!-- Ingredients -->
+            <v-row>
+              <v-col
+                cols="12"
+                sm="12"
+              >
+                <v-row>
+                  <v-col
+                    cols='12'
+                    sm='9'
+                  >
+                  <div class="ml-2 text-purple-500 text-xl font-medium pb-4">Comments/Ratings</div>
+                  </v-col>
+
+                  <v-col
+                    cols='12'
+                    sm='2'
+                  >
+                    <div 
+                      v-show="!editAccess"
+                      class="text-green-600 text-4xl cursor-pointer -mt-4 pt-2 -ml-3" 
+                      title="Add new comment" 
+                      @click="openCommentDialog"
+                    >
+                    +
+                    </div>
+                  </v-col>
+                </v-row>
+                
+                <!-- Comments List -->
+                <div class="overflow-y-auto overflow-x-none h-full pt-3 pl-3">
+                  <span v-for="(comment, index) of comments" :key="index">
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        sm='11'
+                        class="ma-0 pa-0"
+                      >
+                        <div class="bg-purple-100 pl-4 pr-4 pt-2 rounded-3xl">
+                          <v-rating
+                            v-model="comment.rating"
+                            background-color="deep-purple accent-2"
+                            color="deep-purple accent-2"
+                            readonly
+                            small
+                          ></v-rating>
+                          <div class="flex flex-wrap">
+                            <div class="text-md pb-2">{{comment.body}}</div>
+                            <div class="text-sm"> - {{comment.commentOwnerUserName}} | {{formatDate(comment.dateCreated)}}</div>
+                          </div>
+                          <div
+                            v-if="canRemoveComment(comment.commentOwnerId)"
+                            @click="deleteComment(comment._id, index)" 
+                            class="text-red-500 font-bold cursor-pointer hover:text-black"
+                            title="delete this comment"
+                          >
+                            Remove
+                          </div>
+                        </div>
+                        <div class="bg-white p-3"></div>
+                      </v-col>
+                    </v-row>
+                  </span>
+                </div>
+              </v-col> 
+
+            </v-row>
+          
+          </v-col>
         </v-row>
 
       </v-container>
       <div data-app>
         <ConfirmDeleteDialog @close-dialog="closeDialog" @delete-recipe="deleteRecipe" :open="deleteOpen" />
+      </div>
+      <div data-app>
+        <CommentDialog @close-dialog="closeCommentDialog" @add-comment="commentDialogAdd" :open="commentDialogOpen" />
       </div>
     </div>
 </template>
@@ -462,16 +564,22 @@
 import AuthService from '../../../service/AuthService'
 import RecipeService from '../../../service/RecipeService'
 import ConfirmDeleteDialog from '../../utility/ConfirmDeleteDialog'
+import CommentDialog from '../comments/CommentDialog'
+import CommentService from '../../../service/CommentService'
+
 export default {
   name: "Recipe",
+  props: ['publicViewed'],
   components: {
-    ConfirmDeleteDialog
+    ConfirmDeleteDialog, CommentDialog
   },
   data() {
     return {
       recipe: {},
+      comments: [],
       editMode: false,
       deleteOpen: false,
+      commentDialogOpen: false,
 
       name: null,
       recipeImage: null,
@@ -487,7 +595,8 @@ export default {
       newIngredient: '',
       isPublic: false,
       favorited: false,
-      recipeID: null
+      recipeID: null,
+      recipeOwnerId: null
     };
   },
   mounted: async function() {
@@ -506,6 +615,11 @@ export default {
     this.isPublic = res.data.public
     this.favorited = res.data.favorited
     this.recipeID = res.data._id
+    this.recipeOwnerId = res.data.ownerId
+
+    // get comments attached to recipe
+    let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+    this.comments = res2.data.comments
   },
   methods: {
     updateRecipe: async function() {
@@ -591,10 +705,44 @@ export default {
     closeDialog: function() {
       this.deleteOpen = false
     },
+    closeCommentDialog: function() {
+      this.commentDialogOpen = false
+    },
+    commentDialogAdd: function(data) {
+      this.comments.push({
+          commentOwnerUserName: data.commentOwnerUserName,
+          commentOwnerId: data.commentOwnerId,
+          dateCreated: new Date(data.dateCreated).toDateString(),
+          rating: data.rating,
+          body: data.body,
+          _id: data._id
+      })
+      this.commentDialogOpen = false
+    },
+    deleteComment: async function(commentId, index) {
+      const res = await CommentService.deleteComment(commentId)
+      if (res.status !== 200){
+        this.$vToastify.error(`something went wrong`)
+      }
+      else {
+        this.comments.splice(index, 1)
+        this.$vToastify.success(`comment successfully deleted`)
+      }
+    },
 
     openDialog: function() {
       this.deleteOpen = true
-    }
+    },
+    openCommentDialog: function() {
+      this.commentDialogOpen = true
+    },
+    formatDate: function(date) {
+      return new Date(date).toDateString()
+    },
+    canRemoveComment(ownerCommentId) {
+      // if you own the recipe OR if you own the comment inside the not-owned recipe
+        return this.recipeOwnerId === this.$store.state.user.id || ownerCommentId === this.$store.state.user.id
+    },
   },
   computed: {
     isAddIngredientBlank () {
@@ -602,7 +750,7 @@ export default {
     },
     editAccess() {
       return !this.$router.history.current.fullPath.includes('/public/')
-    }
+    },
   }
 };
 </script>

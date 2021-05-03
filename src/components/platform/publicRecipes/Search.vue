@@ -193,7 +193,7 @@
 </template>
 
 <script>
-import Public from "../../service/PublicService";
+import Public from "../../../service/PublicService";
 export default {
   name: "Search",
   data() {
@@ -220,21 +220,17 @@ export default {
   methods: {
     // functions
     async searchRecipe() {
-
       if(!this.userInput && !this.recipeName && !this.userName && !this.tags) {
             this.$vToastify.error("Please search something")
           return
       }
       if (this.selectModel.value == "username" || this.userName) {
         //username
-        console.log(this.userInput)
         this.recipeData.userName = this.userInput || this.userName;
-        console.log(this.recipeData)
       }
       if (this.selectModel.value == "name" || this.recipeName) {
         //username
         this.recipeData.name = this.userInput || this.recipeName;
-
       }
       if (this.selectModel.value == "ingredients" || this.ingridients) {
         //recipe name
@@ -243,8 +239,7 @@ export default {
           $all: ingredients
         };
       }
-
-       if (this.tags.length !== 0) {
+       if (this.tags) {
         //tags name
         this.recipeData["ingredients.tags"] = {
           $all: this.tags
@@ -258,13 +253,12 @@ export default {
     },
     changeTest() {
       //reset the filter when they change
-      // this.selectedFilters.push({text:this.selectModel.value})
+      this.selectedFilters.push({text:this.selectModel.value})
     },
     openDialog() {
       // remove the model value
       this.selectModel = {}
     }
-
   },
   mounted() {
     //before the page loads

@@ -53,19 +53,35 @@
             View
         </router-link>
       </v-btn>
+      <v-rating
+        v-if="avgRating"
+        half-increments
+        v-model="avgRating"
+        background-color="deep-purple accent-2"
+        color="deep-purple accent-2"
+        title="average rating on this recipe"
+        readonly
+        small
+      ></v-rating>
+      <span v-if="avgRating" class="pl-1 pt-1 text-purple-500 text-sm ">
+        ({{avgRating}})
+      </span>
 
       <!-- Stars here -->
     </v-card-actions>
   </v-card>
 </template>
 <script>
+import CommentService from '../../../service/CommentService'
+
 export default {
    name: 'RecipeCard',
    props: ['recipe'],
 
    data: function() {
        return {
-         createdDate: null
+         createdDate: null,
+         avgRating: null
        }
    },
    methods: {
@@ -73,8 +89,11 @@ export default {
         this.$router.push({name: 'singleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
-   mounted: function() {
+   mounted: async function() {
      this.createdDate = (new Date(this.recipe.dateCreated)).toDateString()
+    // get comments attached to recipe
+    let res2 = await CommentService.getCommentsToRecipe(this.recipe._id)
+    this.avgRating = res2.data.average.toFixed(1)
    }
 
 }

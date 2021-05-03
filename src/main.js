@@ -12,7 +12,7 @@ import Profile from "./components/platform/profileDetails/ProfilePage";
 import Recipes from "./components/platform/recipes/Recipes";
 import Recipe from "./components/platform/recipes/Recipe";
 import PublicRecipes from "./components/platform/publicRecipes/PublicRecipes";
-import Search from "./components/public/Search";
+import Search from "./components/platform/publicRecipes/Search";
 // dependancies
 import VueFeatherIcon from "vue-feather-icon-corrected";
 import VueToastify from "vue-toastify";
