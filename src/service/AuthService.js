@@ -77,7 +77,11 @@ module.exports = {
       .find((row) => row.startsWith("token="))
       .split("=")[1];
 
-      return token
+      if(token) {
+        return token
+      }
+
+      return null
   },
   clearToken: function() {
     document.cookie ="token=;"
