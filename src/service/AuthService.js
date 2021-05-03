@@ -72,12 +72,17 @@ module.exports = {
   },
 
   getToken: function() {
-    const token = document.cookie
+
+
+    let token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="))
-      .split("=")[1];
 
+//handles undefined token on split
       if(token) {
+      token = token.
+      split("=")[1];
+
         return token
       }
 
