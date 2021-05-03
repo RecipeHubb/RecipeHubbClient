@@ -341,12 +341,15 @@
         favorited: this.favorited,
         public: this.isPublic
       })
+
+      // localstorage
       if (res.status === 200){
         this.$vToastify.success(`${this.name} sucessfully created!`)
       }
-      // this.$router.push('/recipes')
-      this.$router.go()
+      this.$router.push('/recipes')
+      // this.$router.go()
       this.$emit('close-dialog')
+      // this.$emit('edit-save', newRecipe)
     },
     previewImage: function(event) {
         const input = event.target

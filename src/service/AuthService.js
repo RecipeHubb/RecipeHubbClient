@@ -88,6 +88,6 @@ module.exports = {
     
     // pushes to home page and refreshes the page for new nav
     this.$router.push('/login')
-    this.$router.go(0)
+    // this.$router.go(0)
   },
 };

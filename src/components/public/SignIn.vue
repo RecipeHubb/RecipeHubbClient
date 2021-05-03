@@ -63,7 +63,7 @@ export default {
     };
   },
   methods: {
-    signInUser: async function() {
+    async signInUser() {
       // validate credentials
       this.validateCredentials();
 
@@ -78,7 +78,8 @@ export default {
         this.$vToastify.success("Logging In...");
         // pushes to home page and refreshes the page for new nav
         this.$router.push("/profile");
-        this.$router.go(0);
+        this.$store.commit('refresh')
+        // this.$router.go(0);
         return;
         // push new routes to authenticated user
       }
