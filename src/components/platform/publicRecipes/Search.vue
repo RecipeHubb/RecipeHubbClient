@@ -193,7 +193,7 @@
 </template>
 
 <script>
-import Public from "../../service/PublicService";
+import Public from "../../../service/PublicService";
 export default {
   name: "Search",
   data() {

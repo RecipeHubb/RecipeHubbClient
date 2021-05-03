@@ -91,9 +91,9 @@ export default {
    },
    mounted: async function() {
      this.createdDate = (new Date(this.recipe.dateCreated)).toDateString()
-         // get comments attached to recipe
+    // get comments attached to recipe
     let res2 = await CommentService.getCommentsToRecipe(this.recipe._id)
-    this.avgRating = res2.data.rating.toFixed(1)
+    this.avgRating = res2.data.average.toFixed(1)
    }
 
 }

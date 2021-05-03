@@ -15,7 +15,7 @@
         lg="6"
         >
           <h1 class="text-5xl pt-10 text-purple-500 text-center">
-            My Recipes
+            Public Recipes
           </h1>        
         </v-col>
 
