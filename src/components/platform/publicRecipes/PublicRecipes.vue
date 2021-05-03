@@ -2,9 +2,29 @@
   <div>
     <v-container >
       <v-row justify="center">
-        <h1 class="text-5xl pt-10 pb-10 text-purple-500">
-          Public Recipes
-        </h1>
+
+        <v-col
+        cols="12"
+        lg="3"
+        >
+          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
+        </v-col>
+
+        <v-col
+        cols="12"
+        lg="6"
+        >
+          <h1 class="text-5xl pt-10 text-purple-500 text-center">
+            My Recipes
+          </h1>        
+        </v-col>
+
+        <v-col
+        cols="12"
+        lg="3"
+        >
+          <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
+        </v-col>
       </v-row>
       <div v-if="!recipes">
         <v-row justify="center">
@@ -28,7 +48,7 @@
             cols="12"
             :lg="colWidth"
             sm="6"
-            xs="10"
+            xs="9"
           >
             <PublicRecipeCard :recipe="recipe" />
           </v-col>
@@ -42,21 +62,68 @@
 import RecipeService from "../../../service/RecipeService"
 import AuthService from'../../../service/AuthService'
 import PublicRecipeCard from './PublicRecipeCard'
+import ListFilter from '../../utility/ListFilter'
+import ListSorter from '../../utility/ListSorter'
 
 export default {
   name: "Recipes",
   components: {
-    PublicRecipeCard
+    PublicRecipeCard,
+    ListSorter,
+    ListFilter
   },
 
   data() {
     return {
       recipes: null,
-      title: null
+      originalList: null,
+      colWidth: null,
+      filterBy: null
     }
   },
   methods: {
-
+    sortRecipes: function (sorter) {
+      switch (sorter){
+        case 'Oldest':
+          this.recipes = this.recipes.sort((a,b) => a.dateCreated.localeCompare(b.dateCreated))
+          break
+        case 'Newest':
+          this.recipes = this.recipes.sort((a,b) =>  b.dateCreated.localeCompare(a.dateCreated))
+          break
+        case 'Recipe Name A-Z':
+          this.recipes = this.recipes.sort((a, b) => a.name.localeCompare(b.name))
+          break
+        case 'Recipe Name Z-A':
+          this.recipes = this.recipes.sort((a,b) => b.name.localeCompare(a.name))
+          break
+        case 'Highest Rated':
+          // this.recipes = null
+          break
+        case 'Lowest Rated':
+          // this.recipes = null
+          break
+        case 'So-Easy Rating':
+          this.recipes = this.recipes.sort((a,b) => b.soEasyRating - a.soEasyRating)
+          break
+        case 'Serving Size':
+          this.recipes = this.recipes.sort((a,b) => b.servingSize - a.servingSize)
+          break
+      }
+    },
+    filterRecipes: function (filterString) {
+        if (filterString !== '') {
+          let newList = this.originalList.filter(recipe => recipe.name.toLowerCase().includes(filterString))
+          if (newList.length == 1) this.colWidth = 6
+          else if (newList.length == 2) this.colWidth = 6
+          else this.colWidth = 4
+          this.recipes = newList
+          return
+        }
+        else {
+          this.recipes = this.originalList
+          this.colWidth = 4
+        }
+    }
   },
   mounted: async function() {
     // validate authorized user
@@ -65,7 +132,7 @@ export default {
     }
     let res = await RecipeService.getPublicRecipes()
     this.recipes = res.data
-    if (this.recipes.length == 1) this.colWidth = 12
+    if (this.recipes.length == 1) this.colWidth = 6
     else if (this.recipes.length == 2) this.colWidth = 6
     else this.colWidth = 4
   },

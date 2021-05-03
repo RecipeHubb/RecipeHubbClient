@@ -334,7 +334,7 @@
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: JSON.stringify(this.recipeImage),
+        recipeImage: this.recipeImage ? JSON.stringify(this.recipeImage) : null,
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
@@ -344,7 +344,7 @@
       if (res.status === 200){
         this.$vToastify.success(`${this.name} sucessfully created!`)
       }
-      this.$router.push('/recipes')
+      // this.$router.push('/recipes')
       this.$router.go()
       this.$emit('close-dialog')
     },

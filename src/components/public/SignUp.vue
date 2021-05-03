@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="h-full lg:p-16 py-16">
+  <div class="h-full ">
     <div class="shadow-lg rounded-lg bg-indigo-50">
       <div class="font-mono flex justify-center">
         <div class="text-center lg:m-16 m-8 lg:w-96">
@@ -66,7 +66,7 @@
 </textarea>
           </div>
           <div
-            class="bg-white border-2 rounded-md cursor-pointer p-2 my-6 px-8 text-sm inline-block"
+            class="bg-white border-2 rounded-md cursor-pointer hover:bg-purple-400 p-2 my-6 px-8 text-sm inline-block"
             v-on:click="registerUser"
           >
             Sign Up
