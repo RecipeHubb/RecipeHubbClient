@@ -3,7 +3,7 @@
     <div class="bg-hue h-full font-serif flex-1">
       <!-- NAVBAR -->
       <div
-        class="lg:px-6 mt-2 px-4 border-b-2 border-gray-600 flex justify-between bg-white"
+        class="lg:px-6 mt-2 px-4 flex justify-between bg-white"
       >
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>

@@ -26,6 +26,7 @@ import "@/assets/styles/main.css";
 import "@/assets/styles/main.css";
 import AuthService from './service/AuthService'
 import Vuex from 'vuex'
+import "@/assets/styles/main.css";
 
 library.add(faCoffee)
 
