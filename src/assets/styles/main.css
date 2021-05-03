@@ -60,3 +60,13 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
+  .tooltip{
+    visibility: hidden;
+    position: absolute;
+    top: 12px;
+    left:5px;
+  }
+  .has-tooltip:hover .tooltip {
+    visibility: visible;
+    z-index: 100;
+  }

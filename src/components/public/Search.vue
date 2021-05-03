@@ -227,7 +227,9 @@ export default {
       }
       if (this.selectModel.value == "username" || this.userName) {
         //username
+        console.log(this.userInput)
         this.recipeData.userName = this.userInput || this.userName;
+        console.log(this.recipeData)
       }
       if (this.selectModel.value == "name" || this.recipeName) {
         //username
@@ -242,7 +244,7 @@ export default {
         };
       }
 
-       if (this.tags) {
+       if (this.tags.length !== 0) {
         //tags name
         this.recipeData["ingredients.tags"] = {
           $all: this.tags
@@ -256,7 +258,7 @@ export default {
     },
     changeTest() {
       //reset the filter when they change
-      this.selectedFilters.push({text:this.selectModel.value})
+      // this.selectedFilters.push({text:this.selectModel.value})
     },
     openDialog() {
       // remove the model value
