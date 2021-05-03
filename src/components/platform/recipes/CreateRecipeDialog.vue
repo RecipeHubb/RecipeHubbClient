@@ -334,7 +334,7 @@
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: JSON.stringify(this.recipeImage),
+        recipeImage: this.recipeImage ? JSON.stringify(this.recipeImage) : null,
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
