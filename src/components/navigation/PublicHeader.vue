@@ -1,6 +1,6 @@
 <template lang="">
   <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white">
-    <div class="bg-hue  font-serif flex-1">
+    <div class="bg-hue flex-1">
       <!-- NAVBAR -->
       <div
         class="lg:px-6 mt-2 px-4 flex justify-between bg-white"
@@ -29,37 +29,37 @@
                   <router-link to="/about">About</router-link>
                 </li>
                 <li
-                  v-show="!loggedIn"
+                  v-show="!isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/register">Sign Up</router-link>
                 </li>
                 <li
-                  v-show="loggedIn"
+                  v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/createrecipe">Create</router-link>
                 </li>
                 <li
-                  v-show="loggedIn"
+                  v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/public/recipes">Public</router-link>
                 </li>
                 <li
-                  v-show="loggedIn"
+                  v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/recipes">Recipes</router-link>
                 </li>
                 <li
-                  v-show="loggedIn"
+                  v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/profile">Profile</router-link>
                 </li>
                 <li
-                  v-if="!loggedIn"
+                  v-if="!isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
                   <router-link to="/login">Sign In</router-link>
@@ -84,25 +84,32 @@
 
         <div class="lg:inline lg:float-right hidden mt-2">
           <button
-            v-show="!loggedIn"
+            v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
           </button>
           <button
-            v-show="!loggedIn"
+            v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/about"><span class="text-black hover:text-purple-500">About</span></router-link>
           </button>
           <button
-            v-show="!loggedIn"
+            v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/register"><span class="text-black hover:text-purple-500">Sign up</span></router-link>
           </button>
           <button
-            v-show="loggedIn"
+            v-show="isLoggedIn"
+            class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            title="View your personal list of recipes here"
+          >
+            <router-link to="/search"><span class="text-black hover:text-purple-500">Search</span></router-link>
+          </button>
+          <button
+            v-show="isLoggedIn"
             @click="open = true"
             title="Create a new recipe here"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
@@ -110,27 +117,27 @@
             <span class="text-black hover:text-purple-500">Create</span>
           </button>
           <button
-            v-show="loggedIn"
+            v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
             title="View all public recipes here"
           >
             <router-link to="/public/recipes"><span class="text-black hover:text-purple-500">Public</span></router-link>
           </button>
           <button
-            v-show="loggedIn"
+            v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
             title="View your personal list of recipes here"
           >
             <router-link to="/recipes"><span class="text-black hover:text-purple-500">Recipes</span></router-link>
           </button>
           <button
-            v-show="loggedIn"
+            v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/profile"><span class="text-black hover:text-purple-500">Profile</span></router-link>
           </button>
           <button
-            v-if="!loggedIn"
+            v-if="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
             <router-link to="/login"><span class="text-black hover:text-purple-500">Sign In</span></router-link>
@@ -163,34 +170,32 @@ export default {
     CreateRecipeDialog,
     LogoutDialog
   },
+
   data() {
     return {
       isOpen: false,
-      loggedIn: false,
       open: false,
       logoutOpen: false,
     };
   },
-  mounted() {
-    //get token before everything is mounted
-    const token = AuthService.getToken()
-    //check token to verify if they are logged in
-    if (token && token !== null) {
-      this.loggedIn = true;
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
     }
   },
   methods: {
     handleMenu() {
       this.isOpen = !this.isOpen;
     },
+    
     logout() {
       localStorage.clear();
       AuthService.clearToken();
       this.logoutOpen = false;
+      this.$store.commit('refresh')
       
       // pushes to home page and refreshes the page for new nav
       this.$router.push('/')
-      this.$router.go(0)
     },
 
     // Create Recipe Dialog

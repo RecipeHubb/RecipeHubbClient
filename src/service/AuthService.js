@@ -72,12 +72,21 @@ module.exports = {
   },
 
   getToken: function() {
-    const token = document.cookie
+
+
+    let token = document.cookie
       .split("; ")
       .find((row) => row.startsWith("token="))
-      .split("=")[1];
 
-      return token
+//handles undefined token on split
+      if(token) {
+      token = token.
+      split("=")[1];
+
+        return token
+      }
+
+      return null
   },
   clearToken: function() {
     document.cookie ="token=;"
@@ -88,6 +97,6 @@ module.exports = {
     
     // pushes to home page and refreshes the page for new nav
     this.$router.push('/login')
-    this.$router.go(0)
+    // this.$router.go(0)
   },
 };

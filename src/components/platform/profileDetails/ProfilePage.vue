@@ -87,7 +87,7 @@
             </div>
             <div class="text-center mt-12">
               <h3
-                class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
+                class="text-4xl fnt-semibold leading-normal mb-2 text-gray-800 mb-2"
               >
                 {{user.firstName}} {{user.lastName}}
               </h3>
@@ -115,7 +115,11 @@
       </div>
     </section>
     <div data-app>
-      <EditSettingsDialog @close-dialog="closeDialog" :open="editOpen" />
+      <EditSettingsDialog 
+        @close-dialog="closeDialog"
+        @edit-complete="onEditComplete" 
+        :open="editOpen" 
+      />
     </div>
   </div>
 </template>
@@ -137,6 +141,10 @@ export default {
   methods: {
     closeDialog() {
       this.editOpen = false
+    },
+    onEditComplete(userinfo) {
+      this.user = userinfo
+      this.editOpen  = false
     },
     openEditDialog() {
       this.editOpen = true
