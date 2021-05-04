@@ -28,7 +28,7 @@
           v-model="userInput"
           v-on:keyup.enter="searchRecipe"
         />
-        
+
         <div class="absolute inset-y-0 right-0 flex items-center">
           <label for="recipe" class="sr-only">Recipe</label>
           <select
@@ -36,7 +36,7 @@
             name="recipe"
             class="focus:ring-purple-500 outline-none focus:gray-purple-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
             v-model="selectModel"
-            @change="changeTest"
+            @change="updateChips"
           >
             <option
               v-for="(selectOption, i) in options"
@@ -46,70 +46,62 @@
               >{{ selectOption.text }}</option
             >
           </select>
-              <i
-                v-on:click="searchRecipe"
-                class="fa fa-arrow-right inset-y-0 mb-2 pr-5  hover:text-gray-900 cursor-pointer text-gray-700"
-                style="font-size: 15px;margin-left: 10px;
+          <i
+            v-on:click="searchRecipe"
+            class="fa fa-arrow-right inset-y-0 mb-2 pr-5  hover:text-gray-900 cursor-pointer text-gray-700"
+            style="font-size: 15px;margin-left: 10px;
                 margin-top: 5px;"
-              ></i>
-              
+          ></i>
         </div>
-     
-        <div class="absolute inset-x-full mx-2 inset-y-4">
-            <v-row justify="center">
-    <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <div class='has-tooltip'>
-  <span class='tooltip bg-gray-900 text-white p-2 text-xs  lg:mt-100 rounded'>Advance Filters</span>
-        <i
-                v-bind="attrs"
-                v-on="on"
-                class="fa fa-stream  hover:text-gray-900 cursor-pointer text-gray-700 pl-4"
-                style="font-size: 15px;margin-left: 10px;
-                margin-top: 5px;"
-                v-on:click="openDialog"
-              ></i>
-</div>
 
-      </template>
-      
-      <v-card>
-        <v-card-title>
-          <span class="headline">Advanced Settings</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Username"
-                  v-model="userName"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Recipe Name"
-                  type="text"
-                  v-model="recipeName"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Ingredient"
-                  v-model="ingredients"
-                ></v-text-field>
-              </v-col>
-              <!-- <v-col
+        <div class="absolute inset-x-full mx-2 inset-y-4">
+          <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="600px">
+              <template v-slot:activator="{ on, attrs }">
+                <div class="has-tooltip">
+                  <span
+                    class="tooltip bg-gray-900 text-white p-2 text-xs  lg:mt-100 rounded"
+                    >Advance Filters</span
+                  >
+                  <i
+                    v-bind="attrs"
+                    v-on="on"
+                    class="fa fa-stream  hover:text-gray-900 cursor-pointer text-gray-700 pl-4"
+                    style="font-size: 15px;margin-left: 10px;
+                margin-top: 5px;"
+                    v-on:click="openDialog"
+                  ></i>
+                </div>
+              </template>
+
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Advanced Settings</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4"> </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Username"
+                          v-model="userName"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Recipe Name"
+                          type="text"
+                          v-model="recipeName"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Ingredient"
+                          v-model="ingredients"
+                        ></v-text-field>
+                      </v-col>
+                      <!-- <v-col
                 cols="12"
                 sm="6"
               >
@@ -119,57 +111,69 @@
                   required
                 ></v-select>
               </v-col> -->
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack','American',
-                  'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Chicken',
-                  'Beef', 'Pork', 'Vegetables', 'Fruit','Sweet', 'Spicy', 'Savory', 'Other'
-                  ]"
-                  label="Tags"
-                  multiple
-                  v-model="tags"
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>*indicates required field</small>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="searchRecipe"
-          >
-            Search
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </v-row>
+                      <v-col cols="12" sm="6">
+                        <v-autocomplete
+                          :items="[
+                            'Breakfast',
+                            'Lunch',
+                            'Dinner',
+                            'Dessert',
+                            'Snack',
+                            'American',
+                            'Mexican',
+                            'Italian',
+                            'Thai',
+                            'Indian',
+                            'Chinese',
+                            'Seafood',
+                            'Chicken',
+                            'Beef',
+                            'Pork',
+                            'Vegetables',
+                            'Fruit',
+                            'Sweet',
+                            'Spicy',
+                            'Savory',
+                            'Other',
+                          ]"
+                          label="Tags"
+                          multiple
+                          v-model="tags"
+                        ></v-autocomplete>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="dialog = false">
+                    Close
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="searchRecipe">
+                    Search
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
         </div>
       </div>
 
-      
       <!-- CUSTOM CHIPS -->
       <div class="flex my-1 w-1/4">
- <div v-for="(selectedFilters, i) in activeFilters" :key="i" class=" hover:bg-green-200 flex justify-center items-center m-1 font-medium py-2 px-2 rounded-md text-green-700 bg-green-100 border border-green-300 w-1/4" >
+        <div
+          v-for="(selectedFilters, i) in activeFilters"
+          :key="i"
+          class=" hover:bg-green-200 flex justify-center items-center m-1 font-medium py-2 px-2 rounded-md text-green-700 bg-green-100 border border-green-300"
+        >
           <div
             class=" text-xs font-normal leading-none flex-initial cursor-pointer w-full"
+            @click="removeChip(i)"
           >
-            {selectedFilter.text}
+            {{ selectedFilters.text }}
           </div>
-          <div>
+          <div @click="removeChip(i)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="100%"
@@ -201,64 +205,106 @@ export default {
       items: [],
       userName: null,
       recipeName: null,
-      ingredients:null,
+      ingredients: null,
       tags: [],
-      dialog:false,
-      selectModel: { value: "name", text: "Recipe Name" },
+      customFilters: false,
+      dialog: false,
+      selectModel: { value: "recipe name", text: "Recipe Name" },
       selectOption: {},
       userInput: null,
       options: [
-        { value: "name", text: "Recipe Name" },
+        { value: "recipe name", text: "Recipe Name" },
         { value: "username", text: "Username" },
         { value: "ingredients", text: "Ingredients" },
       ],
-      activeFilters: [],
+      activeFilters: [{ text: "recipe name" }],
       selectedFilters: {},
       recipeData: {},
+      customFiltersChip: [],
     };
   },
   methods: {
     // functions
     async searchRecipe() {
-      if(!this.userInput && !this.recipeName && !this.userName && !this.tags) {
-            this.$vToastify.error("Please search something")
-          return
+      if (!this.userInput && !this.recipeName && !this.userName && !this.tags) {
+        this.$vToastify.error("Please search something");
+        return;
       }
       if (this.selectModel.value == "username" || this.userName) {
         //username
         this.recipeData.userName = this.userInput || this.userName;
+
+        // custom filters
+        this.customFiltersChip.push("username");
+
       }
-      if (this.selectModel.value == "name" || this.recipeName) {
-        //username
-        this.recipeData.name = this.userInput || this.recipeName;
-      }
-      if (this.selectModel.value == "ingredients" || this.ingridients) {
+      if (this.selectModel.value == "recipe name" || this.recipeName) {
         //recipe name
-        const ingredients = this.userInput.split(",") || this.ingridients;
-        this.recipeData["ingredients.name"] = {
-          $all: ingredients
-        };
+        this.recipeData.name = this.userInput || this.recipeName;
+        this.customFiltersChip.push("recipe name");
       }
-       if (this.tags) {
+      if (this.selectModel.value == "ingredients" || this.ingredients) {
+        //ingredient name
+        let ingredients = this.ingridients;
+        if(this.userInput) {
+            ingredients = this.userInput.split(",")
+        }
+        this.recipeData["ingredients.name"] = {
+          $all: ingredients,
+        };
+        this.customFiltersChip.push("ingredient");
+      }
+      if (this.tags.length !== 0) {
         //tags name
         this.recipeData["ingredients.tags"] = {
-          $all: this.tags
+          $all: this.tags,
         };
+        this.customFiltersChip.push("tags");
       }
+
+      this.customHandler();
       const data = await Public.getRecipes(this.recipeData);
-      console.log(data, this.recipeData)
+
+      console.log(data);
       //reset filter ??
       this.recipeData = {};
-      this.dialog = false
+      this.dialog = false;
     },
-    changeTest() {
+    updateChips() {
       //reset the filter when they change
-      this.selectedFilters.push({text:this.selectModel.value})
+      // const exists = this.activeFilters.find(el => el.text === this.selectModel.value)
+      // if(!exists) {
+      this.activeFilters[0] = { text: this.selectModel.value };
+      // }
     },
     openDialog() {
+      console.log("here");
       // remove the model value
-      this.selectModel = {}
-    }
+      this.selectModel = {};
+      this.customFilters = true;
+    },
+    removeChip(index) {
+      console.log("clicking");
+      this.activeFilters.splice(index, 1);
+
+      // if the activeFilter array length is less than 1 than remove the model
+      if (this.activeFilters.length <= 1) {
+        this.selectModel = {};
+      }
+    },
+    customHandler() {
+      if (this.customFilters) {
+        //reset models and filters
+        this.selectModel = {};
+        this.activeFilters = [];
+
+         this.customFiltersChip.forEach((txt) => {
+          this.activeFilters.push({ text: txt });
+        });
+        this.options.push({ value: "custom", text: "Custom" });
+        this.selectModel = { value: "custom", text: "Custom" };
+      }
+    },
   },
   mounted() {
     //before the page loads
