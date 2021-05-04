@@ -1,4 +1,5 @@
 <template lang="">
+<<<<<<< HEAD
   <div class="pt-10">
     <v-container v-if="editMode" fluid>
       <v-row justify="center" class="lg:text-5xl lg:pb-10 text-purple-500">
@@ -23,6 +24,27 @@
             @click="switchIcon"
             title="Toggle Preview Mode"
             class=" lg:mr-2 lg:mb-5 m-0 p-0"
+=======
+    <div class='pt-10'>
+      <v-container v-if="editMode" fluid>
+        <v-row justify="center" class="text-5xl pb-10 text-purple-500">
+          <v-col
+            cols='10'
+            sm='1'
+            lg='1'
+            xs='1'
+          >
+            <!-- <span @click="goBack" title="Go back to Recipes List">
+              <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+            </span>    -->
+          </v-col>
+          <v-col cols='10' lg='2' sm='2' xs='1'></v-col>
+          <v-col
+            cols='10'
+            lg='4'
+            sm='4'
+            xs='5'
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
           >
             <i class="fas fa-eye lg:text-3xl text-sm text-gray-900 cursor-pointer "></i>
           </div>
@@ -36,6 +58,7 @@
               v-model="name"
               dense
               color="deep-purple accent-2"
+<<<<<<< HEAD
           ></v-text-field>  
            <div
             v-if="editMode"
@@ -54,6 +77,35 @@
           <v-row>
             <v-col cols="12" sm="12">
               <div>
+=======
+            ></v-text-field>
+          </v-col>
+          <v-col
+            cols='10'
+            sm='1'
+            lg='1'
+            xs='1'
+          >
+            <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" mr-2 mb-5">
+              <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
+            </div>
+          </v-col>
+          <v-col cols='10' lg='1' sm='2' xs='1'></v-col>
+        </v-row>
+        <v-row justify="center" align="center">
+          <v-col
+            cols='12'
+            lg='4'
+            sm='6'
+            xs='10'
+          >
+            <!-- Image -->
+            <v-row>
+              <v-col
+                cols='12'
+                sm='12'
+              >
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
                 <div>
                   <img
                     :src="recipeImage"
@@ -418,6 +470,7 @@
             <v-col cols="12" sm="12">
               <h3 class="text-2xl -pt-30 pb-2 text-purple-500">
                 Ingredients
+<<<<<<< HEAD
               </h3>
               <div v-for="(ingredient, index) of ingredients" :key="index">
                 <div>
@@ -428,6 +481,21 @@
             <!-- Instructions -->
             <v-col cols="12" sm="12">
               <h3 class="text-2xl pt-10 pb-2 text-purple-500">
+=======
+                </h3>
+                <div v-for="(ingredient, index) of ingredients" :key="index">
+                  <div>
+                    {{ingredient.value}}
+                  </div>
+                </div>
+              </v-col> 
+              <!-- Instructions -->
+              <v-col
+                cols='12'
+                sm='12'
+              >
+                <h3 class="text-2xl pt-10 pb-2 text-purple-500">
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
                 Instructions
               </h3>
               <p class="text-justify">
@@ -439,6 +507,7 @@
 
         <v-col cols="12" lg="1"> </v-col>
 
+<<<<<<< HEAD
         <!-- Comment Section -->
         <v-col cols="12" lg="3" sm="6" xs="9">
           <!-- Ingredients -->
@@ -457,8 +526,38 @@
                     class="text-green-600 text-4xl cursor-pointer -mt-4 pt-2 -ml-3"
                     title="Add new comment"
                     @click="openCommentDialog"
+=======
+          <!-- Comment Section -->
+          <v-col
+            cols='12'
+            lg='3'
+            sm='6'
+            xs='9'
+          >
+           <!-- Ingredients -->
+            <v-row>
+              <v-col
+                cols="12"
+                sm="9"
+                lg='12'
+              >
+                <v-row>
+                  <v-col
+                    cols='12'
+                    sm='9'
+                    xs='8'
+                  >
+                  <div class="text-purple-500 text-xl  pb-4">Comments/Ratings</div>
+                  </v-col>
+
+                  <v-col
+                    cols='12'
+                    sm='2'
+                    xs='3'
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
                   >
                     +
+<<<<<<< HEAD
                   </div>
                 </v-col>
               </v-row>
@@ -508,6 +607,61 @@
         @delete-recipe="deleteRecipe"
         :open="deleteOpen"
       />
+=======
+                    </div>
+                  </v-col>
+                </v-row>
+                
+                <!-- Comments List -->
+                <div class="overflow-y-auto overflow-x-none h-full pt-3 pl-3">
+                  <span v-for="(comment, index) of comments" :key="index">
+                    <v-row>
+                      <v-col
+                        cols="12"
+                        lg="11"
+                        xs='11'
+                        class="ma-0 pa-0"
+                      >
+                        <div class="bg-purple-100 pl-4 pr-4 pt-2 rounded-3xl">
+                          <v-rating
+                            v-model="comment.rating"
+                            background-color="deep-purple accent-2"
+                            color="deep-purple accent-2"
+                            readonly
+                            small
+                          ></v-rating>
+                          <div class="flex flex-wrap">
+                            <div class="text-md pb-2">{{comment.body}}</div>
+                            <div class="text-sm"> - {{comment.commentOwnerUserName}} | {{formatDate(comment.dateCreated)}}</div>
+                          </div>
+                          <div
+                            v-if="canRemoveComment(comment.commentOwnerId)"
+                            @click="deleteComment(comment._id, index)" 
+                            class="text-red-500 font-bold cursor-pointer hover:text-black"
+                            title="delete this comment"
+                          >
+                            Remove
+                          </div>
+                        </div>
+                        <div class="bg-white p-3"></div>
+                      </v-col>
+                    </v-row>
+                  </span>
+                </div>
+              </v-col> 
+
+            </v-row>
+          
+          </v-col>
+        </v-row>
+      </v-container>
+      <div data-app>
+        <ConfirmDeleteDialog @close-dialog="closeDialog" @delete-recipe="deleteRecipe" :open="deleteOpen" />
+      </div>
+      <div data-app>
+        <CommentDialog @close-dialog="closeCommentDialog" @add-comment="commentDialogAdd" :open="commentDialogOpen" />
+      </div>
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
     </div>
     <div data-app>
       <CommentDialog
@@ -578,9 +732,15 @@ export default {
     this.recipeOwnerId = res.data.ownerId;
 
     // get comments attached to recipe
+<<<<<<< HEAD
     let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id);
     console.log(typeof res2.data.comments);
     this.comments = res2.data.comments;
+=======
+    let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+    console.log(typeof(res2.data.comments))
+    this.comments = res2.data.comments
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
   },
   methods: {
     updateRecipe: async function() {
@@ -669,11 +829,17 @@ export default {
       this.commentDialogOpen = false;
     },
     commentDialogAdd: async function() {
+<<<<<<< HEAD
       let res2 = await CommentService.getCommentsToRecipe(
         this.$route.params.id
       );
       this.comments = res2.data.comments;
       this.commentDialogOpen = false;
+=======
+      let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+      this.comments = res2.data.comments
+      this.commentDialogOpen = false
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
     },
     deleteComment: async function(commentId, index) {
       const res = await CommentService.deleteComment(commentId);

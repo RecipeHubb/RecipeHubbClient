@@ -21,7 +21,11 @@
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
+<<<<<<< HEAD
                   <router-link to="/"><span class="text-black hover:text-purple-500 text-lg ">Home</span></router-link>
+=======
+                  <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
+>>>>>>> 85ccef2 (numerous style updates, functionality updates)
                 </li>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
