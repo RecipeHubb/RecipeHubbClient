@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import EditSettingsDialog from '../../utility/EditSettingsDialog'
+import EditSettingsDialog from './EditSettingsDialog'
 export default {
   name: "ProfilePage",
   components: {
@@ -152,7 +152,7 @@ export default {
   },
   mounted() {
     this.user = JSON.parse(localStorage.getItem("user"));
-    this.defaultImage = JSON.parse(this.user.profilePic) || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
+    this.defaultImage = this.user.profilePic || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
   },
 };
 </script>

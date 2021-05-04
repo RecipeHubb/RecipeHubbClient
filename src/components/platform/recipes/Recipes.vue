@@ -4,15 +4,9 @@
       <v-row justify="center">
 
         <v-col
-        cols="12"
-        lg="3"
-        >
-          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
-        </v-col>
-
-        <v-col
-        cols="12"
-        lg="6"
+          cols="12"
+          sm="6"
+          xs='10'
         >
           <h1 class="text-5xl pt-10 text-purple-500 text-center">
             My Recipes
@@ -20,8 +14,18 @@
         </v-col>
 
         <v-col
+          order-lg="first"
+          cols="12"
+          sm="3"
+          xs='10'
+        >
+          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
+        </v-col>
+
+        <v-col
         cols="12"
-        lg="3"
+        sm="3"
+        xs='10'
         >
           <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
         </v-col>
@@ -48,7 +52,7 @@
             cols="12"
             :lg="colWidth"
             sm="6"
-            xs="9"
+            xs="8"
           >
             <RecipeCard :recipe="recipe" />
           </v-col>

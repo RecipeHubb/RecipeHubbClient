@@ -165,8 +165,8 @@
 </template>
 
 <script>
-  import UserService from '../../service/UserService'
-  import AuthService from '../../service/AuthService'
+  import UserService from '../../../service/UserService'
+  import AuthService from '../../../service/AuthService'
 
   export default {
   name: "EditSettingsDialog",
@@ -176,27 +176,27 @@
       firstName: null,
       lastName: null,
       profilePic: null,
+      previewImg: null,
       city: null,
       email: null,
       userName: null,
       bio: null,
       oldEmail: null,
       oldUserName: null,
-      previewImg: null
     };
   },
   methods: {
     updateProfile: async function() {
         if (!this.firstName || !this.lastName || !this.email || !this.userName) {
-        this.$vToastify.error("Please fill out required fields before submitting")
-        return
+          this.$vToastify.error("Please fill out required fields before submitting")
+          return
         }
         let data = {
         firstName: this.firstName,
         lastName: this.lastName,
         userName: this.userName,
         email: this.email,
-        profilePic: this.profilePic ? JSON.stringify(this.profilePic) : null,
+        profilePic: this.previewImg ? JSON.stringify(this.profilePic) : null,
         city: this.city,
         bio: this.bio,
         oldEmail: this.oldEmail,
@@ -259,7 +259,7 @@
       let u = JSON.parse(localStorage.getItem('user'))
       this.firstName = u.firstName
       this.lastName = u.lastName
-      this.previewImg = u.profilePic ? JSON.parse(u.profilePic) : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
+      this.previewImg = u.profilePic ? u.profilePic : "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
       this.city = u.city
       this.email = u.email
       this.oldEmail = u.email

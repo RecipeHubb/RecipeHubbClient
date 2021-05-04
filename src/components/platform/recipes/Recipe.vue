@@ -6,16 +6,18 @@
             cols='10'
             sm='1'
             lg='1'
+            xs='1'
           >
             <!-- <span @click="goBack" title="Go back to Recipes List">
               <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
             </span>    -->
           </v-col>
-          <v-col cols='10' lg='2' sm='2'></v-col>
+          <v-col cols='10' lg='2' sm='2' xs='1'></v-col>
           <v-col
             cols='10'
             lg='4'
             sm='4'
+            xs='5'
           >
             <v-text-field
               outlined
@@ -29,12 +31,13 @@
             cols='10'
             sm='1'
             lg='1'
+            xs='1'
           >
             <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" mr-2 mb-5">
               <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
             </div>
           </v-col>
-          <v-col cols='10' lg='1' sm='2'></v-col>
+          <v-col cols='10' lg='1' sm='2' xs='1'></v-col>
         </v-row>
         <v-row justify="center" align="center">
           <v-col
@@ -444,11 +447,11 @@
                 <h3 class="text-2xl -pt-30 pb-2 text-purple-500">
                 Ingredients
                 </h3>
-                <ul v-for="(ingredient, index) of ingredients" :key="index">
+                <div v-for="(ingredient, index) of ingredients" :key="index">
                   <div>
                     {{ingredient.value}}
                   </div>
-                </ul>
+                </div>
               </v-col> 
               <!-- Instructions -->
               <v-col
@@ -477,25 +480,28 @@
             cols='12'
             lg='3'
             sm='6'
-            xs='10'
+            xs='9'
           >
            <!-- Ingredients -->
             <v-row>
               <v-col
                 cols="12"
-                sm="12"
+                sm="9"
+                lg='12'
               >
                 <v-row>
                   <v-col
                     cols='12'
                     sm='9'
+                    xs='8'
                   >
-                  <div class="ml-2 text-purple-500 text-xl font-medium pb-4">Comments/Ratings</div>
+                  <div class="text-purple-500 text-xl  pb-4">Comments/Ratings</div>
                   </v-col>
 
                   <v-col
                     cols='12'
                     sm='2'
+                    xs='3'
                   >
                     <div 
                       v-show="!editAccess"
@@ -514,7 +520,8 @@
                     <v-row>
                       <v-col
                         cols="12"
-                        sm='11'
+                        lg="11"
+                        xs='11'
                         class="ma-0 pa-0"
                       >
                         <div class="bg-purple-100 pl-4 pr-4 pt-2 rounded-3xl">
@@ -549,7 +556,6 @@
           
           </v-col>
         </v-row>
-
       </v-container>
       <div data-app>
         <ConfirmDeleteDialog @close-dialog="closeDialog" @delete-recipe="deleteRecipe" :open="deleteOpen" />
@@ -575,8 +581,8 @@ export default {
   },
   data() {
     return {
-      recipe: {},
-      comments: [],
+      recipe: null,
+      comments: null,
       editMode: false,
       deleteOpen: false,
       commentDialogOpen: false,
@@ -619,6 +625,7 @@ export default {
 
     // get comments attached to recipe
     let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+    console.log(typeof(res2.data.comments))
     this.comments = res2.data.comments
   },
   methods: {
@@ -708,15 +715,9 @@ export default {
     closeCommentDialog: function() {
       this.commentDialogOpen = false
     },
-    commentDialogAdd: function(data) {
-      this.comments.push({
-          commentOwnerUserName: data.commentOwnerUserName,
-          commentOwnerId: data.commentOwnerId,
-          dateCreated: new Date(data.dateCreated).toDateString(),
-          rating: data.rating,
-          body: data.body,
-          _id: data._id
-      })
+    commentDialogAdd: async function() {
+      let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+      this.comments = res2.data.comments
       this.commentDialogOpen = false
     },
     deleteComment: async function(commentId, index) {

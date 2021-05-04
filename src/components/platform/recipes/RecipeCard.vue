@@ -95,6 +95,5 @@ export default {
     let res2 = await CommentService.getCommentsToRecipe(this.recipe._id)
     this.avgRating = res2.data.average.toFixed(1)
    }
-
 }
 </script>

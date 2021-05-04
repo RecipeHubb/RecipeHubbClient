@@ -1,18 +1,12 @@
 <template lang="">
   <div>
-    <v-container >
+    <v-container>
       <v-row justify="center">
 
         <v-col
-        cols="12"
-        lg="3"
-        >
-          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
-        </v-col>
-
-        <v-col
-        cols="12"
-        lg="6"
+          cols="12"
+          sm="6"
+          xs='10'
         >
           <h1 class="text-5xl pt-10 text-purple-500 text-center">
             Public Recipes
@@ -20,8 +14,18 @@
         </v-col>
 
         <v-col
+          order-lg="first"
+          cols="12"
+          sm="3"
+          xs='10'
+        >
+          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
+        </v-col>
+
+        <v-col
         cols="12"
-        lg="3"
+        sm="3"
+        xs='10'
         >
           <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
         </v-col>
@@ -35,7 +39,7 @@
           ></v-progress-circular>
         </v-row>
       </div>
-      <div v-else-if="recipes.length == 0">
+      <div v-else-if="recipes.length === 0">
         <v-row justify="center">
           <div class="text-purple-500 text-2xl">No Recipes... sad</div>
         </v-row>
@@ -48,7 +52,7 @@
             cols="12"
             :lg="colWidth"
             sm="6"
-            xs="9"
+            xs="8"
           >
             <PublicRecipeCard :recipe="recipe" />
           </v-col>
@@ -61,9 +65,9 @@
 <script>
 import RecipeService from "../../../service/RecipeService"
 import AuthService from'../../../service/AuthService'
-import PublicRecipeCard from './PublicRecipeCard'
-import ListFilter from '../../utility/ListFilter'
+import PublicRecipeCard from '../publicRecipes/PublicRecipeCard'
 import ListSorter from '../../utility/ListSorter'
+import ListFilter from '../../utility/ListFilter'
 
 export default {
   name: "Recipes",
@@ -132,7 +136,8 @@ export default {
     }
     let res = await RecipeService.getPublicRecipes()
     this.recipes = res.data
-    if (this.recipes.length == 1) this.colWidth = 6
+    this.originalList = res.data
+    if (this.recipes.length == 1) this.colWidth = 12
     else if (this.recipes.length == 2) this.colWidth = 6
     else this.colWidth = 4
   },
