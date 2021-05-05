@@ -1,5 +1,5 @@
 <template lang="">
-  <div class=" p-6 flex justify-center ">
+  <div class=" p-6 flex justify-center mt-8 ">
     <div class="shadow-lg rounded-lg bg-indigo-50 w-3/4">
       <div class=" flex justify-center">
         <div class="relative w-1/2 hidden lg:block ">
@@ -16,14 +16,14 @@
               <router-link to="/register">Sign up</router-link>
             </span>
           </h1>
-          <div class="my-16">
+          <div class="lg:my-16 my-4">
             <h1 class="text-2xl py-2">Sign in</h1>
             <div>
               <input
                 type="text"
                 placeholder="Email or Username"
                 v-model="credential"
-                class="border-2 bg-white rounded-md my-2 p-2 outline-none w-7/12"
+                class="border-2 bg-white rounded-md my-2 p-2 outline-none  w-3/8 lg:w-7/12"
                 @keydown.enter="signInUser"
               />
             </div>
@@ -32,7 +32,7 @@
                 type="password"
                 v-model="password"
                 placeholder="Password"
-                class="border-2 bg-white rounded-md my-2 p-2 w-7/12  outline-none"
+                class="border-2 bg-white rounded-md my-2 p-2 lg:w-7/12 w-3/8   outline-none"
                 @keydown.enter="signInUser"
               />
             </div>
@@ -46,7 +46,7 @@
           </h1>
           </div>
             <div
-              class="bg-white border-2 rounded-md cursor-pointer hover:bg-purple-400  p-2 my-6 px-8  text-sm inline-block"
+              class="bg-white border-2 rounded-md cursor-pointer  hover:bg-purple-400  p-2 my-6 px-8  text-sm inline-block"
               v-on:click="signInUser"
             >
               Login
