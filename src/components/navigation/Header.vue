@@ -21,49 +21,49 @@
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/"><span class="text-black hover:text-purple-500 text-lg ">Home</span></router-link>
+                  <router-link to="/"><span @click="isOpen = false" class="text-black hover:text-purple-500 text-lg ">Home</span></router-link>
                 </li>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/about"><span class="text-black hover:text-purple-500">About</span></router-link>
+                  <router-link to="/about"><span @click="isOpen = false" class="text-black hover:text-purple-500">About</span></router-link>
                 </li>
                 <li
                   v-show="!isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/register"><span class="text-black hover:text-purple-500">Sign Up</span></router-link>
+                  <router-link to="/register"><span @click="isOpen = false" class="text-black hover:text-purple-500">Sign Up</span></router-link>
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                   @click="open = true"
                 >
-                  <span class="text-black hover:text-purple-500">Create</span>
+                  <span @click="isOpen = false" class="text-black hover:text-purple-500">Create</span>
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/public/recipes"><span class="text-black hover:text-purple-500">Public</span></router-link>
+                  <router-link to="/public/recipes"><span @click="isOpen = false" class="text-black hover:text-purple-500">Public</span></router-link>
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/recipes"><span class="text-black hover:text-purple-500">Recipes</span></router-link>
+                  <router-link to="/recipes"><span @click="isOpen = false" class="text-black hover:text-purple-500">Recipes</span></router-link>
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/profile"><span class="text-black hover:text-purple-500">Profile</span></router-link>
+                  <router-link to="/profile"><span @click="isOpen = false" class="text-black hover:text-purple-500">Profile</span></router-link>
                 </li>
                 <li
                   v-if="!isLoggedIn"
                   class="border-transparent border-b-2  hover:border-purple-600"
                 >
-                  <router-link to="/login"><span class="text-black hover:text-purple-500">Sign In</span></router-link>
+                  <router-link to="/login"><span @click="isOpen = false" class="text-black hover:text-purple-500">Sign In</span></router-link>
                 </li>
                 <li
                   v-else
