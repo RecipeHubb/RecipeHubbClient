@@ -76,7 +76,7 @@ import CommentService from '../../../service/CommentService'
 
 export default {
    name: 'PublicRecipeCard',
-   props: ['recipe'],
+   props: ['recipe', 'route'],
 
    data: function() {
        return {
@@ -86,7 +86,7 @@ export default {
    },
    methods: {
      routeToRecipe() {
-        this.$router.push({name: 'publicSingleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
+        this.$router.push({name: this.route, params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
    mounted: async function() {
