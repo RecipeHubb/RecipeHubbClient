@@ -768,21 +768,21 @@ export default {
       else this.$router.push('/recipes')
     },
 
+    // Recipe confirm delete functions
+    openDialog: function() {
+      this.deleteOpen = true
+    },
     closeDialog: function() {
       this.deleteOpen = false
     },
+
+    // Comment add / delete functions
     closeCommentDialog: function() {
       this.commentDialogOpen = false
     },
-    commentDialogAdd: function(data) {
-      this.comments.push({
-          commentOwnerUserName: data.commentOwnerUserName,
-          commentOwnerId: data.commentOwnerId,
-          dateCreated: new Date(data.dateCreated).toDateString(),
-          rating: data.rating,
-          body: data.body,
-          _id: data._id
-      })
+    commentDialogAdd: async function() {
+      let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
+      this.comments = res2.data.comments
       this.commentDialogOpen = false
     },
     deleteComment: async function(commentId, index) {
@@ -795,13 +795,10 @@ export default {
         this.$vToastify.success(`comment successfully deleted`)
       }
     },
-
-    openDialog: function() {
-      this.deleteOpen = true
-    },
     openCommentDialog: function() {
       this.commentDialogOpen = true
     },
+
     formatDate: function(date) {
       return new Date(date).toDateString()
     },
