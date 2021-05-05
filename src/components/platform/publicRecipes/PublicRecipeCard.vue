@@ -67,7 +67,7 @@
         color="purple darken-1"
         text
       >
-        <router-link :to="{name: 'publicSingleRecipe', params: {id: this.recipe._id, recipeName: this.recipe.name}}">
+        <router-link :to="{name: route, params: {id: this.recipe._id, recipeName: this.recipe.name}}">
             View
         </router-link>
       </v-btn>

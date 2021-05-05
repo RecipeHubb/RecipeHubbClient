@@ -4,7 +4,7 @@
         <h1 class="text-4xl text-gray-700">How <span class="text-purple-500">RecipeHubb </span> Works</h1>
         <div class="lg:grid lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:gap-1 m-6 lg:m-12">
           <div class="flex justify-center items-center my-6 ">
-            <h1 class="text-xl lg:text-xl">RcipeHubb, in its simplicty, is a way to store and save all the recipes you have!
+            <h1 class="text-xl lg:text-xl">RecipeHubb, in its simplicty, is a way to store and save all the recipes you have!
               It is a personal platform where you can add recipes, and include necessary information about them, including 
               things like ingredients, cooking instructions, serving size, and much more. </h1>
           </div>

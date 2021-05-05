@@ -53,7 +53,7 @@
           sm="6"
           xs="8"
         >
-          <RecipeCard :recipe="recipe" />
+          <RecipeCard :recipe="recipe" :route="route" />
         </v-col>
       </v-row> 
     </div>
@@ -63,7 +63,7 @@
 <script>
 import RecipeService from "../../../service/RecipeService"
 import AuthService from'../../../service/AuthService'
-import RecipeCard from './RecipeCard'
+import RecipeCard from '../publicRecipes/PublicRecipeCard'
 import ListSorter from '../../utility/ListSorter'
 import ListFilter from '../../utility/ListFilter'
 
@@ -80,7 +80,8 @@ export default {
       recipes: null,
       originalList: null,
       colWidth: null,
-      filterBy: null
+      filterBy: null,
+      route: 'singleRecipe'
     }
   },
   methods: {
@@ -97,12 +98,6 @@ export default {
           break
         case 'Recipe Name Z-A':
           this.recipes = this.recipes.sort((a,b) => b.name.localeCompare(a.name))
-          break
-        case 'Highest Rated':
-          // this.recipes = null
-          break
-        case 'Lowest Rated':
-          // this.recipes = null
           break
         case 'So-Easy Rating':
           this.recipes = this.recipes.sort((a,b) => b.soEasyRating - a.soEasyRating)
