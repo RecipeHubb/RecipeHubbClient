@@ -683,16 +683,20 @@ export default {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
-        recipeImage: this.recipeImage ? JSON.stringify(this.recipeImage) : null,
+        recipeImage: this.previewImg ? JSON.stringify(this.recipeImage) : null,
         servingSize: this.numPeopleServed,
         soEasyRating: this.soEasyRating,
         tags: this.tags,
         favorited: this.favorited,
         public: this.isPublic
       })
-      if (res.status === 200){
-        this.editMode = false
+      if (res.status !== 200){
+        this.$vToastify.error(`Something went wrong, try again later`)
+        return
+      }
+      else {
         this.$vToastify.success(`${this.name} sucessfully updated`)
+        this.editMode = false
       }
     },
 
@@ -702,6 +706,7 @@ export default {
       console.log(res)
       if (res.status !== 200){
         this.$vToastify.success(`Something went wrong, try again later`)
+        return
       }
       else {
         this.editMode = false
