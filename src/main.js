@@ -6,6 +6,7 @@ import About from "./components/public/About";
 import Home from "./components/public/Home";
 import SignIn from "./components/public/SignIn";
 import SignUp from "./components/public/SignUp";
+import Reset from "./components/public/Reset";
 import Error from "./components/public/404";
 // platform
 import Profile from "./components/platform/profileDetails/ProfilePage";
@@ -81,6 +82,7 @@ const routes = [
     },
   }, // needs to be authenticated
   { path: "/search", component: Search },
+  {path: '/forgot-password', component:Reset},
   {
     path: "/recipes/:id/:recipeName",
     name: "singleRecipe",

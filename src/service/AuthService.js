@@ -23,6 +23,41 @@ module.exports = {
     }
   },
 
+  reset: async (data) => {
+    try {
+      let query = null;
+      if (data.email) query = { email: data.email };
+      if (data.username) query = { userName: data.username };
+
+      if (query) {
+        const res = await axios.post(`${URL}user-auth/reset`, {
+          query,
+          password: data.password,
+        });
+        return res;
+      }
+      return false;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  findUser: async (data) => {
+    try {
+      let query = null;
+      if (data.email) query = { email: data.email };
+      if (data.username) query = { userName: data.username };
+
+      if (query) {
+        const res = await axios.post(`${URL}user-auth/find`, {
+          query,
+        });
+        return res;
+      }
+      return false;
+    } catch (err) {
+      console.log(err);
+    }
+  },
   login: async (data) => {
     try {
       let query = null;
