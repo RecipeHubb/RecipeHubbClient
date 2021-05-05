@@ -276,7 +276,6 @@ export default {
         return;
       }
       if (this.selectedQuickFilter.value == "username" || this.userName) {
-        //username
         // not null
         if (this.userInput || this.userName) {
           this.recipeData.userName = this.userInput || this.userName;
