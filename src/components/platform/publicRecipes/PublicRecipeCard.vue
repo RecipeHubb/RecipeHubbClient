@@ -76,7 +76,7 @@ import CommentService from '../../../service/CommentService'
 
 export default {
    name: 'PublicRecipeCard',
-   props: ['recipe'],
+   props: ['recipe', 'route'],
 
    data: function() {
        return {
@@ -86,14 +86,14 @@ export default {
    },
    methods: {
      routeToRecipe() {
-        this.$router.push({name: 'publicSingleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
+        this.$router.push({name: this.route, params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
    mounted: async function() {
      this.createdDate = (new Date(this.recipe.dateCreated)).toDateString()
     // get comments attached to recipe
     let res2 = await CommentService.getCommentsToRecipe(this.recipe._id)
-    this.avgRating = res2.data.average.toFixed(1)   
-  }
+    this.avgRating = res2.data.average.toFixed(1)
+   }
 }
 </script>

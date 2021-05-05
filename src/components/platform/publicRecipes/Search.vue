@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 font-thin m-0 h-screen">
+  <div class="p-6 font-thin m-0">
     <div class="grid justify-center">
       <div class="my-6 text-center">
         <p class="text-xl">
@@ -27,6 +27,15 @@
           class="focus:ring-purple-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm shadow appearance-none border py-2 px-3 text-grey-darker border-purple-300 outline-none rounded-md"
           v-model="userInput"
           v-on:keyup.enter="searchRecipe"
+          :placeholder="
+            selectedQuickFilter.value === 'ingredients'
+              ? `cheese, lemons, sugar, cream`
+              : selectedQuickFilter.value === 'recipe name'
+              ? 'chicken hearts'
+              : selectedQuickFilter.value === 'username'
+              ? 'beetsMan'
+              : null
+          "
         />
 
         <div class="absolute inset-y-0 right-0 flex items-center">
@@ -35,7 +44,7 @@
             id="recipe"
             name="recipe"
             class="focus:ring-purple-500 outline-none focus:gray-purple-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
-            v-model="selectModel"
+            v-model="selectedQuickFilter"
             @change="updateChips"
           >
             <option
@@ -69,7 +78,7 @@
                     class="fa fa-stream  hover:text-gray-900 cursor-pointer text-gray-700 pl-4"
                     style="font-size: 15px;margin-left: 10px;
                 margin-top: 5px;"
-                    v-on:click="openDialog"
+                    v-on:click="advanceFilters"
                   ></i>
                 </div>
               </template>
@@ -86,6 +95,7 @@
                         <v-text-field
                           label="Username"
                           v-model="userName"
+                          placeholder="gclaude"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -93,24 +103,16 @@
                           label="Recipe Name"
                           type="text"
                           v-model="recipeName"
+                          placeholder="White Chili"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
-                          label="Ingredient"
+                          label="Ingredients"
                           v-model="ingredients"
+                          placeholder="cheese, lemons, sugar, cream"
                         ></v-text-field>
                       </v-col>
-                      <!-- <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Tag"
-                  required
-                ></v-select>
-              </v-col> -->
                       <v-col cols="12" sm="6">
                         <v-autocomplete
                           :items="[
@@ -165,15 +167,14 @@
         <div
           v-for="(selectedFilters, i) in activeFilters"
           :key="i"
-          class=" hover:bg-green-200 flex justify-center items-center m-1 font-medium py-2 px-2 rounded-md text-green-700 bg-green-100 border border-green-300"
+          class=" flex justify-center items-center m-1 font-medium py-2 px-2 rounded-md text-green-700 bg-green-100 border border-green-300"
         >
           <div
-            class=" text-xs font-normal leading-none flex-initial cursor-pointer w-full"
-            @click="removeChip(i)"
+            class=" text-xs font-normal leading-none flex-initial w-full"
           >
             {{ selectedFilters.text }}
           </div>
-          <div @click="removeChip(i)">
+          <!-- <div @click="removeChip(i)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="100%"
@@ -189,27 +190,66 @@
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
-          </div>
+          </div> -->
         </div>
       </div>
+    </div>
+    <div v-show="loading">
+      <v-container>
+        <v-row justify="center">
+          <h1 class="text-5xl pt-10 pb-10 text-purple-500"></h1>
+        </v-row>
+        <div v-if="!recipes">
+          <v-row justify="center">
+            <div class="text-purple-500 text-2xl">Loading Recipes...</div>
+            <v-progress-circular
+              indeterminate
+              color="deep-purple accent-1"
+            ></v-progress-circular>
+          </v-row>
+        </div>
+        <div v-else-if="recipes.length === 0">
+          <v-row justify="center">
+            <div class="text-purple-500 text-2xl">No Found Recipe</div>
+          </v-row>
+        </div>
+        <div v-else>
+          <v-row justify="center">
+            <v-col
+              v-for="recipe in recipes"
+              :key="recipe.id"
+              cols="12"
+              :lg="colWidth"
+              sm="6"
+              xs="10"
+            >
+              <PublicRecipeCard :recipe="recipe" :route="route" />
+            </v-col>
+          </v-row>
+        </div>
+      </v-container>
     </div>
   </div>
 </template>
 
 <script>
 import Public from "../../../service/PublicService";
+import PublicRecipeCard from "./PublicRecipeCard";
 export default {
   name: "Search",
+  components: {
+    PublicRecipeCard,
+  },
   data() {
     return {
-      items: [],
+      route: 'searchPage',
       userName: null,
       recipeName: null,
       ingredients: null,
       tags: [],
-      customFilters: false,
+      showAdvanceChip: false,
       dialog: false,
-      selectModel: { value: "recipe name", text: "Recipe Name" },
+      selectedQuickFilter: { value: "recipe name", text: "Recipe Name" },
       selectOption: {},
       userInput: null,
       options: [
@@ -220,94 +260,137 @@ export default {
       activeFilters: [{ text: "recipe name" }],
       selectedFilters: {},
       recipeData: {},
-      customFiltersChip: [],
+      advanceActiveChip: [],
+      loading: false,
+      recipes: [],
     };
   },
   methods: {
-    // functions
     async searchRecipe() {
-      if (!this.userInput && !this.recipeName && !this.userName && !this.tags) {
+      if (!this.userInput && !this.recipeName && !this.userName && !this.tags && this.ingredients) {
         this.$vToastify.error("Please search something");
         return;
       }
-      if (this.selectModel.value == "username" || this.userName) {
+      if(this.selectedQuickFilter.value === 'custom') {
+        this.$vToastify.error("Please change Custom filter")
+        return;
+      }
+      if (this.selectedQuickFilter.value == "username" || this.userName) {
         //username
-        this.recipeData.userName = this.userInput || this.userName;
+        // not null
+        if (this.userInput || this.userName) {
+          this.recipeData.userName = this.userInput || this.userName;
+        }
+        this.validateReq(this.userName, this.userInput, "userName");
 
         // custom filters
-        this.customFiltersChip.push("username");
-
+        this.advanceActiveChip.push("username");
       }
-      if (this.selectModel.value == "recipe name" || this.recipeName) {
+      if (this.selectedQuickFilter.value == "recipe name" || this.recipeName) {
         //recipe name
         this.recipeData.name = this.userInput || this.recipeName;
-        this.customFiltersChip.push("recipe name");
+        this.advanceActiveChip.push("recipe name");
+
+        this.validateReq(this.recipeName, this.userInput, "name");
       }
-      if (this.selectModel.value == "ingredients" || this.ingredients) {
+      if(this.selectedQuickFilter.value === 'custom') {
+        this.$vToastify.error('Please change filter type')
+      }
+      if (this.selectedQuickFilter.value == "ingredients" || this.ingredients) {
         //ingredient name
-        let ingredients = this.ingridients;
-        if(this.userInput) {
-            ingredients = this.userInput.split(",")
+        let ingredients = null
+        if (this.userInput && !this.ingredients) {
+          ingredients = this.userInput.split(", ");
+        }
+        if(this.ingredients) {
+          ingredients = this.ingredients.split(", ");
         }
         this.recipeData["ingredients.name"] = {
           $all: ingredients,
         };
-        this.customFiltersChip.push("ingredient");
+
+        if (this.ingredients) {
+          this.validateReq(ingredients, this.userInput, "ingredients.name");
+          this.advanceActiveChip.push("ingredient");
+        }
       }
       if (this.tags.length !== 0) {
+        let tags = (this.userInput && this.userInput.split(",")) || this.tags;
         //tags name
-        this.recipeData["ingredients.tags"] = {
-          $all: this.tags,
+        this.recipeData["tags"] = {
+          $all: tags,
         };
-        this.customFiltersChip.push("tags");
+
+        this.advanceActiveChip.push("tags");
       }
-
-      this.customHandler();
+      this.advancedChipHandler();
       const data = await Public.getRecipes(this.recipeData);
+      this.loading = true;
+      this.recipes = data.data;
 
-      console.log(data);
-      //reset filter ??
+      // reset filter ??
       this.recipeData = {};
       this.dialog = false;
     },
+    validateReq(data, input, type) {
+      if (type === "ingredients.name") {
+        this.recipeData[type] = {
+          $all: data,
+        };
+        return;
+      }
+
+      if (data || input) {
+        this.recipeData[type] = data || input;
+        return;
+      }
+
+      this.recipeData[type] = {};
+    },
     updateChips() {
       //reset the filter when they change
-      // const exists = this.activeFilters.find(el => el.text === this.selectModel.value)
+      // const exists = this.activeFilters.find(el => el.text === this.selectedQuickFilter.value)
       // if(!exists) {
-      this.activeFilters[0] = { text: this.selectModel.value };
+        this.userInput = null
+      this.activeFilters[0] = { text: this.selectedQuickFilter.value };
       // }
     },
-    openDialog() {
-      console.log("here");
+    advanceFilters() {
       // remove the model value
-      this.selectModel = {};
-      this.customFilters = true;
+      this.selectedQuickFilter = {};
+      this.advanceActiveChip = [];
+      this.showAdvanceChip = true;
     },
     removeChip(index) {
       console.log("clicking");
       this.activeFilters.splice(index, 1);
 
       // if the activeFilter array length is less than 1 than remove the model
-      if (this.activeFilters.length <= 1) {
-        this.selectModel = {};
+      if (this.activeFilters.length <= 1 && !this.showAdvanceChip) {
+        this.selectedQuickFilter = {};
       }
     },
-    customHandler() {
-      if (this.customFilters) {
+    advancedChipHandler() {
+      if (this.showAdvanceChip) {
         //reset models and filters
-        this.selectModel = {};
+        this.selectedQuickFilter = {};
         this.activeFilters = [];
 
-         this.customFiltersChip.forEach((txt) => {
+        this.advanceActiveChip.forEach((txt) => {
           this.activeFilters.push({ text: txt });
         });
+        const optionsExists = this.options.find((el) => el.value === "custom");
+
+      // custom already exists in options
+        if (optionsExists) {
+          this.selectedQuickFilter = { value: "custom", text: "Custom" };
+          return;
+        }
+        // push it and display custom
+        this.selectedQuickFilter = { value: "custom", text: "Custom" };
         this.options.push({ value: "custom", text: "Custom" });
-        this.selectModel = { value: "custom", text: "Custom" };
       }
     },
-  },
-  mounted() {
-    //before the page loads
   },
 };
 </script>
