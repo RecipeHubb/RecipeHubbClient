@@ -62,7 +62,7 @@
               placeholder="bio"
               class="border-2 bg-white rounded-md my-6 p-2 outline-none lg:w-9/12"
             /> -->
-            <textarea placeholder="bio" v-model="bio" class="border-2 bg-white hidden lg:block rounded-md my-6 p-2 outline-none  lg:w-9/12" rows="5" cols="80" id="TITLE">
+            <textarea placeholder="bio" v-model="bio" class="border-2 bg-white rounded-md my-2 p-2 lg:w-9/12 w-3/8 outline-none lg:inline hidden" rows="5" cols="80" id="TITLE">
             </textarea>
             <textarea placeholder="bio" v-model="bio" class="border-2 bg-white lg:hidden block rounded-md my-6 p-2 outline-none " rows="5" cols="20" id="TITLE">
             </textarea>
