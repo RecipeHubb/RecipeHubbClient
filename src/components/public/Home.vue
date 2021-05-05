@@ -2,7 +2,7 @@
   <!-- We can update font -->
   <!-- Section -->
   <div class="flex justify-center pt-10 h-screen">
-    <div class="m-6 lg:m-12 text-center lg:w-1/2">
+    <div class="m-6 lg:m-12 text-center center-items lg:w-1/2">
       <h1 class="text-4xl text-gray-700">
         Welcome to <span class="text-purple-500">RecipeHubb </span>
       </h1>
@@ -10,14 +10,30 @@
         Welcome to RecipeHubb, Your hub of personal and shared recipes that you
         can use on the go! 
       </p>
+      <v-container>
+        <v-row justify="center">
+          <v-col cols='12' lg='6'>
+            <v-img
+              max-width="250px"
+              max-height="125px"
+              alt="RecipeHubb Logo"
+              :src="image"
+            ></v-img>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
     <!-- <div class="w-1/2 relative"><img src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"</div> -->
   </div>
 </template>
 <script>
+import image from '../../assets/recipehubb_long.png'
 export default {
   name: "Home",
-  methods: {
+  data() {
+    return {
+      image
+    }
   },
 };
 </script>
