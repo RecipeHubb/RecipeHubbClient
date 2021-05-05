@@ -679,7 +679,7 @@ export default {
         this.$vToastify.error("Please fill out required fields before updating")
         return
       }
-      const res = await RecipeService.updateRecipe(this.recipeID, {
+      const updatedRecipe = {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
@@ -689,7 +689,12 @@ export default {
         tags: this.tags,
         favorited: this.favorited,
         public: this.isPublic
-      })
+      }
+      if (!updatedRecipe.recipeImage){
+        delete updatedRecipe.recipeImage
+      }
+      
+      const res = await RecipeService.updateRecipe(this.recipeID, updatedRecipe)
       if (res.status !== 200){
         this.$vToastify.error(`Something went wrong, try again later`)
         return

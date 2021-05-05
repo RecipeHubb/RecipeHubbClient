@@ -362,8 +362,9 @@
         favorited: this.favorited,
         public: this.isPublic
       }
-      const res = await RecipeService.createRecipe(newRecipe)
 
+      const res = await RecipeService.createRecipe(newRecipe)
+      
       if (res.status !== 200){
         this.$vToastify.error(`Something went wrong`)
         return
