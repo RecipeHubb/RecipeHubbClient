@@ -693,7 +693,7 @@ export default {
       if (!updatedRecipe.recipeImage){
         delete updatedRecipe.recipeImage
       }
-      
+
       const res = await RecipeService.updateRecipe(this.recipeID, updatedRecipe)
       if (res.status !== 200){
         this.$vToastify.error(`Something went wrong, try again later`)
@@ -745,7 +745,7 @@ export default {
         this.newIngredientMeasurement = ''
       }
       else{
-        this.$vToastify.warning("all ingredient fields needed before adding")
+        this.$vToastify.warning("Ingredient amount and name needed before adding")
         return
       }
     },
@@ -812,7 +812,7 @@ export default {
   },
   computed: {
     isAddIngredientBlank () {
-      return this.newIngredientName === '' || this.newIngredientAmount === '' || this.newIngredientMeasurement === ''
+      return this.newIngredientName === '' || this.newIngredientAmount === ''
     },
     editAccess() {
       return !this.$router.history.current.fullPath.includes('/public/')

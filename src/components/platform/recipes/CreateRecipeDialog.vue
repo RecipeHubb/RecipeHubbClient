@@ -414,7 +414,7 @@
         this.newIngredientMeasurement = ''
       }
       else{
-        this.$vToastify.warning("all ingredient fields needed before adding")
+        this.$vToastify.warning("Ingredient amount and name needed before adding")        
         return
       }
     },
@@ -425,7 +425,7 @@
   },
   computed: {
     isAddIngredientBlank () {
-      return this.newIngredientName === '' || this.newIngredientAmount === '' || this.newIngredientMeasurement === ''
+      return this.newIngredientName === '' || this.newIngredientAmount === ''
     } 
   }
 }
