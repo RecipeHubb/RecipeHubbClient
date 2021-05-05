@@ -16,7 +16,7 @@
 
           <!-- show this section if theey click on the hamburger-->
           <div class="pt-3" v-show="isOpen">
-            <nav class="cursor-pointer text-lg ">
+            <nav class="cursor-pointer text-lg">
               <ul>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
@@ -88,7 +88,7 @@
             v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600  focus:outline-none outline-none"
           >
-            <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
+            <router-link to="/"><span class="text-black hover:text-purple-500 text-lg">Home</span></router-link>
           </button>
           <button
             v-show="!isLoggedIn"
@@ -165,6 +165,7 @@
 import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
 import LogoutDialog from '../utility/LogoutDialog'
 import AuthService from '../../service/AuthService'
+
 export default {
   name: "PublicHeader",
   components: {

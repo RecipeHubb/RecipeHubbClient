@@ -1,41 +1,58 @@
 <template lang="">
     <div class='pt-10'>
       <v-container v-if="editMode" fluid>
-        <v-row justify="center" class="text-5xl pb-10 text-purple-500">
-          <v-col
-            cols='10'
-            sm='1'
-            lg='1'
-          >
-            <!-- <span @click="goBack" title="Go back to Recipes List">
-              <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
-            </span>    -->
-          </v-col>
-          <v-col cols='10' lg='2' sm='2'></v-col>
-          <v-col
-            cols='10'
-            lg='4'
-            sm='4'
-          >
-            <v-text-field
-              outlined
-              label="Name*"
-              v-model="name"
-              dense
-              color="deep-purple accent-2"
-            ></v-text-field>
-          </v-col>
-          <v-col
-            cols='10'
-            sm='1'
-            lg='1'
-          >
-            <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" mr-2 mb-5">
-              <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
-            </div>
-          </v-col>
-          <v-col cols='10' lg='1' sm='2'></v-col>
-        </v-row>
+        <div class='d-none d-sm-flex'>
+          <v-row justify="center" class="text-5xl pb-10 text-purple-500">
+            <v-col
+              cols='10'
+              sm='1'
+              lg='1'
+            >
+              <!-- <span @click="goBack" title="Go back to Recipes List">
+                <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+              </span>    -->
+            </v-col>
+            <v-col cols='10' lg='2' sm='2'></v-col>
+            <v-col
+              cols='10'
+              lg='4'
+              sm='4'
+            >
+              <v-text-field
+                outlined
+                label="Name*"
+                v-model="name"
+                dense
+                color="deep-purple accent-2"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols='10'
+              sm='1'
+              lg='1'
+            >
+              <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" mr-2 mb-5">
+                <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
+              </div>
+            </v-col>
+            <v-col cols='10' lg='1' sm='2'></v-col>
+          </v-row>
+        </div>
+        <div class="d-flex d-sm-none">
+          <v-row justify="center" class="text-5xl pb-10 text-purple-500 pl-4 pr-4">
+              <v-text-field
+                outlined
+                label="Name*"
+                v-model="name"
+                dense
+                color="deep-purple accent-2"
+              ></v-text-field>
+
+              <div v-if="editMode" @click="switchIcon" title="Toggle Preview Mode" class=" ml-3 mr-2 -mt-1">
+                <i class="fas fa-eye text-3xl text-gray-900 cursor-pointer "></i>
+              </div>
+          </v-row>
+        </div>
         <v-row justify="center" align="center">
           <v-col
             cols='12'
@@ -167,28 +184,48 @@
                       sm='3'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
                         outlined
                         placeholder="3"
                         v-model="newIngredientAmount"
                         color="deep-purple accent-2"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="4"
+                        v-model="newIngredientAmount"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
                       sm='3'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
                         placeholder="oz"
                         outlined
                         v-model="newIngredientMeasurement"
                         color="deep-purple accent-2"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="oz"
+                        v-model="newIngredientMeasurement"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
@@ -287,40 +324,55 @@
       </v-container>
       <!-- - - - - - - - - Preview Mode - - - - - - - - - - - - - - -->
       <v-container v-else fluid>
-        <v-row justify="center" class="pt-12">
-          <v-col
-            cols='12'
-            sm='1'
-            lg='1'
-          >
-            <span @click="goBack" title="Go back to Recipes List" class="mt-4">
-              <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
-            </span>   
-          </v-col>
+        <div class='d-none d-sm-flex'>
+          <v-row justify="center" class="pt-12">
+            <v-col
+              cols='12'
+              sm='1'
+              lg='1'
+            >
+              <span @click="goBack" title="Go back to Recipes List" class="mt-4">
+                <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
+              </span>   
+            </v-col>
 
-          <v-col cols='12' sm='2' lg='2'></v-col>
+            <v-col cols='12' sm='2' lg='2'></v-col>
 
-          <v-col
-            cols='12'
-            sm='6'
-            lg='4'
-          >
-          <h1 class="text-5xl pb-10 text-purple-500">
-            {{name}}
-          </h1>
-          </v-col>
-          
-          <v-col
-            cols='12'
-            sm='2'
-            lg='1'
-          >
-            <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
-          </v-col>
+            <v-col
+              cols='12'
+              sm='6'
+              lg='4'
+            >
+            <h1 class="text-5xl pb-10 text-purple-500">
+              {{name}}
+            </h1>
+            </v-col>
+            
+            <v-col
+              cols='12'
+              sm='2'
+              lg='1'
+            >
+              <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
+            </v-col>
 
-          <v-col cols='12' sm='2' lg='1'></v-col>
-          
-        </v-row>
+            <v-col cols='12' sm='2' lg='1'></v-col>
+            
+          </v-row>
+        </div>
+        <div class="d-flex d-sm-none">
+          <v-row justify="center" class="text-5xl pb-10 text-purple-500 pl-4 pr-4">
+              <span @click="goBack" title="Go back to Recipes List" class="">
+                <i class="fas fa-chevron-left text-4xl text-purple-600 cursor-pointer"></i>
+              </span>   
+              <h1 class=" ml-11 mr-11 mt-2 text-3xl pb-10 text-purple-500">
+                {{name}}
+              </h1>
+              <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode" class="-mt-1">
+                  <i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i>
+              </span>
+          </v-row>
+        </div>
         <v-row justify="center">
           <v-col
             cols='12'
@@ -444,11 +496,11 @@
                 <h3 class="text-2xl -pt-30 pb-2 text-purple-500">
                 Ingredients
                 </h3>
-                <ul v-for="(ingredient, index) of ingredients" :key="index">
+                <div v-for="(ingredient, index) of ingredients" :key="index">
                   <div>
                     {{ingredient.value}}
                   </div>
-                </ul>
+                </div>
               </v-col> 
               <!-- Instructions -->
               <v-col
@@ -646,14 +698,15 @@ export default {
 
     deleteRecipe: async function() {
       const res = await RecipeService.deleteRecipe(this.recipeID)
-      if (res.status === 200){
+      console.log(this.recipeID)
+      console.log(res)
+      if (res.status !== 200){
+        this.$vToastify.success(`Something went wrong, try again later`)
+      }
+      else {
         this.editMode = false
         this.$vToastify.success(`${this.name} sucessfully deleted`)
-        if (this.$router.history.current.fullPath.includes('/recipes')) {
-          this.$router.push('/recipes')
-          this.$router.go()
-        }
-        else this.$router.push('/recipes')
+        this.$router.push('/recipes')
       }
     },
 

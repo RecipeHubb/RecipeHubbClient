@@ -2,7 +2,7 @@
 <template>
   <v-app>
     <div id="app" class="flex flex-col h-full" >
-      <PublicHeader />
+      <Header />
       <div class="flex-1 h-screen mx-auto ">
       <router-view></router-view>
     </div>
@@ -12,13 +12,13 @@
 </template>
 
 <script>
-import PublicHeader from './components/navigation/PublicHeader.vue'
+import Header from './components/navigation/Header.vue'
 import Footer from './components/navigation/Footer.vue'
 import './assets/styles/index.css'
 export default {
   name: 'App',
   components: {
-    PublicHeader,
+    Header,
     Footer
   }
 }

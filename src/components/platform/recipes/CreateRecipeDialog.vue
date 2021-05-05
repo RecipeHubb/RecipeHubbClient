@@ -53,8 +53,9 @@
                     <!-- <div class="ml-2 text-purple-400 text-md">Tags</div> -->
                       <v-autocomplete
                         :items="['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack','American',
-                        'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Chicken',
-                        'Beef', 'Pork', 'Vegetables', 'Fruit','Sweet', 'Spicy', 'Savory', 'Other'
+                        'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Chicken',
+                        'Beef', 'Pork', 'Seafood', 'Vegetables', 'Fruit', 'Comfort Food', 'Sweet',
+                         'Spicy', 'Savory', 'Other'
                         ]"
                         v-model="tags"
                         placeholder="Dinner"
@@ -117,35 +118,55 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      sm='3'
+                      sm='2'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
                         outlined
                         placeholder="3"
                         color="deep-purple accent-2"
                         v-model="newIngredientAmount"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="4"
+                        v-model="newIngredientAmount"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      sm='3'
+                      sm='2'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
                         placeholder="oz"
                         outlined
                         color="deep-purple accent-2"
                         v-model="newIngredientMeasurement"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="oz"
+                        v-model="newIngredientMeasurement"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
-                      sm='5'
+                      sm='6'
                       class="ma-0 pa-0"
                     >
                       <v-text-field
@@ -330,7 +351,7 @@
         this.$vToastify.error("Please fill out required fields before submitting")
         return
       }
-      const res = await RecipeService.createRecipe({
+      const newRecipe = {
         name: this.name,
         ingredients: this.ingredients,
         instructions: this.instructions,
@@ -340,16 +361,19 @@
         tags: this.tags,
         favorited: this.favorited,
         public: this.isPublic
-      })
-
-      // localstorage
-      if (res.status === 200){
-        this.$vToastify.success(`${this.name} sucessfully created!`)
       }
-      this.$router.push('/recipes')
-      // this.$router.go()
-      this.$emit('close-dialog')
-      // this.$emit('edit-save', newRecipe)
+      const res = await RecipeService.createRecipe(newRecipe)
+
+      if (res.status !== 200){
+        this.$vToastify.error(`Something went wrong`)
+        return
+      }
+      else {
+        this.$vToastify.success(`${this.name} sucessfully created!`)
+        if (this.$router.history.current.path === '/recipes') this.$router.go()
+        else this.$router.push('/recipes')
+        this.$emit('close-dialog')
+      }
     },
     previewImage: function(event) {
         const input = event.target
@@ -405,9 +429,3 @@
   }
 }
 </script>
-<style scoped>
-/* .v-text-field--outlined >>> fieldset {
-  border-color: rgba(172, 90, 197, 0.986);
-} */
-
-</style>
