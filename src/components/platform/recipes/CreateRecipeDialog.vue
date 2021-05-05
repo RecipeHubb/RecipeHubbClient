@@ -286,11 +286,11 @@
                 sm='6'
                 xs='10'
               >
-                <v-checkbox
+                <!-- <v-checkbox
                   v-model="favorited"
                   color="deep-purple accent-2"
                   :label="`Favorite`"
-                ></v-checkbox>
+                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-container>
