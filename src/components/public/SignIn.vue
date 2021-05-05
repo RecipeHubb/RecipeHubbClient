@@ -36,12 +36,22 @@
                 @keydown.enter="signInUser"
               />
             </div>
+              <div class="flex justify-center">
+            <h1 class="text-right text-sm px-4 py-4 text-gray-700">
+            
+            <span class="font-bold"
+            >
+              <router-link to="/forgot-password">Forget password?</router-link>
+            </span>
+          </h1>
+          </div>
             <div
               class="bg-white border-2 rounded-md cursor-pointer hover:bg-purple-400  p-2 my-6 px-8  text-sm inline-block"
               v-on:click="signInUser"
             >
               Login
             </div>
+          
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
   <v-app>
     <div id="app" class="flex flex-col h-full" >
       <Header />
-      <div class="flex-1 h-screen mx-auto ">
+      <div class="flex-1 h-screen ">
       <router-view></router-view>
     </div>
       <Footer />
