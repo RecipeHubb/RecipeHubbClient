@@ -54,7 +54,7 @@
             sm="6"
             xs="8"
           >
-            <PublicRecipeCard :recipe="recipe" />
+            <PublicRecipeCard :recipe="recipe" :route="route"  />
           </v-col>
         </v-row> 
       </div>
@@ -79,6 +79,7 @@ export default {
 
   data() {
     return {
+      route:"publicSingleRecipe",
       recipes: null,
       originalList: null,
       colWidth: null,

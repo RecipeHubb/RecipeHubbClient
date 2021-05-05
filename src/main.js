@@ -104,8 +104,16 @@ const routes = [
       authenticate: true,
     },
   },
+  {
+    path: "/search/public/recipes/:id/:recipeName",
+    name: "searchPage",
+    component: Recipe,
+    meta: {
+      authenticate: true,
+    },
+  },
   { path: "/*", component: Error },
-];
+]; 
 
 const router = new VueRouter({
   routes,
