@@ -3,9 +3,9 @@
   <v-app>
     <div id="app" class="flex flex-col h-full" >
       <Header />
-      <div class="flex-1 h-screen ">
-      <router-view></router-view>
-    </div>
+      <div class="flex-1 h-screen mx-auto ">
+        <router-view></router-view>
+      </div>
       <Footer />
     </div>
   </v-app>
