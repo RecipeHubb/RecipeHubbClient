@@ -8,8 +8,8 @@
               It is a personal platform where you can add recipes, and include necessary information about them, including 
               things like ingredients, cooking instructions, serving size, and much more. </h1>
           </div>
-          <div class="flex justify-center items-center my-6  "><feather-droplet class="lg:w-24 w-12 lg:h-24 h-12 w-12 hidden"></feather-droplet></div>
-          <div class="flex justify-center items-center my-6 "><feather-camera class="lg:w-24 lg:h-24 w-12 h-12 hidden"></feather-camera></div>
+          <div class="flex justify-center items-center my-6  "><feather-droplet class="lg:w-24 w-12 lg:h-24 h-12 w-12 lg:block hidden"></feather-droplet></div>
+          <div class="flex justify-center items-center my-6 "><feather-camera class="lg:w-24 lg:h-24 w-12 h-12 lg:block hidden"></feather-camera></div>
           <div><h1 class="text-xl">Another cool feature is that this platform is also public! Users have the
               ability to view all recipes by other users of the platform that they mark as a publically accessible recipe. You 
               are then able to view these recipes and comment on them and drop a rating for the original owner. It is platform
