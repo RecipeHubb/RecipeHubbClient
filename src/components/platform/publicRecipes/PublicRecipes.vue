@@ -1,9 +1,5 @@
 <template lang="">
-<<<<<<< HEAD
   <div class="w-screen">
-=======
-  <div>
->>>>>>> 85ccef2 (numerous style updates, functionality updates)
     <v-container>
       <v-row justify="center">
 
