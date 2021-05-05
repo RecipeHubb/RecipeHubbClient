@@ -1,6 +1,6 @@
 <template>
-  <div class="h-screen">
-    <section class="relative block w-screen" style="height: 500px;">
+  <div class="">
+    <section class="relative block w-screen pb-2" style="height: 500px;">
       <div
         class="absolute top-0 w-full h-full bg-center bg-cover"
         style='background-image: url("https://images.unsplash.com/photo-1506368249639-73a05d6f6488?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80");'
@@ -98,10 +98,10 @@
                 {{user.city}}
               </div>
             </div>
-            <div class="mt-10 py-10 border-t border-gray-300 text-center">
+            <div class="mt-10 py-10 lg:my-0 my-4 border-t border-gray-300 text-center">
               <div class="flex flex-wrap justify-center">
                 <div class="w-full lg:w-9/12 px-4">
-                  <p class="mb-4 text-lg leading-relaxed text-gray-800">
+                  <p class="lg:mb-4 text-lg leading-relaxed text-gray-800">
                     {{user.bio}}
                   </p>
                   <!-- <a href="" class="font-normal text-pink-500"
