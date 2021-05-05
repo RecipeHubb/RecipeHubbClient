@@ -1,65 +1,63 @@
 <template lang="">
-  <div>
-    <v-container>
-      <v-row justify="center">
+  <v-container>
+    <v-row justify="center">
 
-        <v-col
-          cols="12"
-          sm="6"
-          xs='10'
-        >
-          <h1 class="text-5xl pt-10 text-purple-500 text-center">
-            My Recipes
-          </h1>        
-        </v-col>
+      <v-col
+        cols="12"
+        sm="6"
+        xs='4'
+      >
+        <h1 class="text-5xl pt-10 text-purple-500 text-center">
+          My Recipes
+        </h1>        
+      </v-col>
 
-        <v-col
-          order-lg="first"
-          cols="12"
-          sm="3"
-          xs='10'
-        >
-          <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
-        </v-col>
-
-        <v-col
+      <v-col
+        order-lg="first"
         cols="12"
         sm="3"
-        xs='10'
-        >
-          <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
-        </v-col>
+        xs='4'
+      >
+        <ListSorter :recipes="recipes" @sort-recipes="sortRecipes" />
+      </v-col>
+
+      <v-col
+      cols="12"
+      sm="3"
+      xs='4'
+      >
+        <ListFilter :recipes="recipes" @filter-recipes="filterRecipes" />
+      </v-col>
+    </v-row>
+    <div v-if="!recipes">
+      <v-row justify="center">
+        <div class="text-purple-500 text-2xl">Loading Recipes...</div>
+        <v-progress-circular
+          indeterminate
+          color="deep-purple accent-1"
+        ></v-progress-circular>
       </v-row>
-      <div v-if="!recipes">
-        <v-row justify="center">
-          <div class="text-purple-500 text-2xl">Loading Recipes...</div>
-          <v-progress-circular
-            indeterminate
-            color="deep-purple accent-1"
-          ></v-progress-circular>
-        </v-row>
-      </div>
-      <div v-else-if="recipes.length === 0">
-        <v-row justify="center">
-          <div class="text-purple-500 text-2xl">No Recipes... sad</div>
-        </v-row>
-      </div>
-      <div v-else>
-        <v-row justify="center" >
-          <v-col
-            v-for="recipe in recipes" 
-            :key="recipe.id"
-            cols="12"
-            :lg="colWidth"
-            sm="6"
-            xs="8"
-          >
-            <RecipeCard :recipe="recipe" />
-          </v-col>
-        </v-row> 
-      </div>
-    </v-container>
-  </div>
+    </div>
+    <div v-else-if="recipes.length === 0">
+      <v-row justify="center">
+        <div class="text-purple-500 text-2xl">No Recipes... sad</div>
+      </v-row>
+    </div>
+    <div v-else>
+      <v-row justify="center" >
+        <v-col
+          v-for="recipe in recipes" 
+          :key="recipe.id"
+          cols="12"
+          :lg="colWidth"
+          sm="6"
+          xs="8"
+        >
+          <RecipeCard :recipe="recipe" />
+        </v-col>
+      </v-row> 
+    </div>
+  </v-container>
 </template>
 
 <script>

@@ -1,23 +1,43 @@
 <template>
+  <div class="rounded-3xl">
   <v-card
-    class="mx-auto"
     min-width="300"
     min-height="300"
     elevation='15'
+    
   >
-    <v-img
-      v-if="recipe.recipeImage"
-      alt="No Image Available"
-      class="white--text align-end cursor-pointer"
-      height="200px"
-      max-height="200px"
-      position="center"
-      :src="recipe.recipeImage"
-      @click="routeToRecipe"
-      title="Click image to view more recipe details"
-    >
-    </v-img>
-    <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+    <div class="d-none d-sm-flex"> 
+      <v-img
+        v-if="recipe.recipeImage"
+        alt="No Image Available"
+        class="white--text align-end cursor-pointer "
+        height="200px"
+        max-height="200px"
+        position="center"
+        :src="recipe.recipeImage"
+        @click="routeToRecipe"
+        title="Click image to view more recipe details"
+      >
+      </v-img>
+          <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+    </div>
+    <div class="d-flex d-sm-none">
+      <v-img
+        v-if="recipe.recipeImage"
+        alt="No Image Available"
+        class="white--text align-end cursor-pointer class='d-none d-sm-flex "
+        height="200px"
+        max-height="200px"
+        width="340px"
+        position="center"
+        :src="recipe.recipeImage"
+        @click="routeToRecipe"
+        title="Click image to view more recipe details"
+      >
+      </v-img>
+          <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+    </div>
+
 
     <v-card-subtitle class="pb-0">
       <span class="text-2xl text-purple-500">{{recipe.name}}</span>
@@ -70,6 +90,7 @@
       <!-- Stars here -->
     </v-card-actions>
   </v-card>
+  </div>
 </template>
 <script>
 import CommentService from '../../../service/CommentService'
