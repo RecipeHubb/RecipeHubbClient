@@ -1,5 +1,5 @@
 <template lang="">
-  <div>
+  <div class="w-screen">
     <v-container>
       <v-row justify="center">
 
