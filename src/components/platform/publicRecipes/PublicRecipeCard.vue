@@ -17,7 +17,7 @@
       title="Click image to view more recipe details"
     >
     </v-img>
-    <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+    <div v-else class="text-center mb-12 mt-12" @click="goBack"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
 
     <v-card-subtitle class="pb-0">
       <span class="text-2xl text-purple-500">{{recipe.name}}</span>
@@ -90,10 +90,12 @@ export default {
      }
    },
    mounted: async function() {
-     this.createdDate = (new Date(this.recipe.dateCreated)).toDateString()
+     this.createdDate = (new Date(this.recipe.createdAt)).toDateString()
     // get comments attached to recipe
-    let res2 = await CommentService.getCommentsToRecipe(this.recipe._id)
-    this.avgRating = res2.data.average.toFixed(1)   
+    let comments = await CommentService.getCommentsToRecipe(this.recipe._id)
+    if(comments) {
+      this.avgRating = comments.data && comments.data.average ?  Number(comments.data.average.toFixed(1)) : null
+    } 
   }
 }
 </script>

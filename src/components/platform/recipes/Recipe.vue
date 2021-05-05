@@ -170,28 +170,48 @@
                       sm='3'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
                         outlined
                         placeholder="3"
                         v-model="newIngredientAmount"
                         color="deep-purple accent-2"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="4"
+                        v-model="newIngredientAmount"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
                       sm='3'
                       class="ma-0 pa-0"
                     >
-                      <v-select
+                      <!-- <v-select
                       dense
                         :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
                         placeholder="oz"
                         outlined
                         v-model="newIngredientMeasurement"
                         color="deep-purple accent-2"
-                      ></v-select>
+                      ></v-select> -->
+                      <v-text-field
+                        outlined
+                        dense
+                        placeholder="oz"
+                        v-model="newIngredientMeasurement"
+                        required
+                        color="deep-purple accent-2"
+                        @keydown.enter="addIngredient"
+                        class="ma-0 pa-0"
+                      ></v-text-field>
                     </v-col>
                     <v-col
                       cols="12"
@@ -625,7 +645,6 @@ export default {
 
     // get comments attached to recipe
     let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
-    console.log(typeof(res2.data.comments))
     this.comments = res2.data.comments
   },
   methods: {
@@ -653,14 +672,15 @@ export default {
 
     deleteRecipe: async function() {
       const res = await RecipeService.deleteRecipe(this.recipeID)
-      if (res.status === 200){
+      console.log(this.recipeID)
+      console.log(res)
+      if (res.status !== 200){
+        this.$vToastify.success(`Something went wrong, try again later`)
+      }
+      else {
         this.editMode = false
         this.$vToastify.success(`${this.name} sucessfully deleted`)
-        if (this.$router.history.current.fullPath.includes('/recipes')) {
-          this.$router.push('/recipes')
-          this.$router.go()
-        }
-        else this.$router.push('/recipes')
+        this.$router.push('/recipes')
       }
     },
 

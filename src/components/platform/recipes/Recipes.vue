@@ -127,6 +127,10 @@ export default {
           this.recipes = this.originalList
           this.colWidth = 4
         }
+    },
+    updateRecipeList: async function () {
+      let res = await RecipeService.getRecipes()
+      this.recipes = res.data
     }
   },
   mounted: async function() {
