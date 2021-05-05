@@ -121,7 +121,7 @@
                         :src="previewImg" 
                         height="200" 
                         width="200"
-                        class="bg-gray-400"
+                        class="bg-gray-400 w-full lg:w-1/2"
                         >
                     </div>
                     <input

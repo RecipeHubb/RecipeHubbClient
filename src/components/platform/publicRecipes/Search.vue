@@ -276,7 +276,10 @@ export default {
         return;
       }
       if (this.selectedQuickFilter.value == "username" || this.userName) {
+<<<<<<< HEAD
+=======
         //username
+>>>>>>> staging
         // not null
         if (this.userInput || this.userName) {
           this.recipeData.userName = this.userInput || this.userName;

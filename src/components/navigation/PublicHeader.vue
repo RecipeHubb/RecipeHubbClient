@@ -16,12 +16,12 @@
 
           <!-- show this section if theey click on the hamburger-->
           <div class="pt-3" v-show="isOpen">
-            <nav class="cursor-pointer">
+            <nav class="cursor-pointer text-lg ">
               <ul>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
+                  <router-link to="/"><span class="text-black hover:text-purple-500 text-lg ">Home</span></router-link>
                 </li>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
@@ -78,7 +78,7 @@
         </div>
         <div class="inline lg:hidden mt-1 ml-2">
           <label v-on:click="handleMenu">
-            <feather-activity></feather-activity>
+            <i class="fa fa-bars"/>
           </label>
         </div>
         <input type="checkbox" id="menu-toggle" class="mt-4 hidden" />
@@ -86,7 +86,7 @@
         <div class="lg:inline lg:float-right hidden mt-2">
           <button
             v-show="!isLoggedIn"
-            class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
+            class="px-2 border-transparent border-b-2 hover:border-purple-600  focus:outline-none outline-none"
           >
             <router-link to="/"><span class="text-black hover:text-purple-500">Home</span></router-link>
           </button>
