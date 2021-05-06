@@ -79,10 +79,7 @@
                 sm='12'
               >
                 <v-autocomplete
-                  :items="['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack','American',
-                  'Mexican', 'Italian', 'Thai', 'Indian', 'Chinese', 'Seafood', 'Chicken',
-                  'Beef', 'Pork', 'Vegetables', 'Fruit','Sweet', 'Spicy', 'Savory', 'Other'
-                  ]"
+                  :items="tagsList"
                   v-model="tags"
                   label="Tags/Categories"
                   color="deep-purple accent-2"
@@ -577,6 +574,7 @@ import CommentService from '../../../../service/CommentService'
 import ConfirmDeleteDialog from '../../../utility/ConfirmDeleteDialog'
 import CommentDialog from './CommentDialog'
 import UserService from '../../../../service/UserService'
+import tagsList from '../../../../utility/tagsList'
 
 export default {
   name: "Recipe",
@@ -586,6 +584,7 @@ export default {
   },
   data() {
     return {
+      tagsList,
       recipe: {},
       comments: [],
       editMode: false,

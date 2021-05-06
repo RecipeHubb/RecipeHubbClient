@@ -2,6 +2,7 @@
   <div class="text-purple-500 text-lg pt-5">
     Sort by...
     <v-select
+<<<<<<< Updated upstream
       :items="[
         'Breakfast',
         'Lunch',
@@ -15,6 +16,9 @@
         'Oldest',
         'Newest',
       ]"
+=======
+      :items="sortList"
+>>>>>>> Stashed changes
       color="deep-purple accent-2"
       v-model="filterBy"
       outlined
@@ -26,11 +30,13 @@
 </template>
 
 <script>
+import sortList from '../../utility/sortList'
 export default {
   name: "ListFilter",
   props: ["recipes"],
   data() {
     return {
+      sortList,
       filterBy: "Oldest",
     };
   },

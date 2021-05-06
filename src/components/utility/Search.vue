@@ -118,29 +118,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-autocomplete
-                          :items="[
-                            'Breakfast',
-                            'Lunch',
-                            'Dinner',
-                            'Dessert',
-                            'Snack',
-                            'American',
-                            'Mexican',
-                            'Italian',
-                            'Thai',
-                            'Indian',
-                            'Chinese',
-                            'Seafood',
-                            'Chicken',
-                            'Beef',
-                            'Pork',
-                            'Vegetables',
-                            'Fruit',
-                            'Sweet',
-                            'Spicy',
-                            'Savory',
-                            'Other',
-                          ]"
+                          :items="tagsList"
                           label="Tags"
                           multiple
                           v-model="tags"
@@ -239,6 +217,7 @@
 <script>
 import Public from '../../service/PublicService';
 import RecipeCard from "../platform/recipes/RecipeCard";
+import tagsList from '../../utility/tagsList'
 export default {
   name: "Search",
   components: {
@@ -247,6 +226,7 @@ export default {
   data() {
     return {
       route: 'searchPage',
+      tagsList,
       userName: null,
       recipeName: null,
       ingredients: null,
@@ -259,7 +239,7 @@ export default {
       options: [
         { value: "recipe name", text: "Recipe Name" },
         { value: "username", text: "Username" },
-        { value: "ingredients", text: "Ingredients" },
+        { value: "ingre dients", text: "Ingredients" },
       ],
       activeFilters: [{ text: "recipe name" }],
       selectedFilters: {},
@@ -354,12 +334,12 @@ export default {
       //reset the filter when they change
       // const exists = this.activeFilters.find(el => el.text === this.selectedQuickFilter.value)
       // if(!exists) {
-        this.userInput = null
+      this.userInput = null
       this.activeFilters[0] = { text: this.selectedQuickFilter.value };
       // }
     },
     advanceFilters() {
-      // remove the model value
+      // reset values and set showAdvanceChip to true
       this.selectedQuickFilter = {};
       this.advanceActiveChip = [];
       this.showAdvanceChip = true;

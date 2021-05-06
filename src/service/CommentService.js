@@ -1,10 +1,7 @@
 // Login/Signup and Auth service page
 const axios = require("axios");
 const AuthService = require("./AuthService");
-let URL = process.env.API_URL || "https://recipehubbapi.herokuapp.com/";
-if (process.env.NODE_ENV === "development") {
-  URL = "http://localhost:8000/";
-}
+let URL = require("../utility/appUrl");
 module.exports = {
   createComment: (data) => {
     try {

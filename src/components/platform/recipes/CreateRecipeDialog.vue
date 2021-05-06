@@ -34,30 +34,7 @@
                   </v-col>
                   <v-col cols="12" sm="6" md="6" xs="10">
                     <v-autocomplete
-                      :items="[
-                        'Breakfast',
-                        'Lunch',
-                        'Dinner',
-                        'Dessert',
-                        'Snack',
-                        'American',
-                        'Mexican',
-                        'Italian',
-                        'Thai',
-                        'Indian',
-                        'Chinese',
-                        'Chicken',
-                        'Beef',
-                        'Pork',
-                        'Seafood',
-                        'Vegetables',
-                        'Fruit',
-                        'Comfort Food',
-                        'Sweet',
-                        'Spicy',
-                        'Savory',
-                        'Other',
-                      ]"
+                      :items="tagsList"
                       v-model="tags"
                       placeholder="Dinner"
                       label="Tags/Categories"
@@ -270,11 +247,13 @@
 
 <script>
 import RecipeService from "../../../service/RecipeService";
+import tagsList from '../../../utility/tagsList'
 export default {
   name: "CreateRecipeDialog",
   props: ["open"],
   data() {
     return {
+      tagsList,
       name: null,
       recipeImage: null,
       previewImg: null,
