@@ -177,27 +177,36 @@
                   </v-row>
                 </div>
                 <!-- Ingredients List -->
-                <div class="overflow-y-auto h-60 pt-2 pl-3">
-                  <span v-for="(ingredient, index) of ingredients" :key="index">
-                    <v-row>
-                      <v-col cols="12" sm="10" class="ma-0 pa-0">
-                        <div class="text-lg">{{ ingredient.value }}</div>
-                        <!-- <v-text-field
-                          outlined
-                          dense
-                          :value="ingredient.value"
-                        ></v-text-field> -->
-                      </v-col>
-                      <v-col cols="12" sm="1" class="ma-0 pa-0">
-                        <span
-                          class="text-red-600 text-2xl cursor-pointer"
-                          title="remove this ingredient"
-                          @click="deleteIngredient(index)"
-                          >X</span
+                <div class="overflow-y-auto h-60 ">
+                  <v-simple-table dense>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">
+                            Amount
+                          </th>
+                          <th class="text-left">
+                            Measurement
+                          </th>
+                          <th class="text-left">
+                            Name
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(ingredient, index) of ingredients" :key="index"
                         >
-                      </v-col>
-                    </v-row>
-                  </span>
+                          <td>{{ ingredient.amount }}</td>
+                          <td>{{ ingredient.measurement }}</td>
+                          <td>{{ ingredient.name }}</td>
+                          <td>
+                            <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
                 </div>
               </v-col>
             </v-row>
