@@ -132,7 +132,6 @@
                   label="Serves:"
                   color="deep-purple accent-2"
                   hide-details
-
                 >
                   <template v-slot:append>
                     <span class="pt-1 text-purple-600 text-xl">{{servingSize}}</span>
@@ -433,8 +432,9 @@
                   max="5"
                   min="0"
                   label="So-Easy Rating: "
+                  color="deep-purple accent-2"
                   hide-details
-                  disabled
+                  readonly
                 >
                   <template v-slot:append>
                     <span class="pt-1 text-purple-600 text-xl">{{soEasyRating}}</span>
@@ -452,8 +452,9 @@
                   max="20"
                   min="0"
                   label="Serves: "
+                  color="deep-purple accent-2"
                   hide-details
-                  disabled
+                  readonly
                 >
                   <template v-slot:append>
                     <span class="pt-1 text-purple-600 text-xl">{{servingSize}}</span>
@@ -725,8 +726,6 @@ export default {
 
     deleteRecipe: async function() {
       const res = await RecipeService.deleteRecipe(this.recipeID)
-      console.log(this.recipeID)
-      console.log(res)
       if (res.status !== 200){
         this.$vToastify.success(`Something went wrong, try again later`)
         return

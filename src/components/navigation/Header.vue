@@ -2,9 +2,7 @@
   <div class="sticky z-50 inset-x-0 top-0 h-16 bg-white">
     <div class="bg-hue flex-1">
       <!-- NAVBAR -->
-      <div
-        class="lg:px-6 mt-2 px-4 flex justify-between bg-white"
-      >
+      <div class="lg:px-6 mt-2 px-4 flex justify-between bg-white">
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>
           <img
@@ -21,49 +19,95 @@
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/"><span @click="isOpen = false" class="text-black hover:text-purple-500 text-lg ">Home</span></router-link>
+                  <router-link to="/"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500 text-lg "
+                      >Home</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/about"><span @click="isOpen = false" class="text-black hover:text-purple-500">About</span></router-link>
+                  <router-link to="/about"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >About</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-show="!isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/register"><span @click="isOpen = false" class="text-black hover:text-purple-500">Sign Up</span></router-link>
+                  <router-link to="/register"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >Sign Up</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                   @click="open = true"
                 >
-                  <span @click="isOpen = false" class="text-black hover:text-purple-500">Create</span>
+                  <span
+                    @click="isOpen = false"
+                    class="text-black hover:text-purple-500"
+                    >Create</span
+                  >
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/public/recipes"><span @click="isOpen = false" class="text-black hover:text-purple-500">Public</span></router-link>
+                  <router-link to="/public/recipes"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >Public</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/recipes"><span @click="isOpen = false" class="text-black hover:text-purple-500">Recipes</span></router-link>
+                  <router-link to="/recipes"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >Recipes</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-show="isLoggedIn"
                   class="border-transparent border-b-2 hover:border-purple-600"
                 >
-                  <router-link to="/profile"><span @click="isOpen = false" class="text-black hover:text-purple-500">Profile</span></router-link>
+                  <router-link to="/profile"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >Profile</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-if="!isLoggedIn"
                   class="border-transparent border-b-2  hover:border-purple-600"
                 >
-                  <router-link to="/login"><span @click="isOpen = false" class="text-black hover:text-purple-500">Sign In</span></router-link>
+                  <router-link to="/login"
+                    ><span
+                      @click="isOpen = false"
+                      class="text-black hover:text-purple-500"
+                      >Sign In</span
+                    ></router-link
+                  >
                 </li>
                 <li
                   v-else
@@ -78,7 +122,7 @@
         </div>
         <div class="inline lg:hidden mt-1 ml-2">
           <label v-on:click="handleMenu">
-            <i class="fa fa-bars"/>
+            <i class="fa fa-bars" />
           </label>
         </div>
         <input type="checkbox" id="menu-toggle" class="mt-4 hidden" />
@@ -88,26 +132,42 @@
             v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600  focus:outline-none outline-none"
           >
-            <router-link to="/"><span class="text-black hover:text-purple-500 text-lg">Home</span></router-link>
+            <router-link to="/"
+              ><span class="text-black hover:text-purple-500 text-lg"
+                >Home</span
+              ></router-link
+            >
           </button>
           <button
             v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/about"><span class="text-black hover:text-purple-500">About</span></router-link>
+            <router-link to="/about"
+              ><span class="text-black hover:text-purple-500"
+                >About</span
+              ></router-link
+            >
           </button>
           <button
             v-show="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/register"><span class="text-black hover:text-purple-500">Sign up</span></router-link>
+            <router-link to="/register"
+              ><span class="text-black hover:text-purple-500"
+                >Sign up</span
+              ></router-link
+            >
           </button>
           <button
             v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
             title="View your personal list of recipes here"
           >
-            <router-link to="/search"><span class="text-black hover:text-purple-500">Search</span></router-link>
+            <router-link to="/search"
+              ><span class="text-black hover:text-purple-500"
+                >Search</span
+              ></router-link
+            >
           </button>
           <button
             v-show="isLoggedIn"
@@ -122,26 +182,42 @@
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
             title="View all public recipes here"
           >
-            <router-link to="/public/recipes"><span class="text-black hover:text-purple-500">Public</span></router-link>
+            <router-link to="/public/recipes"
+              ><span class="text-black hover:text-purple-500"
+                >Public</span
+              ></router-link
+            >
           </button>
           <button
             v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
             title="View your personal list of recipes here"
           >
-            <router-link to="/recipes"><span class="text-black hover:text-purple-500">Recipes</span></router-link>
+            <router-link to="/recipes"
+              ><span class="text-black hover:text-purple-500"
+                >Recipes</span
+              ></router-link
+            >
           </button>
           <button
             v-show="isLoggedIn"
             class="px-2 text-black border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/profile"><span class="text-black hover:text-purple-500">Profile</span></router-link>
+            <router-link to="/profile"
+              ><span class="text-black hover:text-purple-500"
+                >Profile</span
+              ></router-link
+            >
           </button>
           <button
             v-if="!isLoggedIn"
             class="px-2 border-transparent border-b-2 hover:border-purple-600 focus:outline-none outline-none"
           >
-            <router-link to="/login"><span class="text-black hover:text-purple-500">Sign In</span></router-link>
+            <router-link to="/login"
+              ><span class="text-black hover:text-purple-500"
+                >Sign In</span
+              ></router-link
+            >
           </button>
           <button
             v-else
@@ -157,20 +233,24 @@
       <CreateRecipeDialog @close-dialog="closeDialog" :open="open" />
     </div>
     <div data-app>
-      <LogoutDialog @close-dialog="closeLogoutDialog" @log-out="logout" :open="logoutOpen" />
+      <LogoutDialog
+        @close-dialog="closeLogoutDialog"
+        @log-out="logout"
+        :open="logoutOpen"
+      />
     </div>
   </div>
 </template>
 <script>
-import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
-import LogoutDialog from '../utility/LogoutDialog'
-import AuthService from '../../service/AuthService'
+import CreateRecipeDialog from "../platform/recipes/CreateRecipeDialog";
+import LogoutDialog from "../utility/LogoutDialog";
+import AuthService from "../../service/AuthService";
 
 export default {
   name: "PublicHeader",
   components: {
     CreateRecipeDialog,
-    LogoutDialog
+    LogoutDialog,
   },
 
   data() {
@@ -182,22 +262,22 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      return this.$store.getters.isLoggedIn
-    }
+      return this.$store.getters.isLoggedIn;
+    },
   },
   methods: {
     handleMenu() {
       this.isOpen = !this.isOpen;
     },
-    
+
     logout() {
       localStorage.clear();
       AuthService.clearToken();
       this.logoutOpen = false;
-      this.$store.commit('refresh')
-      
+      this.$store.commit("refresh");
+
       // pushes to home page and refreshes the page for new nav
-      this.$router.push('/')
+      this.$router.push("/");
     },
 
     // Create Recipe Dialog
@@ -205,7 +285,7 @@ export default {
       this.open = false;
     },
     openLogoutDialog() {
-      this.logoutOpen = true
+      this.logoutOpen = true;
     },
     closeLogoutDialog() {
       this.logoutOpen = false;

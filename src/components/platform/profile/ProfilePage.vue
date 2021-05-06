@@ -50,7 +50,9 @@
               <div
                 class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center"
               >
-                <div class="lg:py-6 lg:px-3 sm:mt-0 flex justify-center lg:block mt-4 lg:mt-0">
+                <div
+                  class="lg:py-6 lg:px-3 sm:mt-0 flex justify-center lg:block mt-4 lg:mt-0"
+                >
                   <button
                     class="bg-purple-400 active:bg-pink-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                     type="button"
@@ -62,27 +64,28 @@
                   </button>
                 </div>
               </div>
-              <div class="w-full lg:w-4/12 px-4 lg:order-1">
-              </div>
+              <div class="w-full lg:w-4/12 px-4 lg:order-1"></div>
             </div>
             <div class="text-center mt-12">
               <h3
                 class="text-4xl fnt-semibold leading-normal mb-2 text-gray-800 mb-2"
               >
-                {{user.firstName}} {{user.lastName}}
+                {{ user.firstName }} {{ user.lastName }}
               </h3>
               <div
                 class="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
               >
                 <i class="fas fa-map-marker-alt mr-2 text-lg text-gray-500"></i>
-                {{user.city}}
+                {{ user.city }}
               </div>
             </div>
-            <div class="mt-10 py-10 lg:my-0 my-4 border-t border-gray-300 text-center">
+            <div
+              class="mt-10 py-10 lg:my-0 my-4 border-t border-gray-300 text-center"
+            >
               <div class="flex flex-wrap justify-center">
                 <div class="w-full lg:w-9/12 px-4">
                   <p class="lg:mb-4 text-lg leading-relaxed text-gray-800">
-                    {{user.bio}}
+                    {{ user.bio }}
                   </p>
                   <!-- <a href="" class="font-normal text-pink-500"
                       >Show more</a
@@ -95,44 +98,48 @@
       </div>
     </section>
     <div data-app>
-      <EditSettingsDialog 
+      <EditSettingsDialog
         @close-dialog="closeDialog"
-        @edit-complete="onEditComplete" 
-        :open="editOpen" 
+        @edit-complete="onEditComplete"
+        :open="editOpen"
       />
     </div>
   </div>
 </template>
 
 <script>
-import EditSettingsDialog from './EditSettingsDialog'
+import EditSettingsDialog from "./EditSettingsDialog";
 export default {
   name: "ProfilePage",
   components: {
-    EditSettingsDialog
+    EditSettingsDialog,
   },
   data() {
     return {
       user: {},
       editOpen: false,
-      defaultImage: null
+      defaultImage: null,
     };
   },
   methods: {
     closeDialog() {
-      this.editOpen = false
+      this.user = this.$store.getters.user;
+      this.editOpen = false;
+      this.$router.go(0);
     },
     onEditComplete(userinfo) {
-      this.user = userinfo
-      this.editOpen  = false
+      this.user = userinfo;
+      this.editOpen = false;
     },
     openEditDialog() {
-      this.editOpen = true
-    }
+      this.editOpen = true;
+    },
   },
   mounted() {
-    this.user = JSON.parse(localStorage.getItem("user"));
-    this.defaultImage = this.user.profilePic || "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1"
+    this.user = this.$store.getters.user;
+    this.defaultImage =
+      this.user.profilePic ||
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvectorified.com%2Fimages%2Fno-profile-picture-icon-22.jpg&f=1&nofb=1";
   },
 };
 </script>

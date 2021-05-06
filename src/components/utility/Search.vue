@@ -96,6 +96,7 @@
                           label="Username"
                           v-model="userName"
                           placeholder="gclaude"
+                          color="deep-purple accent-2"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -104,6 +105,7 @@
                           type="text"
                           v-model="recipeName"
                           placeholder="White Chili"
+                          color="deep-purple accent-2"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -111,6 +113,7 @@
                           label="Ingredients"
                           v-model="ingredients"
                           placeholder="cheese, lemons, sugar, cream"
+                          color="deep-purple accent-2"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
@@ -141,6 +144,7 @@
                           label="Tags"
                           multiple
                           v-model="tags"
+                          color="deep-purple accent-2"
                         ></v-autocomplete>
                       </v-col>
                     </v-row>

@@ -1,58 +1,49 @@
-
 <template lang="">
-    <div>
-      <v-dialog
-        v-model="open"
-        transition="dialog-bottom-transition"
-        width="500"
-        @click:outside="closeDialog"
-      >
+  <div>
+    <v-dialog
+      v-model="open"
+      transition="dialog-bottom-transition"
+      width="500"
+      @click:outside="closeDialog"
+    >
       <v-card>
         <v-card-title>
-          <button  @click="closeDialog" title="return to recipe page">
-            <i class="fas fa-chevron-left text-2xl text-purple-600 mr-2 ml-1 text-center"></i>
+          <button @click="closeDialog" title="return to recipe page">
+            <i
+              class="fas fa-chevron-left text-2xl text-purple-600 mr-2 ml-1 text-center"
+            ></i>
           </button>
-          <span class="headline text-2xl text-purple-600 pl-2">New Comment</span>
+          <span class="headline text-2xl text-purple-600 pl-2"
+            >New Comment</span
+          >
         </v-card-title>
         <v-card-text>
-
           <v-container>
             <!-- 1st row -->
             <v-row>
-              <v-col
-                cols="12"
-                sm="8"
-                md="9"
-              >
+              <v-col cols="12" sm="8" md="9">
                 <v-row>
-              
-                    <v-col
-                      cols="12"
-                      sm="12"
-                    >
-                      <v-rating
-                        v-model="rating"
-                        background-color="deep-purple accent-2"
-                        color="deep-purple accent-2"
-                        large
-                      ></v-rating>
-                    </v-col>
+                  <v-col cols="12" sm="12">
+                    <v-rating
+                      v-model="rating"
+                      background-color="deep-purple accent-2"
+                      color="deep-purple accent-2"
+                      large
+                    ></v-rating>
+                  </v-col>
 
-                    <v-col
-                      cols="12"
-                      sm="12"
-                    >
-                      <v-textarea
-                        outlined
-                        name="input-7-4"
-                        label="Comment"
-                        placeholder="Enter additional comments on this recipe..."
-                        v-model="body"
-                        color="deep-purple accent-2"
-                      ></v-textarea>
-                    </v-col>
-                  </v-row>
-                </v-col>
+                  <v-col cols="12" sm="12">
+                    <v-textarea
+                      outlined
+                      name="input-7-4"
+                      label="Comment"
+                      placeholder="Enter additional comments on this recipe..."
+                      v-model="body"
+                      color="deep-purple accent-2"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+              </v-col>
               <!-- <v-col
                 cols="12"
                 sm="4"
@@ -74,7 +65,6 @@
                     >
                 </div>
               </v-col>  -->
-
             </v-row>
           </v-container>
         </v-card-text>
@@ -89,7 +79,7 @@
           >
             Cancel
           </v-btn>
-          
+
           <v-btn
             color="black darken-1"
             text
@@ -101,35 +91,33 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-      </v-dialog>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-  import CommentService from '../../../../service/CommentService'
+import CommentService from "../../../../service/CommentService";
 
-  export default {
+export default {
   name: "NewCommentDialog",
-  props: ['open', 'isNewComment'],
+  props: ["open", "isNewComment"],
   data() {
     return {
       rating: null,
       body: null,
       previewImg: null,
-      commentPic: null
+      commentPic: null,
     };
   },
   methods: {
-    closeDialog: function(){ // clear state and close dialod
-      this.rating = null,
-      this.body = null,
-
-      this.$emit('close-dialog')
+    closeDialog: function() {
+      // clear state and close dialod
+      (this.rating = null), (this.body = null), this.$emit("close-dialog");
     },
     saveComment: async function() {
       if (!this.rating || !this.body) {
-        this.$vToastify.error('rating and comment text required')
-        return
+        this.$vToastify.error("rating and comment text required");
+        return;
       }
       let data = {
         recipeId: this.$route.params.id,
@@ -137,17 +125,17 @@
         commentOwnerUserName: this.$store.state.user.userName,
         rating: this.rating,
         body: this.body,
+      };
+      const res = await CommentService.createComment(data);
+      if (res.status !== 200) {
+        this.$vToastify.error(`something went wrong`);
+        return;
       }
-      const res = await CommentService.createComment(data)
-      if (res.status !== 200){
-        this.$vToastify.error(`something went wrong`)
-        return
-      }
-      this.$vToastify.success(`comment successfully added`)
-      this.$emit('add-comment', res.data)
-      this.rating = null
-      this.body = null
-    }
+      this.$vToastify.success(`comment successfully added`);
+      this.$emit("add-comment", res.data);
+      this.rating = null;
+      this.body = null;
+    },
     // changeCommentPic: function(event) {
     //     const input = event.target
     //     if (input.files && input.files[0]) {
@@ -160,6 +148,5 @@
     //     }
     // }
   },
-
-}
+};
 </script>

@@ -10,7 +10,9 @@
         <v-card-title class="headline text-purple-500">
           Confirm Delete?
         </v-card-title>
-        <v-card-text class="text-lg">This action cannot be undone...</v-card-text>
+        <v-card-text class="text-lg"
+          >This action cannot be undone...</v-card-text
+        >
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -36,15 +38,15 @@
 </template>
 <script>
 export default {
-    name: 'ConfirmDeleteDialog',
-    props: ['open'],
-    methods: {
-        closeDialog: function() {
-            this.$emit('close-dialog')
-        },
-        confirmDelete: function() {
-            this.$emit('delete-recipe')
-        }
-    }
-}
+  name: "ConfirmDeleteDialog",
+  props: ["open"],
+  methods: {
+    closeDialog: function() {
+      this.$emit("close-dialog");
+    },
+    confirmDelete: function() {
+      this.$emit("delete-recipe");
+    },
+  },
+};
 </script>
