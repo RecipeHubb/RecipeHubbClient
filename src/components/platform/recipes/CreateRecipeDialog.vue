@@ -22,7 +22,6 @@
               <v-col cols="12" sm="6" md="6">
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
-                    <!-- <div class="ml-2 text-purple-400 text-md">Recipe Name</div> -->
                     <v-text-field
                       outlined
                       placeholder="Chicken Pot Pie"
@@ -34,7 +33,6 @@
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="6" xs="10">
-                    <!-- <div class="ml-2 text-purple-400 text-md">Tags</div> -->
                     <v-autocomplete
                       :items="[
                         'Breakfast',
@@ -62,7 +60,7 @@
                       ]"
                       v-model="tags"
                       placeholder="Dinner"
-                      label="Tags"
+                      label="Tags/Categories"
                       multiple
                       outlined
                       color="deep-purple accent-2"
@@ -72,9 +70,9 @@
                     ></v-autocomplete>
                   </v-col>
 
-                  <v-col cols="12" sm="6">
+                  <v-col cols="12" sm="6" xs="10">
                     <div>
-                      <!-- <div class="ml-2 text-purple-400 text-md">Add Image</div> -->
+                      <div class="ml-2 text-purple-500 text-md">Add Recipe Image</div>
                       <div>
                         <img
                           :src="previewImg"
@@ -93,11 +91,10 @@
                   </v-col>
 
                   <v-col cols="12" sm="6">
-                    <!-- <div class="ml-2 text-purple-400 text-md">Additional Instructions</div> -->
+                    <div class="ml-2 text-purple-500 text-md">Additional Instructions</div>
                     <v-textarea
                       outlined
                       name="input-7-4"
-                      label="Instructions"
                       placeholder="Enter additonal recipe prep instructions here..."
                       height="200px"
                       v-model="instructions"
@@ -113,14 +110,6 @@
                 <div class="pb-4">
                   <v-row>
                     <v-col cols="12" sm="2" class="ma-0 pa-0">
-                      <!-- <v-select
-                      dense
-                        :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
-                        outlined
-                        placeholder="3"
-                        color="deep-purple accent-2"
-                        v-model="newIngredientAmount"
-                      ></v-select> -->
                       <v-text-field
                         outlined
                         dense
@@ -133,14 +122,6 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12" sm="2" class="ma-0 pa-0">
-                      <!-- <v-select
-                      dense
-                        :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
-                        placeholder="oz"
-                        outlined
-                        color="deep-purple accent-2"
-                        v-model="newIngredientMeasurement"
-                      ></v-select> -->
                       <v-text-field
                         outlined
                         dense
@@ -177,27 +158,36 @@
                   </v-row>
                 </div>
                 <!-- Ingredients List -->
-                <div class="overflow-y-auto h-60 pt-2 pl-3">
-                  <span v-for="(ingredient, index) of ingredients" :key="index">
-                    <v-row>
-                      <v-col cols="12" sm="10" class="ma-0 pa-0">
-                        <div class="text-lg">{{ ingredient.value }}</div>
-                        <!-- <v-text-field
-                          outlined
-                          dense
-                          :value="ingredient.value"
-                        ></v-text-field> -->
-                      </v-col>
-                      <v-col cols="12" sm="1" class="ma-0 pa-0">
-                        <span
-                          class="text-red-600 text-2xl cursor-pointer"
-                          title="remove this ingredient"
-                          @click="deleteIngredient(index)"
-                          >X</span
+                <div class="overflow-y-auto h-60 ">
+                  <v-simple-table dense>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">
+                            Amount
+                          </th>
+                          <th class="text-left">
+                            Measurement
+                          </th>
+                          <th class="text-left">
+                            Name
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(ingredient, index) of ingredients" :key="index"
                         >
-                      </v-col>
-                    </v-row>
-                  </span>
+                          <td>{{ ingredient.amount }}</td>
+                          <td>{{ ingredient.measurement }}</td>
+                          <td>{{ ingredient.name }}</td>
+                          <td>
+                            <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
                 </div>
               </v-col>
             </v-row>
@@ -246,11 +236,6 @@
                 ></v-checkbox>
               </v-col>
               <v-col cols="12" lg="2" sm="6" xs="10">
-                <!-- <v-checkbox
-                  v-model="favorited"
-                  color="deep-purple accent-2"
-                  :label="`Favorite`"
-                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-container>
@@ -308,9 +293,7 @@ export default {
   methods: {
     createRecipe: async function() {
       if (!this.name) {
-        this.$vToastify.error(
-          "Please fill out required fields before submitting"
-        );
+        this.$vToastify.error( "Please fill out required fields before submitting");
         return;
       }
       const newRecipe = {
@@ -350,20 +333,21 @@ export default {
     },
     // clear state and close dialog
     closeModal: function() {
-      (this.name = null),
-        (this.image = null),
-        (this.previewImg = null),
-        (this.instructions = null),
-        (this.tags = []),
-        (this.numPeopleServed = 0),
-        (this.soEasyRating = 0),
-        (this.ingredients = []),
-        (this.newIngredient = ""),
-        (this.isPublic = false),
-        (this.favorited = false);
+      this.name = null;
+      this.image = null;
+      this.previewImg = null;
+      this.instructions = null;
+      this.tags = [];
+      this.numPeopleServed = 0;
+      this.soEasyRating = 0;
+      this.ingredients = [];
+      this.newIngredient = "";
+      this.isPublic = false;
+      this.favorited = false;
       this.$emit("close-dialog");
     },
 
+    // add ingredient to list before saving the recipe
     addIngredient: function() {
       if (!this.isAddIngredientBlank) {
         this.ingredients.push({

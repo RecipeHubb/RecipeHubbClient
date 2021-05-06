@@ -3,15 +3,7 @@
       <v-container v-if="editMode" fluid>
         <div class='d-none d-sm-flex'>
           <v-row justify="center" class="text-5xl pb-10 text-purple-500">
-            <v-col
-              cols='10'
-              sm='1'
-              lg='1'
-            >
-              <!-- <span @click="goBack" title="Go back to Recipes List">
-                <i class="fas fa-chevron-left text-5xl text-purple-600 cursor-pointer"></i>
-              </span>    -->
-            </v-col>
+            <v-col cols='10' sm='1' lg='1' ></v-col>
             <v-col cols='10' lg='2' sm='2'></v-col>
             <v-col
               cols='10'
@@ -60,7 +52,6 @@
             sm='6'
             xs='10'
           >
-            <!-- Image -->
             <v-row>
               <v-col
                 cols='12'
@@ -83,7 +74,6 @@
                   >
                 </div>
               </v-col>
-           <!-- Tags -->
               <v-col
                 cols='12'
                 sm='12'
@@ -94,13 +84,12 @@
                   'Beef', 'Pork', 'Vegetables', 'Fruit','Sweet', 'Spicy', 'Savory', 'Other'
                   ]"
                   v-model="tags"
-                  label="Tags"
+                  label="Tags/Categories"
                   color="deep-purple accent-2"
                   multiple
                   outlined
                 ></v-autocomplete>
               </v-col>
-            <!-- So easy meter -->
               <v-col
                 cols='12'
                 sm='12'
@@ -119,7 +108,6 @@
                   </template>
                 </v-slider>
               </v-col>
-           <!-- Serves -->
               <v-col
                 cols='12'
                 sm='12'
@@ -138,8 +126,6 @@
                   </template>
                 </v-slider>
               </v-col>
-           <!-- Public -->
-           <!-- Favorited -->
               <v-col
                 cols='12'
                 sm='12'
@@ -149,20 +135,11 @@
                   :label="`Public`"
                   color="deep-purple accent-2"
                 ></v-checkbox>
-                <!-- <v-checkbox
-                  v-model="favorited"
-                  :label="`Favorite`"
-                  color="deep-purple accent-2"
-                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-col>
 
-          <v-col
-            cols='12'
-            lg='1'
-          >
-          </v-col>
+          <v-col cols='12' lg='1'></v-col>
 
           <v-col
             cols='12'
@@ -180,17 +157,10 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      sm='3'
+                      md='3'
+                      xs='6'
                       class="ma-0 pa-0"
                     >
-                      <!-- <v-select
-                      dense
-                        :items="['1/4','1/2','3/4', '1', '1 1/4', '1 1/2', '1 3/4', '2', '3', '4']"
-                        outlined
-                        placeholder="3"
-                        v-model="newIngredientAmount"
-                        color="deep-purple accent-2"
-                      ></v-select> -->
                       <v-text-field
                         outlined
                         dense
@@ -204,17 +174,10 @@
                     </v-col>
                     <v-col
                       cols="12"
-                      sm='3'
+                      md='3'
+                      xs='6'
                       class="ma-0 pa-0"
                     >
-                      <!-- <v-select
-                      dense
-                        :items="['tsp', 'tbsp', 'oz', 'cup', 'pint', 'quart', 'gallon', 'lb']"
-                        placeholder="oz"
-                        outlined
-                        v-model="newIngredientMeasurement"
-                        color="deep-purple accent-2"
-                      ></v-select> -->
                       <v-text-field
                         outlined
                         dense
@@ -228,7 +191,8 @@
                     </v-col>
                     <v-col
                       cols="12"
-                      sm='5'
+                      md='3'
+                      xs='12'
                       class="ma-0 pa-0"
                     >
                       <v-text-field
@@ -256,34 +220,38 @@
                       </div>
                     </v-col>
                 </v-row>
-                <!-- Ingredients List -->
-                <div class="overflow-y-auto h-60 pt-2 pl-3">
-                  <span v-for="(ingredient, index) of ingredients" :key="index">
-                    <v-row>
-                      <v-col
-                        cols="12"
-                        sm='10'
-                        class="ma-0 pa-0"
-                      >
-                      <div class="text-lg">{{ingredient.value}}</div>
-                        <!-- <v-text-field
-                          outlined
-                          dense
-                          :value="ingredient"
-                        ></v-text-field> -->
-                      </v-col>
-                      <v-col
-                        cols="12"
-                        sm='1'
-                        class="ma-0 pa-0"
-                      >
-                        <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
-                      </v-col>
-                    </v-row>
-                  </span>
+                <div class="overflow-y-auto h-60 ">
+                  <v-simple-table dense>
+                    <template v-slot:default>
+                      <thead>
+                        <tr>
+                          <th class="text-left">
+                            Amount
+                          </th>
+                          <th class="text-left">
+                            Measurement
+                          </th>
+                          <th class="text-left">
+                            Name
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(ingredient, index) of ingredients" :key="index"
+                        >
+                          <td>{{ ingredient.amount }}</td>
+                          <td>{{ ingredient.measurement }}</td>
+                          <td>{{ ingredient.name }}</td>
+                          <td>
+                            <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
                 </div>
               </v-col> 
-              <!-- Instructions -->
               <v-col
                 cols='12'
                 sm='12'
@@ -302,7 +270,7 @@
           </v-col>
 
 
-        </v-row> <!-- End Main section-->
+        </v-row> 
         <v-row justify="center">
           <v-btn 
             outlined
@@ -318,7 +286,6 @@
           >
             Delete
           </v-btn>
-
         </v-row>
       </v-container>
       <!-- - - - - - - - - - - - - - - - - - - - - - - Preview Mode - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -355,8 +322,7 @@
               <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode"><i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i></span>
             </v-col>
 
-            <v-col cols='12' sm='2' lg='1'></v-col>
-            
+            <v-col cols='12' sm='2' lg='1'></v-col> 
           </v-row>
         </div>
         <div class="d-flex d-sm-none">
@@ -388,7 +354,6 @@
             sm='6'
             xs='10'
           >
-            <!-- Image -->
             <v-row>
               <v-col
                 cols='12'
@@ -405,7 +370,6 @@
                   </div>
                 </div>
               </v-col>
-           <!-- Tags -->
               <v-col
                 cols='12'
                 sm='12'
@@ -421,7 +385,6 @@
                   </v-chip>
                 </v-chip-group>
               </v-col>
-            <!-- So easy meter -->
               <v-col
                 cols='12'
                 sm='12'
@@ -441,7 +404,6 @@
                   </template>
                 </v-slider>
               </v-col>
-           <!-- Serves -->
               <v-col
                 cols='12'
                 sm='12'
@@ -461,8 +423,6 @@
                   </template>
                 </v-slider>
               </v-col>
-           <!-- Public -->
-           <!-- Favorited -->
               <v-col
                 cols='12'
                 sm='12'
@@ -474,13 +434,6 @@
                   :label="`Public`"
                   disabled
                 ></v-checkbox>
-                <!-- <v-checkbox
-                  v-show="editAccess"
-                  v-model="favorited"
-                  color="purple"
-                  :label="`Favorite`"
-                  disabled
-                ></v-checkbox> -->
               </v-col>
             </v-row>
           </v-col>
@@ -497,7 +450,6 @@
             sm='6'
             xs='10'
           >
-           <!-- Ingredients -->
             <v-row>
               <v-col
                 cols="12"
@@ -512,7 +464,6 @@
                   </div>
                 </div>
               </v-col> 
-              <!-- Instructions -->
               <v-col
                 cols='12'
                 sm='12'
@@ -534,14 +485,12 @@
           >
           </v-col>
 
-          <!-- Comment Section -->
           <v-col
             cols='12'
             lg='3'
             sm='6'
             xs='10'
           >
-           <!-- Ingredients -->
             <v-row>
               <v-col
                 cols="12"
@@ -570,7 +519,6 @@
                   </v-col>
                 </v-row>
                 
-                <!-- Comments List -->
                 <div class="overflow-y-auto overflow-x-none h-full pt-3 pl-3">
                   <span v-for="(comment, index) of comments" :key="index">
                     <v-row>
@@ -667,7 +615,7 @@ export default {
     if (!AuthService.getToken()) {
       AuthService.logOut()
     } 
-    //get recipe data from API/DB from params
+    //get recipe data from params id passed from Recipes.vue page
     let res = await RecipeService.getRecipeByID(this.$route.params.id)
     this.name = res.data.name
     this.recipeImage = res.data.recipeImage
@@ -690,7 +638,6 @@ export default {
       let res3 = await UserService.getUserById(this.recipeOwnerId)
       this.recipeOwnerUserName = res3.data.userName
     }
-    // this.comments = res2.data
   },
   methods: {
     updateRecipe: async function() {
@@ -737,6 +684,7 @@ export default {
       }
     },
 
+    // Change image state variable for updating
     previewImage: function(event) {
       const input = event.target
       if (input.files && input.files[0]) {
@@ -749,6 +697,7 @@ export default {
       }
     },
 
+    // Add Ingredient to list before saving
     addIngredient: function(){
       if (!this.isAddIngredientBlank){
         this.ingredients.push({
@@ -767,14 +716,18 @@ export default {
       }
     },
 
+    // Delete from list before saving
     deleteIngredient: function(index){
       this.ingredients.splice(index, 1)
     },
 
+
+    // Toggles between edit mode and preview mode(My recipes only)
     switchIcon: function(){
       this.editMode = !this.editMode
     },
 
+    // Route back to Recipes page, depending on how you accessed this pafe
     goBack: function(){
        if (this.$router.history.current.fullPath.includes('/search')) {
         this.$router.push('/search')
@@ -793,7 +746,10 @@ export default {
       this.deleteOpen = false
     },
 
-    // Comment add / delete functions
+    // Comment open/close and add/delete functions
+    openCommentDialog: function() {
+      this.commentDialogOpen = true
+    },
     closeCommentDialog: function() {
       this.commentDialogOpen = false
     },
@@ -811,9 +767,6 @@ export default {
         this.comments.splice(index, 1)
         this.$vToastify.success(`comment successfully deleted`)
       }
-    },
-    openCommentDialog: function() {
-      this.commentDialogOpen = true
     },
 
     // Other Misc. functions

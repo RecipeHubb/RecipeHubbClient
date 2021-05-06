@@ -87,9 +87,8 @@ export default {
         // add toastr
         this.$vToastify.success("Logging In...");
         // pushes to home page and refreshes the page for new nav
-        this.$router.push("/profile");
+        this.$router.push("/recipes");
         this.$store.commit('refresh')
-        // this.$router.go(0);
         return;
         // push new routes to authenticated user
       }

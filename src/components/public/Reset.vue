@@ -93,9 +93,7 @@ export default {
           this.showReset = true
             return
       }
-      
-        this.$vToastify.error('Username or Email Doesnt exist')
-
+      this.$vToastify.error('Username or Email Doesnt exist')
     },
     async Reset() {
            if(this.confirmPassword === this.password && this.confirmPassword && this.password ) {
@@ -103,7 +101,6 @@ export default {
               this.$vToastify.success('New Password Successful')
               this.$router.push('/login')
               return
-            //   this.$router.push('/login')
           }
           this.$vToastify.error("Passwords not the same.");
     },
@@ -117,7 +114,6 @@ export default {
         this.username = this.credential.toLowerCase();
       }
       // credential is a username
-
       if (!this.credential && !this.password) {
         this.$vToastify.error("Please enter Email or Username and Password.");
         return false;

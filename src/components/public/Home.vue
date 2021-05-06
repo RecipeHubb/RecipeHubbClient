@@ -10,18 +10,12 @@
         Welcome to RecipeHubb, Your hub of personal and shared recipes that you
         can use on the go! 
       </p>
-      <v-container>
-        <v-row justify="center">
-          <v-col cols='12' lg='6'>
-            <v-img
-              max-width="250px"
-              max-height="125px"
-              alt="RecipeHubb Logo"
-              :src="image"
-            ></v-img>
-          </v-col>
-        </v-row>
-      </v-container>
+      <p class="py-2 text-xl pt-10">
+        Get Started <router-link to="/register"><span class="text-2xl text-purple-500">Here</span>!</router-link>
+      </p>
+      <p class="py-2 text-xl">
+        Already a member? <router-link to="/login"><span class="text-2xl text-purple-500">Login</span></router-link>
+      </p>
     </div>
     <!-- <div class="w-1/2 relative"><img src="https://images.unsplash.com/photo-1564865878688-9a244444042a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"</div> -->
   </div>

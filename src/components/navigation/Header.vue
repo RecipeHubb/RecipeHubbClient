@@ -6,6 +6,8 @@
         <!-- <i class="fa fa-fire fa-lg"></i> -->
         <div>
           <img
+            @click="goHome"
+            class="cursor-pointer"
             width="50px"
             height="50px"
             alt="Vue logo"
@@ -268,6 +270,10 @@ export default {
   methods: {
     handleMenu() {
       this.isOpen = !this.isOpen;
+    },
+
+    goHome() {
+      this.$router.push('/')
     },
 
     logout() {
