@@ -74,30 +74,43 @@ export default {
     sortRecipes: function(sorter) {
       switch (sorter) {
         case "Oldest":
-          this.recipes = this.recipes.sort((a, b) => a.dateCreated.localeCompare(b.dateCreated));
+          this.recipes = this.originalList.sort((a, b) => a.dateCreated.localeCompare(b.dateCreated));
           break;
         case "Newest":
-          this.recipes = this.recipes.sort((a, b) => b.dateCreated.localeCompare(a.dateCreated));
+          this.recipes = this.originalList.sort((a, b) => b.dateCreated.localeCompare(a.dateCreated));
           break;
         case "Recipe Name A-Z":
-          this.recipes = this.recipes.sort((a, b) => a.name.localeCompare(b.name));
+          this.recipes = this.originalList.sort((a, b) => a.name.localeCompare(b.name));
           break;
         case "Recipe Name Z-A":
-          this.recipes = this.recipes.sort((a, b) => b.name.localeCompare(a.name));
+          this.recipes = this.originalList.sort((a, b) => b.name.localeCompare(a.name));
           break;
         case "So-Easy Rating":
-          this.recipes = this.recipes.sort((a, b) => b.soEasyRating - a.soEasyRating);
+          this.recipes = this.originalList.sort((a, b) => b.soEasyRating - a.soEasyRating);
           break;
         case "Serving Size":
-          this.recipes = this.recipes.sort((a, b) => b.servingSize - a.servingSize);
+          this.recipes = this.originalList.sort((a, b) => b.servingSize - a.servingSize);
+          break;
+        case "Breakfast":
+          this.recipes = this.originalList.filter((recipe) => recipe.tags.includes('Breakfast'));
+          break;
+        case "Lunch":
+          this.recipes = this.originalList.filter((recipe) => recipe.tags.includes('Lunch'));
+          break;
+        case "Dinner":
+          this.recipes = this.originalList.filter((recipe) => recipe.tags.includes('Dinner'));
+          break;
+        case "Dessert":
+          this.recipes = this.originalList.filter((recipe) => recipe.tags.includes('Dessert'));
+          break;
+        case "Snack":
+          this.recipes = this.originalList.filter((recipe) => recipe.tags.includes('Snack'));
           break;
       }
     },
     filterRecipes: function(filterString) {
       if (filterString !== "") {
-        let newList = this.originalList.filter((recipe) =>
-          recipe.name.toLowerCase().includes(filterString)
-        );
+        let newList = this.originalList.filter((recipe) => recipe.name.toLowerCase().includes(filterString));
         if (newList.length == 1) this.colWidth = 6;
         else if (newList.length == 2) this.colWidth = 6;
         else this.colWidth = 4;

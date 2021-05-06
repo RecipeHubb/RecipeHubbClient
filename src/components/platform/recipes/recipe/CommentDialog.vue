@@ -111,8 +111,10 @@ export default {
   },
   methods: {
     closeDialog: function() {
-      // clear state and close dialod
-      (this.rating = null), (this.body = null), this.$emit("close-dialog");
+      // clear state and close dialog
+      this.rating = null;
+      this.body = null;
+      this.$emit("close-dialog");
     },
     saveComment: async function() {
       if (!this.rating || !this.body) {
@@ -136,17 +138,6 @@ export default {
       this.rating = null;
       this.body = null;
     },
-    // changeCommentPic: function(event) {
-    //     const input = event.target
-    //     if (input.files && input.files[0]) {
-    //         const reader = new FileReader()
-    //         reader.onload = (e) => {
-    //             this.commentPic = e.target.result
-    //             this.previewImg = e.target.result
-    //         }
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
-    // }
   },
 };
 </script>

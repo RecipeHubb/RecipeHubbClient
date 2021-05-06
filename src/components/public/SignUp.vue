@@ -98,22 +98,21 @@ export default {
   methods: {
     registerUser: async function() {
 
-         // validation for empty text inputs
+    // validation for empty text inputs
     if(!this.username && !this.email && !this.password && !this.firstname && !this.lastname && this.city) {
         this.$vToastify.error("Please enter Username, Name, City, Email and Password.");
        return
     }
-      // make sure it is always lowercase
-      const res = await AuthService.register({
-        username: this.username.toLowerCase(),
-        email: this.email.toLowerCase(),
-        password: this.password,
-        bio: this.bio,
-        city: this.city,
-        firstName: this.firstname,
-        lastName: this.lastname
-      });
-
+    // make sure it is always lowercase
+    const res = await AuthService.register({
+      username: this.username.toLowerCase(),
+      email: this.email.toLowerCase(),
+      password: this.password,
+      bio: this.bio,
+      city: this.city,
+      firstName: this.firstname,
+      lastName: this.lastname
+    });
     //push after register to the login page
       if (res.data.success) {
         this.$vToastify.success("Thanks for registering!");

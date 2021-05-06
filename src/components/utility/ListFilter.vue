@@ -23,6 +23,7 @@ export default {
     };
   },
   methods: {
+    // send event to Recipes List to filter by name
     filterRecipes: function(filter) {
       if (filter.key === "Backspace")
         this.$emit("filter-recipes", this.filterBy);

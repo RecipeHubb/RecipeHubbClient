@@ -131,6 +131,7 @@ export default {
   },
   mounted: async function() {
     this.createdDate = new Date(this.recipe.createdAt).toDateString();
+    
     // get comments attached to recipe
     let comments = await CommentService.getCommentsToRecipe(this.recipe._id);
     if (comments) {
