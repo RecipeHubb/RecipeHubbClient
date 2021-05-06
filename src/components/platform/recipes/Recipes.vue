@@ -8,7 +8,7 @@
         xs='4'
       >
         <h1 class="text-5xl pt-10 text-purple-500 text-center">
-          My Recipes
+          {{title}}
         </h1>        
       </v-col>
 
@@ -63,7 +63,7 @@
 <script>
 import RecipeService from "../../../service/RecipeService"
 import AuthService from'../../../service/AuthService'
-import RecipeCard from '../publicRecipes/PublicRecipeCard'
+import RecipeCard from './RecipeCard'
 import ListSorter from '../../utility/ListSorter'
 import ListFilter from '../../utility/ListFilter'
 
@@ -74,14 +74,14 @@ export default {
     ListSorter,
     ListFilter
   },
-
   data() {
     return {
       recipes: null,
       originalList: null,
       colWidth: null,
       filterBy: null,
-      route: 'singleRecipe'
+      route: null,
+      title: null
     }
   },
   methods: {
@@ -108,18 +108,18 @@ export default {
       }
     },
     filterRecipes: function (filterString) {
-        if (filterString !== '') {
-          let newList = this.originalList.filter(recipe => recipe.name.toLowerCase().includes(filterString))
-          if (newList.length == 1) this.colWidth = 6
-          else if (newList.length == 2) this.colWidth = 6
-          else this.colWidth = 4
-          this.recipes = newList
-          return
-        }
-        else {
-          this.recipes = this.originalList
-          this.colWidth = 4
-        }
+      if (filterString !== '') {
+        let newList = this.originalList.filter(recipe => recipe.name.toLowerCase().includes(filterString))
+        if (newList.length == 1) this.colWidth = 6
+        else if (newList.length == 2) this.colWidth = 6
+        else this.colWidth = 4
+        this.recipes = newList
+        return
+      }
+      else {
+        this.recipes = this.originalList
+        this.colWidth = 4
+      }
     },
     updateRecipeList: async function () {
       let res = await RecipeService.getRecipes()
@@ -131,12 +131,25 @@ export default {
     if (!AuthService.getToken()) {
       AuthService.logOut()
     }
-    let res = await RecipeService.getRecipes()
-    this.recipes = res.data
-    this.originalList = res.data
-    if (this.recipes.length == 1) this.colWidth = 12
-    else if (this.recipes.length == 2) this.colWidth = 6
-    else this.colWidth = 4
+    // fetch the correct recipe list based off the path
+    let res
+    if (this.$route.path === '/recipes') {
+      res = await RecipeService.getRecipes()
+      this.route = 'singleRecipe'
+      this.title = 'My Recipes'
+    }
+    else if (this.$route.path === '/public/recipes') {
+      res = await RecipeService.getPublicRecipes()
+      this.route = 'publicSingleRecipe'
+      this.title = 'Public Recipes'
+    }
+    if (res.status === 200){
+      this.recipes = res.data
+      this.originalList = res.data
+      if (this.recipes.length == 1) this.colWidth = 12
+      else if (this.recipes.length == 2) this.colWidth = 6
+      else this.colWidth = 4
+    }
   },
 };
 </script>

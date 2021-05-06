@@ -3,11 +3,8 @@
     <div>
       <v-dialog
         v-model="open"
-        
         transition="dialog-bottom-transition"
         width="1000"
-        height="1000"
-        class="pt-20"
         @click:outside="closeModal"
       >
       <v-card>
@@ -18,7 +15,6 @@
           <span class="headline text-2xl text-purple-600 pl-2">New Recipe</span>
         </v-card-title>
         <v-card-text>
-
           <v-container>
             <!-- 1st row -->
             <v-row>
@@ -324,8 +320,8 @@
 </template>
 
 <script>
-  import RecipeService from '../../../service/RecipeService'
-  export default {
+import RecipeService from '../../../service/RecipeService'
+export default {
   name: "CreateRecipeDialog",
   props: ['open'],
   data() {
@@ -387,7 +383,8 @@
             reader.readAsDataURL(input.files[0]);
         }
     },
-    closeModal: function(){ // clear state and close dialod
+    // clear state and close dialog
+    closeModal: function(){
       this.name =null,
       this.image = null,
       this.previewImg = null,
@@ -401,6 +398,7 @@
       this.favorited = false
       this.$emit('close-dialog')
     },
+
     addIngredient: function(){
       if (!this.isAddIngredientBlank){
         this.ingredients.push({

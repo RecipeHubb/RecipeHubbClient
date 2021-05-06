@@ -85,7 +85,6 @@
         ({{avgRating}})
       </span>
 
-      <!-- Stars here -->
     </v-card-actions>
   </v-card>
 </template>
@@ -93,14 +92,14 @@
 import CommentService from '../../../service/CommentService'
 
 export default {
-   name: 'PublicRecipeCard',
+   name: 'RecipeCard',
    props: ['recipe', 'route'],
 
    data: function() {
-       return {
-         createdDate: null,
-         avgRating: null,
-       }
+      return {
+        createdDate: null,
+        avgRating: null,
+      }
    },
    methods: {
      routeToRecipe() {
@@ -108,7 +107,7 @@ export default {
      }
    },
    mounted: async function() {
-     this.createdDate = (new Date(this.recipe.createdAt)).toDateString()
+    this.createdDate = (new Date(this.recipe.createdAt)).toDateString()
     // get comments attached to recipe
     let comments = await CommentService.getCommentsToRecipe(this.recipe._id)
     if(comments) {

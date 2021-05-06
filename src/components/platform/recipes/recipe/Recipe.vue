@@ -322,7 +322,7 @@
 
         </v-row>
       </v-container>
-      <!-- - - - - - - - - Preview Mode - - - - - - - - - - - - - - -->
+      <!-- - - - - - - - - - - - - - - - - - - - - - - Preview Mode - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
       <v-container v-else fluid>
         <div class='d-none d-sm-flex'>
           <v-row justify="center" class="pt-12">
@@ -371,6 +371,15 @@
               <span v-show="editAccess" v-if="!editMode" @click="switchIcon" title="Toggle Edit Mode" class="-mt-1">
                   <i class="far fa-edit mr-2 text-3xl text-gray-900 cursor-pointer"></i>
               </span>
+          </v-row>
+        </div>
+        <div v-show="!editAccess">
+          <v-row justify="center">
+            <v-col cols='12' sm='10'>
+              <div class="text-black text-center text-lg -mt-5 pb-5">
+                Owner: {{recipeOwnerUserName}}
+              </div>
+            </v-col>
           </v-row>
         </div>
         <v-row justify="center">
@@ -613,11 +622,12 @@
 </template>
 
 <script>
-import AuthService from '../../../service/AuthService'
-import RecipeService from '../../../service/RecipeService'
-import ConfirmDeleteDialog from '../../utility/ConfirmDeleteDialog'
-import CommentDialog from '../comments/CommentDialog'
-import CommentService from '../../../service/CommentService'
+import AuthService from '../../../../service/AuthService'
+import RecipeService from '../../../../service/RecipeService'
+import CommentService from '../../../../service/CommentService'
+import ConfirmDeleteDialog from '../../../utility/ConfirmDeleteDialog'
+import CommentDialog from './CommentDialog'
+import UserService from '../../../../service/UserService'
 
 export default {
   name: "Recipe",
@@ -632,6 +642,7 @@ export default {
       editMode: false,
       deleteOpen: false,
       commentDialogOpen: false,
+      recipeOwnerUserName: null,
 
       name: null,
       recipeImage: null,
@@ -672,6 +683,13 @@ export default {
     // get comments attached to recipe
     let res2 = await CommentService.getCommentsToRecipe(this.$route.params.id)
     this.comments = res2.data.comments
+
+    // get User attached to recipe if public
+    if (!this.editAccess){
+      let res3 = await UserService.getUserById(this.recipeOwnerId)
+      this.recipeOwnerUserName = res3.data.userName
+    }
+    // this.comments = res2.data
   },
   methods: {
     updateRecipe: async function() {
@@ -799,12 +817,13 @@ export default {
       this.commentDialogOpen = true
     },
 
+    // Other Misc. functions
     formatDate: function(date) {
       return new Date(date).toDateString()
     },
     canRemoveComment(ownerCommentId) {
       // if you own the recipe OR if you own the comment inside the not-owned recipe
-        return this.recipeOwnerId === this.$store.state.user.id || ownerCommentId === this.$store.state.user.id
+      return this.recipeOwnerId === this.$store.state.user.id || ownerCommentId === this.$store.state.user.id
     },
   },
   computed: {
