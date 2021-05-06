@@ -106,7 +106,7 @@
 </template>
 
 <script>
-  import CommentService from '../../../service/CommentService'
+  import CommentService from '../../../../service/CommentService'
 
   export default {
   name: "NewCommentDialog",

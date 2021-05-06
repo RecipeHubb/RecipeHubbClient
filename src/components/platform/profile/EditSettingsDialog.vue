@@ -142,7 +142,7 @@
           <v-btn
             color="black darken-1"
             text
-            class="bg-red-500 pr-5"
+            class="bg-red-500"
             @click="closeDialog"
             title="cancel and return to profile page"
           >
@@ -192,17 +192,17 @@
           return
         }
         let data = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        userName: this.userName,
-        email: this.email,
-        profilePic: this.previewImg ? JSON.stringify(this.profilePic) : null,
-        city: this.city,
-        bio: this.bio,
-        oldEmail: this.oldEmail,
-        oldUserName: this.oldUserName,
-        newUserName: this.userName,
-        newEmail: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          userName: this.userName,
+          email: this.email,
+          profilePic: this.previewImg ? JSON.stringify(this.profilePic) : null,
+          city: this.city,
+          bio: this.bio,
+          oldEmail: this.oldEmail,
+          oldUserName: this.oldUserName,
+          newUserName: this.userName,
+          newEmail: this.email,
         }
         let userRes
         // if email or username changed, update Auth information
@@ -231,16 +231,17 @@
         }
       
     },
-    closeDialog: function(){ // clear state and close dialod
-      let u = localStorage.getItem('user')
-      this.firstName = u.firstName,
-      this.lastName = u.lastName,
-      this.profilePic = u.profilePic,
-      this.city = u.city,
-      this.email = u.email,
-      this.userName = u.userName,
-      this.bio = u.bio,
-      this.numRecipes = u.numRecipes,
+    // clear state and close dialog
+    closeDialog: function(){ 
+      // let u = localStorage.getItem('user')
+      // this.firstName = u.firstName,
+      // this.lastName = u.lastName,
+      // this.profilePic = u.profilePic,
+      // this.city = u.city,
+      // this.email = u.email,
+      // this.userName = u.userName,
+      // this.bio = u.bio,
+      // this.numRecipes = u.numRecipes,
       this.$emit('close-dialog')
     },
     changeProfilePic: function(event) {

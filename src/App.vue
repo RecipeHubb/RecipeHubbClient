@@ -4,7 +4,7 @@
     <div id="app" class="flex flex-col h-full" >
       <Header />
       <div class="flex-1 h-screen">
-        <router-view></router-view>
+        <router-view :key="$route.fullPath"></router-view>
       </div>
       <Footer />
     </div>

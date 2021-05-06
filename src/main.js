@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 // public
 import App from "./App.vue";
 import About from "./components/public/About";
@@ -8,12 +9,13 @@ import SignIn from "./components/public/SignIn";
 import SignUp from "./components/public/SignUp";
 import Reset from "./components/public/Reset";
 import Error from "./components/public/404";
+
 // platform
-import Profile from "./components/platform/profileDetails/ProfilePage";
+import Profile from "./components/platform/profile/ProfilePage";
 import Recipes from "./components/platform/recipes/Recipes";
-import Recipe from "./components/platform/recipes/Recipe";
-import PublicRecipes from "./components/platform/publicRecipes/PublicRecipes";
-import Search from "./components/platform/publicRecipes/Search";
+import Recipe from "./components/platform/recipes/recipe/Recipe";
+import Search from "./components/utility/Search";
+
 // dependancies
 import VueFeatherIcon from "vue-feather-icon-corrected";
 import VueToastify from "vue-toastify";
@@ -93,7 +95,7 @@ const routes = [
   },
   {
     path: "/public/recipes",
-    component: PublicRecipes,
+    component: Recipes,
     meta: {
       authenticate: true,
     },

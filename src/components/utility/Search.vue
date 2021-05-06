@@ -223,7 +223,7 @@
               sm="6"
               xs="10"
             >
-              <PublicRecipeCard :recipe="recipe" :route="route" />
+              <RecipeCard :recipe="recipe" :route="route" />
             </v-col>
           </v-row>
         </div>
@@ -233,12 +233,12 @@
 </template>
 
 <script>
-import Public from "../../../service/PublicService";
-import PublicRecipeCard from "./PublicRecipeCard";
+import Public from '../../service/PublicService';
+import RecipeCard from "../platform/recipes/RecipeCard";
 export default {
   name: "Search",
   components: {
-    PublicRecipeCard,
+    RecipeCard,
   },
   data() {
     return {

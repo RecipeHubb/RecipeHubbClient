@@ -21,6 +21,19 @@ module.exports = {
         }
     },
 
+    getUserById: async (ownerId) => {
+        try {
+            return axios.get(`${URL}user/${ownerId}`, {
+                headers: {
+                    token: AuthService.getToken()
+                }
+            })
+        }
+        catch(err){
+            console.log(err)
+        }
+    },
+
     login: (data) => {
         console.log(data)
         try {

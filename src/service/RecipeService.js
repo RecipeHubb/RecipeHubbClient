@@ -41,7 +41,7 @@ module.exports = {
         
     },
 
-    // get all recipes associated with user
+    // get all Public recipes
     getPublicRecipes: () => {
         try {
             return axios.get(`${URL}public/recipe/`,

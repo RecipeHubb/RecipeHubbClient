@@ -1,10 +1,9 @@
 <template>
-  <div class="rounded-3xl">
   <v-card
+    class="mx-auto"
     min-width="300"
     min-height="300"
     elevation='15'
-    
   >
     <div class="d-none d-sm-flex"> 
       <v-img
@@ -19,7 +18,7 @@
         title="Click image to view more recipe details"
       >
       </v-img>
-          <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+      <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
     </div>
     <div class="d-flex d-sm-none">
       <v-img
@@ -35,9 +34,8 @@
         title="Click image to view more recipe details"
       >
       </v-img>
-          <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
+      <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe"><i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i></div>
     </div>
-
 
     <v-card-subtitle class="pb-0">
       <span class="text-2xl text-purple-500">{{recipe.name}}</span>
@@ -69,7 +67,7 @@
         color="purple darken-1"
         text
       >
-        <router-link :to="{name: 'singleRecipe', params: {id: this.recipe._id, recipeName: this.recipe.name}}">
+        <router-link :to="{name: route, params: {id: this.recipe._id, recipeName: this.recipe.name}}">
             View
         </router-link>
       </v-btn>
@@ -87,36 +85,34 @@
         ({{avgRating}})
       </span>
 
-      <!-- Stars here -->
     </v-card-actions>
   </v-card>
-  </div>
 </template>
 <script>
 import CommentService from '../../../service/CommentService'
 
 export default {
    name: 'RecipeCard',
-   props: ['recipe'],
+   props: ['recipe', 'route'],
 
    data: function() {
-       return {
-         createdDate: null,
-         avgRating: null
-       }
+      return {
+        createdDate: null,
+        avgRating: null,
+      }
    },
    methods: {
      routeToRecipe() {
-        this.$router.push({name: 'singleRecipe', params: { id: this.recipe._id, recipeName: this.recipe.name }})
+        this.$router.push({name: this.route, params: { id: this.recipe._id, recipeName: this.recipe.name }})
      }
    },
    mounted: async function() {
-     this.createdDate = (new Date(this.recipe.createdAt)).toDateString()
+    this.createdDate = (new Date(this.recipe.createdAt)).toDateString()
     // get comments attached to recipe
     let comments = await CommentService.getCommentsToRecipe(this.recipe._id)
     if(comments) {
       this.avgRating = comments.data && comments.data.average ?  Number(comments.data.average.toFixed(1)) : null
-    }
-   }
+    } 
+  }
 }
 </script>
