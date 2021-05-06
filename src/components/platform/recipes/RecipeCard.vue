@@ -13,8 +13,17 @@
         title="Click image to view more recipe details"
       >
       </v-img>
-      <div v-else class="text-center mb-12 mt-12" @click="routeToRecipe">
-        <i class="fas fa-apple-alt text-8xl text-gray-700 cursor-pointer"></i>
+      <div v-else class="text-center ml-13" @click="routeToRecipe">
+      <v-img
+        alt="No Image Available"
+        class="white--text align-end cursor-pointer "
+        height="200"
+        width="250"
+        :src="noImage"
+        @click="routeToRecipe"
+        title="Click image to view more recipe details"
+      >
+      </v-img>
       </div>
     </div>
     <div class="d-flex d-sm-none">
@@ -110,6 +119,7 @@
 </template>
 <script>
 import CommentService from "../../../service/CommentService";
+import noImage from "../../../assets/No-image-available.png"
 
 export default {
   name: "RecipeCard",
@@ -119,6 +129,7 @@ export default {
     return {
       createdDate: null,
       avgRating: null,
+      noImage,
     };
   },
   methods: {
@@ -131,7 +142,6 @@ export default {
   },
   mounted: async function() {
     this.createdDate = new Date(this.recipe.createdAt).toDateString();
-    
     // get comments attached to recipe
     let comments = await CommentService.getCommentsToRecipe(this.recipe._id);
     if (comments) {

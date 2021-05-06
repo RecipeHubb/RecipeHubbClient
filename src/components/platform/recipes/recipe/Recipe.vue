@@ -154,7 +154,7 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      md='3'
+                      md='2'
                       xs='6'
                       class="ma-0 pa-0"
                     >
@@ -188,7 +188,7 @@
                     </v-col>
                     <v-col
                       cols="12"
-                      md='3'
+                      md='5'
                       xs='12'
                       class="ma-0 pa-0"
                     >
@@ -217,7 +217,7 @@
                       </div>
                     </v-col>
                 </v-row>
-                <div class="overflow-y-auto h-60 ">
+                <div class="overflow-y-auto h-60 -ml-4 mr-3">
                   <v-simple-table dense>
                     <template v-slot:default>
                       <thead>
@@ -231,6 +231,9 @@
                           <th class="text-left">
                             Name
                           </th>
+                          <th class="text-center">
+                            Remove
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -240,7 +243,7 @@
                           <td>{{ ingredient.amount }}</td>
                           <td>{{ ingredient.measurement }}</td>
                           <td>{{ ingredient.name }}</td>
-                          <td>
+                          <td class="text-center">
                             <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
                           </td>
                         </tr>
