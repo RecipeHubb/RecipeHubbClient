@@ -47,16 +47,23 @@ Vue.use(VueRouter);
 const store = new Vuex.Store({
   state: {
     user: AuthService.getToken() && JSON.parse(localStorage.getItem("user")),
+    defaultUserData: JSON.parse(localStorage.getItem("user")),
   },
   mutations: {
     refresh(state) {
       state.user =
         AuthService.getToken() && JSON.parse(localStorage.getItem("user"));
     },
+    refreshUser(state, data) {
+      state.defaultUserData = data;
+    },
   },
   getters: {
     isLoggedIn(state) {
       return !!state.user;
+    },
+    user(state) {
+      return state.defaultUserData;
     },
   },
 });
@@ -84,7 +91,7 @@ const routes = [
     },
   }, // needs to be authenticated
   { path: "/search", component: Search },
-  {path: '/forgot-password', component:Reset},
+  { path: "/forgot-password", component: Reset },
   {
     path: "/recipes/:id/:recipeName",
     name: "singleRecipe",
@@ -117,7 +124,7 @@ const routes = [
     },
   },
   { path: "/*", component: Error },
-]; 
+];
 
 const router = new VueRouter({
   routes,
