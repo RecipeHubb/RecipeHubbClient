@@ -107,7 +107,7 @@
                 <div class="ml-4 text-purple-400 text-lg font-medium pb-4">
                   Add/Remove Ingredients
                 </div>
-                <div class="pb-4">
+                <div class="pb-4 ml-3">
                   <v-row>
                     <v-col cols="12" sm="2" class="ma-0 pa-0">
                       <v-text-field
@@ -115,7 +115,6 @@
                         dense
                         placeholder="4"
                         v-model="newIngredientAmount"
-                        required
                         color="deep-purple accent-2"
                         @keydown.enter="addIngredient"
                         class="ma-0 pa-0"
@@ -127,7 +126,6 @@
                         dense
                         placeholder="oz"
                         v-model="newIngredientMeasurement"
-                        required
                         color="deep-purple accent-2"
                         @keydown.enter="addIngredient"
                         class="ma-0 pa-0"
@@ -139,7 +137,6 @@
                         dense
                         placeholder="Chicken breast"
                         v-model="newIngredientName"
-                        required
                         color="deep-purple accent-2"
                         @keydown.enter="addIngredient"
                         class="ma-0 pa-0"
@@ -163,14 +160,17 @@
                     <template v-slot:default>
                       <thead>
                         <tr>
-                          <th class="text-left">
+                          <th class="text-center">
                             Amount
                           </th>
-                          <th class="text-left">
+                          <th class="text-center">
                             Measurement
                           </th>
-                          <th class="text-left">
+                          <th class="text-center">
                             Name
+                          </th>
+                          <th class="text-center">
+                            Remove
                           </th>
                         </tr>
                       </thead>
@@ -178,10 +178,10 @@
                         <tr
                           v-for="(ingredient, index) of ingredients" :key="index"
                         >
-                          <td>{{ ingredient.amount }}</td>
-                          <td>{{ ingredient.measurement }}</td>
-                          <td>{{ ingredient.name }}</td>
-                          <td>
+                          <td class="text-center">{{ ingredient.amount }}</td>
+                          <td class="text-center">{{ ingredient.measurement }}</td>
+                          <td class="text-center">{{ ingredient.name }}</td>
+                          <td class="text-center">
                             <span class="text-red-600 text-2xl cursor-pointer" title="Remove this ingredient" @click="deleteIngredient(index)">X</span>
                           </td>
                         </tr>
@@ -341,9 +341,11 @@ export default {
       this.numPeopleServed = 0;
       this.soEasyRating = 0;
       this.ingredients = [];
-      this.newIngredient = "";
       this.isPublic = false;
       this.favorited = false;
+      this.newIngredientAmount = null;
+      this.newIngredientMeasurement = null;
+      this.newIngredientName = null;
       this.$emit("close-dialog");
     },
 
