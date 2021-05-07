@@ -131,7 +131,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="dialog = false">
+                  <v-btn color="blue darken-1" text @click="close">
                     Close
                   </v-btn>
                   <v-btn color="blue darken-1" text @click="searchRecipe">
@@ -151,9 +151,7 @@
           :key="i"
           class=" flex justify-center items-center m-1 font-medium py-2 px-2 rounded-md text-green-700 bg-green-100 border border-green-300"
         >
-          <div
-            class=" text-xs font-normal leading-none flex-initial w-full"
-          >
+          <div class=" text-xs font-normal leading-none flex-initial w-full">
             {{ selectedFilters.text }}
           </div>
           <!-- <div @click="removeChip(i)">
@@ -215,9 +213,9 @@
 </template>
 
 <script>
-import Public from '../../service/PublicService';
+import Public from "../../service/PublicService";
 import RecipeCard from "../platform/recipes/RecipeCard";
-import tagsList from '../../utility/tagsList'
+import tagsList from "../../utility/tagsList";
 export default {
   name: "Search",
   components: {
@@ -225,7 +223,7 @@ export default {
   },
   data() {
     return {
-      route: 'searchPage',
+      route: "searchPage",
       tagsList,
       userName: null,
       recipeName: null,
@@ -251,19 +249,28 @@ export default {
   },
   methods: {
     async searchRecipe() {
-      if (!this.userInput && !this.recipeName && !this.userName && !this.tags && this.ingredients) {
+      if (
+        !this.userInput &&
+        !this.recipeName &&
+        !this.userName &&
+        !this.tags &&
+        this.ingredients
+      ) {
         this.$vToastify.error("Please search something");
         return;
       }
-      if(this.selectedQuickFilter.value === 'custom') {
-        this.$vToastify.error("Please change Custom filter")
+      // custom filter
+      if (this.selectedQuickFilter.value === "custom") {
+        this.$vToastify.error("Please change Custom filter");
         return;
       }
+
       if (this.selectedQuickFilter.value == "username" || this.userName) {
         // not null
         if (this.userInput || this.userName) {
           this.recipeData.userName = this.userInput || this.userName;
         }
+
         this.validateReq(this.userName, this.userInput, "userName");
 
         // custom filters
@@ -276,16 +283,13 @@ export default {
 
         this.validateReq(this.recipeName, this.userInput, "name");
       }
-      if(this.selectedQuickFilter.value === 'custom') {
-        this.$vToastify.error('Please change filter type')
-      }
       if (this.selectedQuickFilter.value == "ingredients" || this.ingredients) {
         //ingredient name
-        let ingredients = null
+        let ingredients = null;
         if (this.userInput && !this.ingredients) {
           ingredients = this.userInput.split(", ");
         }
-        if(this.ingredients) {
+        if (this.ingredients) {
           ingredients = this.ingredients.split(", ");
         }
         this.recipeData["ingredients.name"] = {
@@ -306,6 +310,27 @@ export default {
 
         this.advanceActiveChip.push("tags");
       }
+      // reset values for the quickfilter
+      if (this.showAdvanceChip) {
+        this.showAdvanceChip = false;
+        this.userName = null;
+        this.recipeName = null;
+        this.ingredients = null;
+        this.userName = null;
+        this.userInput = null
+        
+        const optionsExists = this.options.find((el) => el.value === "custom");
+
+        // custom already exists in options don't push
+        // if not than push to custom
+        if (optionsExists) {
+          this.selectedQuickFilter = { value: "custom", text: "Custom" };
+          return;
+        }
+          this.options.push({ value: "custom", text: "Custom" });
+          this.selectedQuickFilter = { value: "custom", text: "Custom" };
+      }
+
       this.advancedChipHandler();
       const data = await Public.getRecipes(this.recipeData);
       this.loading = true;
@@ -314,6 +339,10 @@ export default {
       // reset filter ??
       this.recipeData = {};
       this.dialog = false;
+    },
+    close() {
+      this.dialog = false;
+      this.showAdvanceChip = false;
     },
     validateReq(data, input, type) {
       if (type === "ingredients.name") {
@@ -327,16 +356,12 @@ export default {
         this.recipeData[type] = data || input;
         return;
       }
-
       this.recipeData[type] = {};
     },
     updateChips() {
       //reset the filter when they change
-      // const exists = this.activeFilters.find(el => el.text === this.selectedQuickFilter.value)
-      // if(!exists) {
-      this.userInput = null
+      this.userInput = null;
       this.activeFilters[0] = { text: this.selectedQuickFilter.value };
-      // }
     },
     advanceFilters() {
       // reset values and set showAdvanceChip to true
@@ -344,34 +369,27 @@ export default {
       this.advanceActiveChip = [];
       this.showAdvanceChip = true;
     },
-    removeChip(index) {
-      console.log("clicking");
-      this.activeFilters.splice(index, 1);
-
-      // if the activeFilter array length is less than 1 than remove the model
-      if (this.activeFilters.length <= 1 && !this.showAdvanceChip) {
-        this.selectedQuickFilter = {};
-      }
-    },
     advancedChipHandler() {
       if (this.showAdvanceChip) {
-        //reset models and filters
+        //reset quickfilter and badges
         this.selectedQuickFilter = {};
         this.activeFilters = [];
 
+        //push activeChip
         this.advanceActiveChip.forEach((txt) => {
           this.activeFilters.push({ text: txt });
         });
+
         const optionsExists = this.options.find((el) => el.value === "custom");
 
-      // custom already exists in options
+        // custom already exists in options don't push
+        // if not than push to custom
         if (optionsExists) {
           this.selectedQuickFilter = { value: "custom", text: "Custom" };
           return;
         }
-        // push it and display custom
-        this.selectedQuickFilter = { value: "custom", text: "Custom" };
-        this.options.push({ value: "custom", text: "Custom" });
+          this.options.push({ value: "custom", text: "Custom" });
+          this.selectedQuickFilter = { value: "custom", text: "Custom" };
       }
     },
   },
