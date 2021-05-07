@@ -2,23 +2,7 @@
   <div class="text-purple-500 text-lg pt-5">
     Sort by...
     <v-select
-<<<<<<< Updated upstream
-      :items="[
-        'Breakfast',
-        'Lunch',
-        'Dinner',
-        'Dessert',
-        'Snack',
-        'Recipe Name A-Z',
-        'Recipe Name Z-A',
-        'So-Easy Rating',
-        'Serving Size',
-        'Oldest',
-        'Newest',
-      ]"
-=======
       :items="sortList"
->>>>>>> Stashed changes
       color="deep-purple accent-2"
       v-model="filterBy"
       outlined
