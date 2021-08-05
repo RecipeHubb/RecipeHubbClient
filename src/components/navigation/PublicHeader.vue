@@ -11,7 +11,7 @@
             width="50px"
             height="50px"
             alt="Vue logo"
-            src="https://recipehubb.s3.us-east-2.amazonaws.com/assets/recipehubb_main.png"
+            src="https://recipehubb.s3.us-west-1.amazonaws.com/assets/recipehubb_main.png"
           />
 
           <!-- show this section if theey click on the hamburger-->
