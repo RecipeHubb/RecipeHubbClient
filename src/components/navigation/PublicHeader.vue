@@ -11,7 +11,7 @@
             width="50px"
             height="50px"
             alt="Vue logo"
-            src="https://recipehubb.s3.us-west-1.amazonaws.com/assets/recipehubb_main.png"
+            src="<%= BASE_URL %>recipehubb_main.png"
           />
 
           <!-- show this section if theey click on the hamburger-->
@@ -187,13 +187,13 @@ export default {
     handleMenu() {
       this.isOpen = !this.isOpen;
     },
-    
+
     logout() {
       localStorage.clear();
       AuthService.clearToken();
       this.logoutOpen = false;
       this.$store.commit('refresh')
-      
+
       // pushes to home page and refreshes the page for new nav
       this.$router.push('/')
     },
