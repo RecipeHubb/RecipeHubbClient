@@ -2,9 +2,6 @@
 const axios = require('axios')
 const AuthService = require('./AuthService')
 let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
-if (process.env.NODE_ENV === "development") {
-  URL = "http://localhost:8000/";
-}
 module.exports = {
 
     createComment: (data) => {
@@ -20,7 +17,7 @@ module.exports = {
         catch(err){
             return err
         }
-        
+
     },
 
     // get all comments associated with Recipe
@@ -37,7 +34,7 @@ module.exports = {
         catch(err){
             return err
         }
-        
+
     },
 
     deleteComment: (id) => {
@@ -46,12 +43,12 @@ module.exports = {
                 {
                     headers: {
                         token: AuthService.getToken()
-                    } 
+                    }
                 }
             )
         }
         catch(err){
             return err
-        } 
+        }
     },
 }

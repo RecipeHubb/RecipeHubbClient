@@ -1,12 +1,9 @@
 // Login/Signup and Auth service page
 const axios = require("axios");
 let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/'
-if (process.env.NODE_ENV === "development") {
-  URL = "http://localhost:8000/";
-}
 
 module.exports = {
-  register: (data) => {
+  register: data => {
     try {
       return axios.post(`${URL}user-auth/`, {
         userName: data.username,
@@ -15,7 +12,7 @@ module.exports = {
         firstName: data.firstName,
         lastName: data.lastName,
         bio: data.bio,
-        city: data.city,
+        city: data.city
       });
     } catch (err) {
       console.log(err);
@@ -23,7 +20,7 @@ module.exports = {
     }
   },
 
-  login: async (data) => {
+  login: async data => {
     try {
       let query = null;
       if (data.email) query = { email: data.email };
@@ -32,7 +29,7 @@ module.exports = {
       if (query) {
         const res = await axios.post(`${URL}user-auth/login`, {
           query,
-          password: data.password,
+          password: data.password
         });
 
         let d = new Date();
@@ -46,8 +43,8 @@ module.exports = {
 
         const user = await axios.get(`${URL}user/data`, {
           headers: {
-            token: res.data.token,
-          },
+            token: res.data.token
+          }
         });
         localStorage.setItem("user", JSON.stringify(user.data));
         return res;
@@ -58,45 +55,41 @@ module.exports = {
     }
   },
 
-  updateUser: async (data) => {
+  updateUser: async data => {
     try {
       return axios.put(`${URL}user-auth/`, data, {
-          headers: {
-              token: this.getToken
-          }
-      })
-    }
-    catch(err){
-        console.log(err)
+        headers: {
+          token: this.getToken
+        }
+      });
+    } catch (err) {
+      console.log(err);
     }
   },
 
   getToken: function() {
-
-
     let token = document.cookie
       .split("; ")
-      .find((row) => row.startsWith("token="))
+      .find(row => row.startsWith("token="));
 
-//handles undefined token on split
-      if(token) {
-      token = token.
-      split("=")[1];
+    //handles undefined token on split
+    if (token) {
+      token = token.split("=")[1];
 
-        return token
-      }
+      return token;
+    }
 
-      return null
+    return null;
   },
   clearToken: function() {
-    document.cookie ="token=;"
+    document.cookie = "token=;";
   },
   logOut: function() {
-    localStorage.clear()
-    this.clearToken()
-    
+    localStorage.clear();
+    this.clearToken();
+
     // pushes to home page and refreshes the page for new nav
-    this.$router.push('/login')
+    this.$router.push("/login");
     // this.$router.go(0)
-  },
+  }
 };

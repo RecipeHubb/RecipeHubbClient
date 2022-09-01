@@ -2,9 +2,6 @@
 const axios = require("axios");
 const AuthService = require('./AuthService')
 let URL = process.env.API_URL || 'https://recipehubbapi.herokuapp.com/public'
-if (process.env.NODE_ENV === "development") {
-  URL = "http://localhost:8000/public";
-}
 
 module.exports = {
     getRecipes: async (data) => {
@@ -20,7 +17,7 @@ module.exports = {
         catch(err){
             return err
         }
-        
+
     },
 
 
