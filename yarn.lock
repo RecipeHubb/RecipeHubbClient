@@ -902,29 +902,12 @@
     "@babel/helper-validator-identifier" "^7.14.0"
     to-fast-properties "^2.0.0"
 
-"@fortawesome/fontawesome-common-types@^0.2.35":
-  version "0.2.35"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.35.tgz#01dd3d054da07a00b764d78748df20daf2b317e9"
-  integrity sha512-IHUfxSEDS9dDGqYwIW7wTN6tn/O8E0n5PcAHz9cAaBoZw6UpG20IG/YM3NNLaGPwPqgjBAFjIURzqoQs3rrtuw==
-
-"@fortawesome/fontawesome-svg-core@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-1.2.35.tgz#85aea8c25645fcec88d35f2eb1045c38d3e65cff"
-  integrity sha512-uLEXifXIL7hnh2sNZQrIJWNol7cTVIzwI+4qcBIq9QWaZqUblm0IDrtSqbNg+3SQf8SMGHkiSigD++rHmCHjBg==
+"@fullhuman/postcss-purgecss@^3.0.0":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@fullhuman/postcss-purgecss/-/postcss-purgecss-3.1.3.tgz#47af7b87c9bfb3de4bc94a38f875b928fffdf339"
+  integrity sha512-kwOXw8fZ0Lt1QmeOOrd+o4Ibvp4UTEBFQbzvWldjlKv5n+G9sXfIPn1hh63IQIL8K8vbvv1oYMJiIUbuy9bGaA==
   dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/free-solid-svg-icons@^5.15.3":
-  version "5.15.3"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.15.3.tgz#52eebe354f60dc77e0bde934ffc5c75ffd04f9d8"
-  integrity sha512-XPeeu1IlGYqz4VWGRAT5ukNMd4VHUEEJ7ysZ7pSSgaEtNvSo+FLurybGJVmiqkQdK50OkSja2bfZXOeyMGRD8Q==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.35"
-
-"@fortawesome/vue-fontawesome@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-2.0.2.tgz#5b86cd2fb7b4c17e5dede722c1c2855c97eceaea"
-  integrity sha512-ecpKSBUWXsxRJVi/dbOds4tkKwEcBQ1JSDZFzE2jTFpF8xIh3OgTX8POIor6bOltjibr3cdEyvnDjecMwUmxhQ==
+    purgecss "^3.1.3"
 
 "@fullhuman/postcss-purgecss@^3.0.0":
   version "3.1.3"
@@ -2515,11 +2498,6 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
-  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
-
 clean-css@4.2.x:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.2.3.tgz#507b5de7d97b48ee53d84adb0160ff6216380f78"
@@ -2853,7 +2831,7 @@ core-js-compat@^3.6.5, core-js-compat@^3.9.0, core-js-compat@^3.9.1:
     browserslist "^4.16.5"
     semver "7.0.0"
 
-core-js@^3.1.3, core-js@^3.10.1, core-js@^3.6.5:
+core-js@^3.10.1, core-js@^3.6.5:
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.11.1.tgz#f920392bf8ed63a0ec8e4e729857bfa3d121c525"
   integrity sha512-k93Isqg7e4txZWMGNYwevZL9MiogLk8pd1PtwrmFmi8IBq4GXqUaVW/a33Llt6amSI36uSjd0GWwc9pTT9ALlQ==
@@ -3921,14 +3899,6 @@ faye-websocket@^0.11.3:
   integrity sha512-D2y4bovYpzziGgbHYtGCMjlJM36vAl/y+xUyn1C+FVx8szd1E+86KwVw6XvYSzOP8iMpm1X0I4xJD+QtUb36OA==
   dependencies:
     websocket-driver ">=0.5.1"
-
-feather-icons@^4.28.0:
-  version "4.28.0"
-  resolved "https://registry.yarnpkg.com/feather-icons/-/feather-icons-4.28.0.tgz#e1892a401fe12c4559291770ff6e68b0168e760f"
-  integrity sha512-gRdqKESXRBUZn6Nl0VBq2wPHKRJgZz7yblrrc2lYsS6odkNFDnA4bqvrlEVRUPjE1tFax+0TdbJKZ31ziJuzjg==
-  dependencies:
-    classnames "^2.2.5"
-    core-js "^3.1.3"
 
 figgy-pudding@^3.5.1:
   version "3.5.2"
@@ -8648,20 +8618,10 @@ vue-eslint-parser@^7.0.0:
     esquery "^1.4.0"
     lodash "^4.17.15"
 
-vue-fa@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vue-fa/-/vue-fa-2.0.1.tgz#a004bc489e03b0e32b593166156531541fee27dd"
-  integrity sha512-AWNZMYzba5vF1kzJh1SyYank70K9o/DZrnjdxMqpC9V7f8XzrUioXmg4KPeT8imNsglhxhhutPUzPmHjesdbYw==
-
 vue-feather-icon-corrected@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/vue-feather-icon-corrected/-/vue-feather-icon-corrected-1.0.2.tgz#ed56e9053fe503feb5a9a536760faf8c5f1de6be"
   integrity sha512-7Z6djKiI6wpdrcPYtqguan2T6dHA5HVfBLNOGkN5Oajl+HEBrEC9QRKIzXYFhbdWd5fiAHnw70bzuNVSg+WEvg==
-
-vue-feather-icon@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/vue-feather-icon/-/vue-feather-icon-1.2.0.tgz#3801b8d25f99ea62978a2f0c4042976ede497573"
-  integrity sha1-OAG40l+Z6mKXii8MQEKXbt5JdXM=
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
