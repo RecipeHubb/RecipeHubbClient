@@ -2,34 +2,28 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 // public
 import App from "./App.vue";
-import About from "./components/public/About";
 import Home from "./components/public/Home";
-import SignIn from "./components/public/SignIn";
-import SignUp from "./components/public/SignUp";
-import Error from "./components/public/404";
-// platform
-import Profile from "./components/platform/profileDetails/ProfilePage";
-import Recipes from "./components/platform/recipes/Recipes";
-import Recipe from "./components/platform/recipes/Recipe";
-import PublicRecipes from "./components/platform/publicRecipes/PublicRecipes";
-import Search from "./components/platform/publicRecipes/Search";
+
+// platform routes load on demand
+const About = () => import("./components/public/About");
+const SignIn = () => import("./components/public/SignIn");
+const SignUp = () => import("./components/public/SignUp");
+const Error = () => import("./components/public/404");
+const Profile = () => import("./components/platform/profileDetails/ProfilePage");
+const Recipes = () => import("./components/platform/recipes/Recipes");
+const Recipe = () => import("./components/platform/recipes/Recipe");
+const PublicRecipes = () => import("./components/platform/publicRecipes/PublicRecipes");
+const Search = () => import("./components/platform/publicRecipes/Search");
 // dependancies
 import VueFeatherIcon from "vue-feather-icon-corrected";
 import VueToastify from "vue-toastify";
 import VueModal from "@kouts/vue-modal";
 import "@kouts/vue-modal/dist/vue-modal.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import vuetify from "./plugins/vuetify";
-import "@/assets/styles/main.css";
 import "@/assets/styles/main.css";
 import AuthService from "./service/AuthService";
 import Vuex from "vuex";
 
-library.add(faCoffee);
-
-Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.use(VueFeatherIcon);
 Vue.use(VueToastify);
 Vue.use(Vuex);

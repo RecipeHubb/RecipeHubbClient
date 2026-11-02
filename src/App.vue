@@ -14,7 +14,6 @@
 <script>
 import PublicHeader from './components/navigation/PublicHeader.vue'
 import Footer from './components/navigation/Footer.vue'
-import './assets/styles/index.css'
 export default {
   name: 'App',
   components: {
