@@ -10,8 +10,8 @@
           <img
             width="50px"
             height="50px"
-            alt="Vue logo"
-            src="https://recipehubb.s3.us-west-1.amazonaws.com/assets/recipehubb_main.png"
+            alt="RecipeHubb logo"
+            :src="logo"
           />
 
           <!-- show this section if theey click on the hamburger-->
@@ -164,6 +164,7 @@
 import CreateRecipeDialog from '../platform/recipes/CreateRecipeDialog'
 import LogoutDialog from '../utility/LogoutDialog'
 import AuthService from '../../service/AuthService'
+import logo from '../../assets/recipehubb_main.png'
 export default {
   name: "PublicHeader",
   components: {
@@ -173,6 +174,7 @@ export default {
 
   data() {
     return {
+      logo,
       isOpen: false,
       open: false,
       logoutOpen: false,
